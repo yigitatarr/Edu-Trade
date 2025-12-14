@@ -1,0 +1,112 @@
+[
+  {
+    "id": "level_1",
+    "number": 1,
+    "title": "Trading Temelleri",
+    "description": "Trading'in temellerini öğren",
+    "icon": "1.circle.fill",
+    "color": "blue",
+    "requiredXP": 0,
+    "lessons": ["lesson_1", "lesson_6", "lesson_7"],
+    "practiceChallenges": ["challenge_first_trade", "challenge_crypto_basics", "challenge_exchange_basics"],
+    "unlockCondition": null
+  },
+  {
+    "id": "level_2",
+    "number": 2,
+    "title": "Risk Yönetimi",
+    "description": "Risk yönetimi tekniklerinde ustalaş",
+    "icon": "2.circle.fill",
+    "color": "green",
+    "requiredXP": 100,
+    "lessons": ["lesson_2", "lesson_3", "lesson_11", "lesson_15", "lesson_25"],
+    "practiceChallenges": ["challenge_stop_loss", "challenge_diversify", "challenge_order_types"],
+    "unlockCondition": {
+      "type": "previousLevelCompleted"
+    }
+  },
+  {
+    "id": "level_3",
+    "number": 3,
+    "title": "Teknik Analiz Temelleri",
+    "description": "Grafikleri ve temel analizi öğren",
+    "icon": "3.circle.fill",
+    "color": "orange",
+    "requiredXP": 200,
+    "lessons": ["lesson_4", "lesson_8", "lesson_17"],
+    "practiceChallenges": ["challenge_support_resistance", "challenge_chart_reading"],
+    "unlockCondition": {
+      "type": "previousLevelCompleted"
+    }
+  },
+  {
+    "id": "level_4",
+    "number": 4,
+    "title": "İleri Teknik Analiz",
+    "description": "Mum desenleri ve göstergeleri öğren",
+    "icon": "4.circle.fill",
+    "color": "purple",
+    "requiredXP": 300,
+    "lessons": ["lesson_9", "lesson_10", "lesson_13", "lesson_14"],
+    "practiceChallenges": ["challenge_candlestick_patterns", "challenge_technical_indicators", "challenge_volume_analysis"],
+    "unlockCondition": {
+      "type": "previousLevelCompleted"
+    }
+  },
+  {
+    "id": "level_5",
+    "number": 5,
+    "title": "Strateji ve Portföy",
+    "description": "Trading stratejileri ve portföy yönetimi",
+    "icon": "5.circle.fill",
+    "color": "blue",
+    "requiredXP": 400,
+    "lessons": ["lesson_5", "lesson_12", "lesson_18", "lesson_19"],
+    "practiceChallenges": ["challenge_trend_following", "challenge_portfolio_management", "challenge_scenario_analysis"],
+    "unlockCondition": {
+      "type": "previousLevelCompleted"
+    }
+  },
+  {
+    "id": "level_6",
+    "number": 6,
+    "title": "Psikoloji ve Gelişim",
+    "description": "Trading psikolojisi ve performans analizi",
+    "icon": "6.circle.fill",
+    "color": "red",
+    "requiredXP": 500,
+    "lessons": ["lesson_16", "lesson_21"],
+    "practiceChallenges": [],
+    "unlockCondition": {
+      "type": "previousLevelCompleted"
+    }
+  },
+  {
+    "id": "level_7",
+    "number": 7,
+    "title": "İleri Seviye Konular",
+    "description": "Margin trading ve DeFi",
+    "icon": "7.circle.fill",
+    "color": "indigo",
+    "requiredXP": 600,
+    "lessons": ["lesson_22", "lesson_23", "lesson_24"],
+    "practiceChallenges": [],
+    "unlockCondition": {
+      "type": "previousLevelCompleted"
+    }
+  },
+  {
+    "id": "level_8",
+    "number": 8,
+    "title": "Piyasa Analizi",
+    "description": "Market sentiment ve order book analizi",
+    "icon": "8.circle.fill",
+    "color": "teal",
+    "requiredXP": 700,
+    "lessons": ["lesson_20"],
+    "practiceChallenges": [],
+    "unlockCondition": {
+      "type": "previousLevelCompleted"
+    }
+  }
+]

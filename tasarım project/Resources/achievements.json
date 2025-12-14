@@ -1,0 +1,50 @@
+[
+  {
+    "id": "first_trade",
+    "title": "İlk İşlem",
+    "description": "İlk işlemini yap",
+    "icon": "hand.thumbsup.fill",
+    "condition": "1 işlem",
+    "isUnlocked": false
+  },
+  {
+    "id": "progressive_trader",
+    "title": "İlerici Trader",
+    "description": "10 işlem tamamla",
+    "icon": "chart.bar.fill",
+    "condition": "10 işlem",
+    "isUnlocked": false
+  },
+  {
+    "id": "centurion",
+    "title": "Yüzlerce",
+    "description": "100 işlem tamamla",
+    "icon": "star.fill",
+    "condition": "100 işlem",
+    "isUnlocked": false
+  },
+  {
+    "id": "scholar",
+    "title": "Bilgin",
+    "description": "Tüm dersleri tamamla",
+    "icon": "book.fill",
+    "condition": "5 ders",
+    "isUnlocked": false
+  },
+  {
+    "id": "master_quizzer",
+    "title": "Quiz Ustası",
+    "description": "Tüm quiz'lerde %100 puan al",
+    "icon": "brain.head.profile",
+    "condition": "Mükemmel quiz skorları",
+    "isUnlocked": false
+  },
+  {
+    "id": "diversifier",
+    "title": "Çeşitlendirici",
+    "description": "Portföyünde 5 farklı coin bulundur",
+    "icon": "square.grid.3x3.fill",
+    "condition": "5 coin",
+    "isUnlocked": false
+  }
+]

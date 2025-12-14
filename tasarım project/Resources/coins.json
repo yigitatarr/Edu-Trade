@@ -1,0 +1,814 @@
+[
+  {
+    "id": "bitcoin",
+    "symbol": "BTC",
+    "name": "Bitcoin",
+    "price": 63500.50,
+    "change24h": 2.5
+  },
+  {
+    "id": "ethereum",
+    "symbol": "ETH",
+    "name": "Ethereum",
+    "price": 3200.75,
+    "change24h": -1.2
+  },
+  {
+    "id": "cardano",
+    "symbol": "ADA",
+    "name": "Cardano",
+    "price": 0.52,
+    "change24h": 3.8
+  },
+  {
+    "id": "binance-coin",
+    "symbol": "BNB",
+    "name": "Binance Coin",
+    "price": 580.25,
+    "change24h": 1.5
+  },
+  {
+    "id": "solana",
+    "symbol": "SOL",
+    "name": "Solana",
+    "price": 145.30,
+    "change24h": 4.2
+  },
+  {
+    "id": "polygon",
+    "symbol": "MATIC",
+    "name": "Polygon",
+    "price": 0.88,
+    "change24h": -0.8
+  },
+  {
+    "id": "chainlink",
+    "symbol": "LINK",
+    "name": "Chainlink",
+    "price": 14.50,
+    "change24h": 2.1
+  },
+  {
+    "id": "litecoin",
+    "symbol": "LTC",
+    "name": "Litecoin",
+    "price": 82.40,
+    "change24h": -1.5
+  },
+  {
+    "id": "ripple",
+    "symbol": "XRP",
+    "name": "Ripple",
+    "price": 0.62,
+    "change24h": 1.8
+  },
+  {
+    "id": "polkadot",
+    "symbol": "DOT",
+    "name": "Polkadot",
+    "price": 7.25,
+    "change24h": 2.3
+  },
+  {
+    "id": "avalanche-2",
+    "symbol": "AVAX",
+    "name": "Avalanche",
+    "price": 38.50,
+    "change24h": 3.1
+  },
+  {
+    "id": "uniswap",
+    "symbol": "UNI",
+    "name": "Uniswap",
+    "price": 6.80,
+    "change24h": -0.5
+  },
+  {
+    "id": "dogecoin",
+    "symbol": "DOGE",
+    "name": "Dogecoin",
+    "price": 0.085,
+    "change24h": 4.5
+  },
+  {
+    "id": "shiba-inu",
+    "symbol": "SHIB",
+    "name": "Shiba Inu",
+    "price": 0.0000085,
+    "change24h": 2.7
+  },
+  {
+    "id": "tron",
+    "symbol": "TRX",
+    "name": "TRON",
+    "price": 0.11,
+    "change24h": 1.2
+  },
+  {
+    "id": "cosmos",
+    "symbol": "ATOM",
+    "name": "Cosmos",
+    "price": 9.50,
+    "change24h": -1.1
+  },
+  {
+    "id": "ethereum-classic",
+    "symbol": "ETC",
+    "name": "Ethereum Classic",
+    "price": 25.30,
+    "change24h": 0.8
+  },
+  {
+    "id": "stellar",
+    "symbol": "XLM",
+    "name": "Stellar",
+    "price": 0.13,
+    "change24h": 1.5
+  },
+  {
+    "id": "monero",
+    "symbol": "XMR",
+    "name": "Monero",
+    "price": 165.20,
+    "change24h": -0.3
+  },
+  {
+    "id": "algorand",
+    "symbol": "ALGO",
+    "name": "Algorand",
+    "price": 0.18,
+    "change24h": 2.0
+  },
+  {
+    "id": "vechain",
+    "symbol": "VET",
+    "name": "VeChain",
+    "price": 0.035,
+    "change24h": 1.8
+  },
+  {
+    "id": "filecoin",
+    "symbol": "FIL",
+    "name": "Filecoin",
+    "price": 4.85,
+    "change24h": -0.9
+  },
+  {
+    "id": "the-sandbox",
+    "symbol": "SAND",
+    "name": "The Sandbox",
+    "price": 0.42,
+    "change24h": 3.2
+  },
+  {
+    "id": "decentraland",
+    "symbol": "MANA",
+    "name": "Decentraland",
+    "price": 0.48,
+    "change24h": 2.5
+  },
+  {
+    "id": "axie-infinity",
+    "symbol": "AXS",
+    "name": "Axie Infinity",
+    "price": 7.20,
+    "change24h": -1.3
+  },
+  {
+    "id": "aave",
+    "symbol": "AAVE",
+    "name": "Aave",
+    "price": 95.50,
+    "change24h": 1.7
+  },
+  {
+    "id": "maker",
+    "symbol": "MKR",
+    "name": "Maker",
+    "price": 2450.00,
+    "change24h": -0.5
+  },
+  {
+    "id": "compound-ether",
+    "symbol": "CETH",
+    "name": "Compound",
+    "price": 0.025,
+    "change24h": 0.3
+  },
+  {
+    "id": "curve-dao-token",
+    "symbol": "CRV",
+    "name": "Curve DAO",
+    "price": 0.55,
+    "change24h": 1.4
+  },
+  {
+    "id": "yearn-finance",
+    "symbol": "YFI",
+    "name": "Yearn Finance",
+    "price": 8500.00,
+    "change24h": -0.8
+  },
+  {
+    "id": "sushi",
+    "symbol": "SUSHI",
+    "name": "SushiSwap",
+    "price": 1.25,
+    "change24h": 2.1
+  },
+  {
+    "id": "1inch",
+    "symbol": "1INCH",
+    "name": "1inch",
+    "price": 0.42,
+    "change24h": 1.6
+  },
+  {
+    "id": "near",
+    "symbol": "NEAR",
+    "name": "NEAR Protocol",
+    "price": 3.85,
+    "change24h": 2.8
+  },
+  {
+    "id": "fantom",
+    "symbol": "FTM",
+    "name": "Fantom",
+    "price": 0.38,
+    "change24h": 1.9
+  },
+  {
+    "id": "harmony",
+    "symbol": "ONE",
+    "name": "Harmony",
+    "price": 0.015,
+    "change24h": 0.7
+  },
+  {
+    "id": "theta-token",
+    "symbol": "THETA",
+    "name": "Theta Network",
+    "price": 1.05,
+    "change24h": -0.4
+  },
+  {
+    "id": "basic-attention-token",
+    "symbol": "BAT",
+    "name": "Basic Attention Token",
+    "price": 0.22,
+    "change24h": 1.3
+  },
+  {
+    "id": "enjincoin",
+    "symbol": "ENJ",
+    "name": "Enjin Coin",
+    "price": 0.28,
+    "change24h": 2.0
+  },
+  {
+    "id": "gala",
+    "symbol": "GALA",
+    "name": "Gala",
+    "price": 0.035,
+    "change24h": 3.5
+  },
+  {
+    "id": "chiliz",
+    "symbol": "CHZ",
+    "name": "Chiliz",
+    "price": 0.095,
+    "change24h": 1.1
+  },
+  {
+    "id": "flow",
+    "symbol": "FLOW",
+    "name": "Flow",
+    "price": 0.85,
+    "change24h": 0.9
+  },
+  {
+    "id": "tezos",
+    "symbol": "XTZ",
+    "name": "Tezos",
+    "price": 0.95,
+    "change24h": 1.4
+  },
+  {
+    "id": "eos",
+    "symbol": "EOS",
+    "name": "EOS",
+    "price": 0.75,
+    "change24h": -0.6
+  },
+  {
+    "id": "dash",
+    "symbol": "DASH",
+    "name": "Dash",
+    "price": 32.50,
+    "change24h": 0.5
+  },
+  {
+    "id": "zcash",
+    "symbol": "ZEC",
+    "name": "Zcash",
+    "price": 28.40,
+    "change24h": -0.2
+  },
+  {
+    "id": "bitcoin-cash",
+    "symbol": "BCH",
+    "name": "Bitcoin Cash",
+    "price": 245.00,
+    "change24h": 1.0
+  },
+  {
+    "id": "wrapped-bitcoin",
+    "symbol": "WBTC",
+    "name": "Wrapped Bitcoin",
+    "price": 63500.00,
+    "change24h": 2.5
+  },
+  {
+    "id": "tether",
+    "symbol": "USDT",
+    "name": "Tether",
+    "price": 1.00,
+    "change24h": 0.01
+  },
+  {
+    "id": "usd-coin",
+    "symbol": "USDC",
+    "name": "USD Coin",
+    "price": 1.00,
+    "change24h": 0.01
+  },
+  {
+    "id": "dai",
+    "symbol": "DAI",
+    "name": "Dai",
+    "price": 1.00,
+    "change24h": 0.01
+  },
+  {
+    "id": "tron",
+    "symbol": "TRX",
+    "name": "TRON",
+    "price": 0.11,
+    "change24h": 1.2
+  },
+  {
+    "id": "okb",
+    "symbol": "OKB",
+    "name": "OKB",
+    "price": 45.20,
+    "change24h": 1.5
+  },
+  {
+    "id": "aptos",
+    "symbol": "APT",
+    "name": "Aptos",
+    "price": 8.50,
+    "change24h": 2.3
+  },
+  {
+    "id": "arbitrum",
+    "symbol": "ARB",
+    "name": "Arbitrum",
+    "price": 1.15,
+    "change24h": 1.8
+  },
+  {
+    "id": "optimism",
+    "symbol": "OP",
+    "name": "Optimism",
+    "price": 2.85,
+    "change24h": 2.1
+  },
+  {
+    "id": "immutable-x",
+    "symbol": "IMX",
+    "name": "Immutable X",
+    "price": 1.25,
+    "change24h": 3.2
+  },
+  {
+    "id": "render-token",
+    "symbol": "RENDER",
+    "name": "Render",
+    "price": 4.50,
+    "change24h": 2.5
+  },
+  {
+    "id": "injective-protocol",
+    "symbol": "INJ",
+    "name": "Injective",
+    "price": 25.30,
+    "change24h": 4.1
+  },
+  {
+    "id": "hedera-hashgraph",
+    "symbol": "HBAR",
+    "name": "Hedera",
+    "price": 0.085,
+    "change24h": 1.8
+  },
+  {
+    "id": "the-graph",
+    "symbol": "GRT",
+    "name": "The Graph",
+    "price": 0.15,
+    "change24h": 2.0
+  },
+  {
+    "id": "stacks",
+    "symbol": "STX",
+    "name": "Stacks",
+    "price": 1.85,
+    "change24h": 3.5
+  },
+  {
+    "id": "celo",
+    "symbol": "CELO",
+    "name": "Celo",
+    "price": 0.65,
+    "change24h": 1.2
+  },
+  {
+    "id": "mina-protocol",
+    "symbol": "MINA",
+    "name": "Mina Protocol",
+    "price": 0.75,
+    "change24h": 2.3
+  },
+  {
+    "id": "loopring",
+    "symbol": "LRC",
+    "name": "Loopring",
+    "price": 0.28,
+    "change24h": 1.5
+  },
+  {
+    "id": "quant-network",
+    "symbol": "QNT",
+    "name": "Quant",
+    "price": 95.50,
+    "change24h": 1.8
+  },
+  {
+    "id": "multiversx",
+    "symbol": "EGLD",
+    "name": "MultiversX",
+    "price": 42.30,
+    "change24h": 2.1
+  },
+  {
+    "id": "radix",
+    "symbol": "XRD",
+    "name": "Radix",
+    "price": 0.045,
+    "change24h": 1.0
+  },
+  {
+    "id": "kava",
+    "symbol": "KAVA",
+    "name": "Kava",
+    "price": 0.85,
+    "change24h": 1.3
+  },
+  {
+    "id": "zilliqa",
+    "symbol": "ZIL",
+    "name": "Zilliqa",
+    "price": 0.025,
+    "change24h": 0.8
+  },
+  {
+    "id": "icon",
+    "symbol": "ICX",
+    "name": "ICON",
+    "price": 0.22,
+    "change24h": 1.1
+  },
+  {
+    "id": "ontology",
+    "symbol": "ONT",
+    "name": "Ontology",
+    "price": 0.35,
+    "change24h": 0.9
+  },
+  {
+    "id": "waves",
+    "symbol": "WAVES",
+    "name": "Waves",
+    "price": 2.85,
+    "change24h": 1.5
+  },
+  {
+    "id": "iotex",
+    "symbol": "IOTX",
+    "name": "IoTeX",
+    "price": 0.045,
+    "change24h": 1.8
+  },
+  {
+    "id": "oasis-network",
+    "symbol": "ROSE",
+    "name": "Oasis Network",
+    "price": 0.095,
+    "change24h": 2.0
+  },
+  {
+    "id": "pancakeswap-token",
+    "symbol": "CAKE",
+    "name": "PancakeSwap",
+    "price": 2.50,
+    "change24h": 1.2
+  },
+  {
+    "id": "compound-governance-token",
+    "symbol": "COMP",
+    "name": "Compound",
+    "price": 55.20,
+    "change24h": 1.5
+  },
+  {
+    "id": "the-graph",
+    "symbol": "GRT",
+    "name": "The Graph",
+    "price": 0.15,
+    "change24h": 2.0
+  },
+  {
+    "id": "0x",
+    "symbol": "ZRX",
+    "name": "0x Protocol",
+    "price": 0.35,
+    "change24h": 1.3
+  },
+  {
+    "id": "kyber-network-crystal",
+    "symbol": "KNC",
+    "name": "Kyber Network",
+    "price": 0.65,
+    "change24h": 0.9
+  },
+  {
+    "id": "ren",
+    "symbol": "REN",
+    "name": "Ren",
+    "price": 0.085,
+    "change24h": 1.1
+  },
+  {
+    "id": "uma",
+    "symbol": "UMA",
+    "name": "UMA",
+    "price": 2.85,
+    "change24h": 1.8
+  },
+  {
+    "id": "band-protocol",
+    "symbol": "BAND",
+    "name": "Band Protocol",
+    "price": 1.45,
+    "change24h": 1.2
+  },
+  {
+    "id": "api3",
+    "symbol": "API3",
+    "name": "API3",
+    "price": 2.25,
+    "change24h": 1.5
+  },
+  {
+    "id": "fetch-ai",
+    "symbol": "FET",
+    "name": "Fetch.ai",
+    "price": 0.35,
+    "change24h": 2.3
+  },
+  {
+    "id": "ocean-protocol",
+    "symbol": "OCEAN",
+    "name": "Ocean Protocol",
+    "price": 0.55,
+    "change24h": 1.8
+  },
+  {
+    "id": "numeraire",
+    "symbol": "NMR",
+    "name": "Numeraire",
+    "price": 18.50,
+    "change24h": 1.0
+  },
+  {
+    "id": "singularitynet",
+    "symbol": "AGIX",
+    "name": "SingularityNET",
+    "price": 0.25,
+    "change24h": 2.5
+  },
+  {
+    "id": "artificial-intelligence",
+    "symbol": "AI",
+    "name": "AI",
+    "price": 1.15,
+    "change24h": 3.2
+  },
+  {
+    "id": "worldcoin-wld",
+    "symbol": "WLD",
+    "name": "Worldcoin",
+    "price": 2.85,
+    "change24h": 4.5
+  },
+  {
+    "id": "bittensor",
+    "symbol": "TAO",
+    "name": "Bittensor",
+    "price": 285.00,
+    "change24h": 2.8
+  },
+  {
+    "id": "akash-network",
+    "symbol": "AKT",
+    "name": "Akash Network",
+    "price": 3.25,
+    "change24h": 1.5
+  },
+  {
+    "id": "livepeer",
+    "symbol": "LPT",
+    "name": "Livepeer",
+    "price": 8.50,
+    "change24h": 2.1
+  },
+  {
+    "id": "arweave",
+    "symbol": "AR",
+    "name": "Arweave",
+    "price": 8.25,
+    "change24h": 1.8
+  },
+  {
+    "id": "storj",
+    "symbol": "STORJ",
+    "name": "Storj",
+    "price": 0.55,
+    "change24h": 1.2
+  },
+  {
+    "id": "siacoin",
+    "symbol": "SC",
+    "name": "Siacoin",
+    "price": 0.0045,
+    "change24h": 0.8
+  },
+  {
+    "id": "helium",
+    "symbol": "HNT",
+    "name": "Helium",
+    "price": 4.25,
+    "change24h": 2.3
+  },
+  {
+    "id": "theta-fuel",
+    "symbol": "TFUEL",
+    "name": "Theta Fuel",
+    "price": 0.055,
+    "change24h": 1.5
+  },
+  {
+    "id": "audius",
+    "symbol": "AUDIO",
+    "name": "Audius",
+    "price": 0.25,
+    "change24h": 1.8
+  },
+  {
+    "id": "chiliz",
+    "symbol": "CHZ",
+    "name": "Chiliz",
+    "price": 0.095,
+    "change24h": 1.1
+  },
+  {
+    "id": "socios",
+    "symbol": "CHZ",
+    "name": "Socios",
+    "price": 0.095,
+    "change24h": 1.1
+  },
+  {
+    "id": "immutable-x",
+    "symbol": "IMX",
+    "name": "Immutable X",
+    "price": 1.25,
+    "change24h": 3.2
+  },
+  {
+    "id": "gods-unchained",
+    "symbol": "GODS",
+    "name": "Gods Unchained",
+    "price": 0.35,
+    "change24h": 1.5
+  },
+  {
+    "id": "illuvium",
+    "symbol": "ILV",
+    "name": "Illuvium",
+    "price": 85.50,
+    "change24h": 2.8
+  },
+  {
+    "id": "my-neighbor-alice",
+    "symbol": "ALICE",
+    "name": "My Neighbor Alice",
+    "price": 1.85,
+    "change24h": 1.2
+  },
+  {
+    "id": "star-atlas",
+    "symbol": "ATLAS",
+    "name": "Star Atlas",
+    "price": 0.0055,
+    "change24h": 2.5
+  },
+  {
+    "id": "alien-worlds",
+    "symbol": "TLM",
+    "name": "Alien Worlds",
+    "price": 0.015,
+    "change24h": 1.8
+  },
+  {
+    "id": "smooth-love-potion",
+    "symbol": "SLP",
+    "name": "Smooth Love Potion",
+    "price": 0.0025,
+    "change24h": 0.9
+  },
+  {
+    "id": "stepn",
+    "symbol": "GMT",
+    "name": "STEPN",
+    "price": 0.25,
+    "change24h": 2.1
+  },
+  {
+    "id": "magic-internet-money",
+    "symbol": "MIM",
+    "name": "Magic Internet Money",
+    "price": 0.98,
+    "change24h": 0.02
+  },
+  {
+    "id": "frax",
+    "symbol": "FRAX",
+    "name": "Frax",
+    "price": 0.99,
+    "change24h": 0.01
+  },
+  {
+    "id": "liquity-usd",
+    "symbol": "LUSD",
+    "name": "Liquity USD",
+    "price": 0.99,
+    "change24h": 0.01
+  },
+  {
+    "id": "terrausd",
+    "symbol": "UST",
+    "name": "TerraUSD",
+    "price": 0.02,
+    "change24h": -5.0
+  },
+  {
+    "id": "true-usd",
+    "symbol": "TUSD",
+    "name": "TrueUSD",
+    "price": 1.00,
+    "change24h": 0.01
+  },
+  {
+    "id": "paxos-standard",
+    "symbol": "PAX",
+    "name": "Pax Dollar",
+    "price": 1.00,
+    "change24h": 0.01
+  },
+  {
+    "id": "binance-usd",
+    "symbol": "BUSD",
+    "name": "Binance USD",
+    "price": 1.00,
+    "change24h": 0.01
+  },
+  {
+    "id": "gemini-dollar",
+    "symbol": "GUSD",
+    "name": "Gemini Dollar",
+    "price": 1.00,
+    "change24h": 0.01
+  }
+]

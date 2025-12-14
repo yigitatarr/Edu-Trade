@@ -1,0 +1,995 @@
+[
+  {
+    "id": "challenge_first_trade",
+    "title": "İlk İşlemini Yap",
+    "description": "Herhangi bir coin satın alarak ilk işlemini tamamla",
+    "detailedDescription": "Trading'e hoş geldin! İlk adımın bir işlem yapmak. Bu görevde, uygulamada nasıl coin alacağını adım adım öğreneceksin.",
+    "type": "practice",
+    "xpReward": 20,
+    "icon": "hand.thumbsup.fill",
+    "requirements": {
+      "tradeCount": 1
+    },
+    "requiredChallengeId": null,
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "İşlem Sekmesine Git",
+        "description": "Alt menüden 'İşlem' sekmesine tıkla. Bu sekme, coin alıp satabileceğin yerdir.",
+        "action": "navigate_to_trade",
+        "icon": "dollarsign.circle.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Bir Coin Seç",
+        "description": "Listeden herhangi bir coin seç (Bitcoin, Ethereum, Solana vb.). Coin'in fiyatını ve 24 saatlik değişimini görebilirsin.",
+        "action": "navigate_to_trade",
+        "icon": "bitcoinsign.circle.fill"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Al Butonuna Tıkla",
+        "description": "Coin detay sayfasında 'Al' butonunun seçili olduğundan emin ol. Bu, coin satın almak için doğru mod.",
+        "action": "navigate_to_trade",
+        "icon": "arrow.down.circle.fill"
+      },
+      {
+        "id": "step_4",
+        "number": 4,
+        "title": "Miktar Gir ve Satın Al",
+        "description": "Almak istediğin coin miktarını gir. Hızlı miktar butonlarını (%25, %50, %75, Max) kullanabilirsin. Sonra 'Al' butonuna tıklayarak işlemi tamamla.",
+        "action": "complete_action",
+        "icon": "checkmark.circle.fill"
+      }
+    ]
+  },
+  {
+    "id": "challenge_stop_loss",
+    "title": "Stop Loss Kullan",
+    "description": "Yatırımlarını korumayı öğren",
+    "detailedDescription": "İlk işlemini tamamladıktan sonra, risk yönetimi hakkında öğrenme zamanı. Stop Loss, trading'de en önemli risk yönetimi araçlarından biridir. Bu görevde, Stop Loss kavramını öğrenecek ve uygulamada nasıl kullanılacağını göreceksin.",
+    "type": "practice",
+    "xpReward": 25,
+    "icon": "hand.raised.fill",
+    "requirements": {
+      "lessonId": "lesson_2"
+    },
+    "requiredChallengeId": "challenge_first_trade",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "Stop Loss Dersini Oku",
+        "description": "Öncelikle 'Stop Loss Emirleri' dersini okuyarak bu kavramı öğren. Ders, stop loss'un ne olduğunu, nasıl çalıştığını ve neden önemli olduğunu açıklayacak.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Ders İçeriğini İncele",
+        "description": "Ders içeriğinde stop loss'un nasıl kullanılacağını öğren. Özellikle fiyat seviyesi belirleme ve risk yönetimi konularına dikkat et.",
+        "action": "read_content",
+        "icon": "doc.text.fill"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "Öğrendiklerini test etmek için ders sonundaki quiz'i tamamla. En az %70 puan alman önerilir.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      },
+      {
+        "id": "step_4",
+        "number": 4,
+        "title": "Görevi Tamamla",
+        "description": "Dersi ve quiz'i tamamladıktan sonra, bu görev otomatik olarak tamamlanacak ve XP kazanacaksın!",
+        "action": "complete_action",
+        "icon": "checkmark.circle.fill"
+      }
+    ]
+  },
+  {
+    "id": "challenge_diversify",
+    "title": "Portföyünü Çeşitlendir",
+    "description": "Portföyünde 3 farklı coin bulundur",
+    "detailedDescription": "Çeşitlendirme riski yönetmenin anahtarıdır. Tüm paranı tek bir coin'e koymak yerine, birden fazla coin arasında dağıt. Bu görev, portföyünde aynı anda en az 3 farklı kripto para bulundurmanı gerektirir. Bu şekilde, bir coin düşerse, diğer yatırımların bunu dengeleyebilir.",
+    "type": "practice",
+    "xpReward": 30,
+    "icon": "square.grid.3x3.fill",
+    "requirements": {
+      "coinCount": 3
+    },
+    "requiredChallengeId": "challenge_first_trade"
+  },
+  {
+    "id": "challenge_support_resistance",
+    "title": "Destek ve Direnci Anla",
+    "description": "Destek/Direnç dersini tamamla",
+    "detailedDescription": "Destek ve direnç, teknik analizdeki temel kavramlardır. Destek, alım ilgisinin güçlü olduğu bir fiyat seviyesidir, direnç ise satış baskısının yüksek olduğu seviyedir. Destek/Direnç dersini tamamlayarak bu önemli seviyeleri nasıl belirleyeceğini ve trading stratejinde nasıl kullanacağını öğren.",
+    "type": "practice",
+    "xpReward": 25,
+    "icon": "slider.horizontal.below.rectangle",
+    "requirements": {
+      "lessonId": "lesson_4"
+    },
+    "requiredChallengeId": "challenge_stop_loss"
+  },
+  {
+    "id": "challenge_trend_following",
+    "title": "Trendi Takip Et",
+    "description": "Trend Takibi dersini tamamla",
+    "detailedDescription": "Trend takibi popüler bir trading stratejisidir. Piyasa trendlerini nasıl belirleyeceğini ve trend yönünde nasıl işlem yapacağını öğren. Bu ders, yükseliş trendlerini, düşüş trendlerini nasıl tanıyacağını ve hareketli ortalamalar ve momentum göstergelerini kullanarak trendleri nasıl etkili bir şekilde takip edeceğini öğretecek.",
+    "type": "practice",
+    "xpReward": 25,
+    "icon": "arrow.triangle.2.circlepath",
+    "requirements": {
+      "lessonId": "lesson_5"
+    },
+    "requiredChallengeId": "challenge_support_resistance"
+  },
+  {
+    "id": "daily_quiz_3",
+    "title": "3 Quiz Tamamla",
+    "description": "Bugün 3 quiz'i bitir",
+    "detailedDescription": "Bilgini test etmek için bugün 3 quiz tamamla. Her quiz, derslerde öğrendiklerini pekiştirmene yardımcı olur.",
+    "type": "daily",
+    "xpReward": 15,
+    "icon": "brain.head.profile",
+    "requirements": {
+      "quizScore": 3
+    },
+    "requiredChallengeId": null
+  },
+  {
+    "id": "daily_trade_1",
+    "title": "Bir İşlem Yap",
+    "description": "Bugün en az 1 işlem tamamla",
+    "detailedDescription": "Pratik yapmak mükemmelleştirir! Becerilerini keskin tutmak için bugün en az bir işlem yap.",
+    "type": "daily",
+    "xpReward": 10,
+    "icon": "arrow.left.arrow.right.circle.fill",
+    "requirements": {
+      "tradeCount": 1
+    },
+    "requiredChallengeId": null
+  },
+  {
+    "id": "weekly_lessons_5",
+    "title": "5 Ders Tamamla",
+    "description": "Bu hafta 5 dersi bitir",
+    "detailedDescription": "Öğrenmende tutarlı ol! Trading'de güçlü bir temel oluşturmak için bu hafta 5 ders tamamla.",
+    "type": "weekly",
+    "xpReward": 50,
+    "icon": "book.fill",
+    "requirements": {
+      "lessonId": "lesson_1"
+    },
+    "requiredChallengeId": null
+  },
+  {
+    "id": "challenge_chart_reading",
+    "title": "Grafik Okuma Ustası",
+    "description": "Grafik Okuma Temelleri dersini tamamla",
+    "detailedDescription": "Grafikler, fiyat hareketlerini görselleştirmenin en önemli yoludur. Bu görevde, grafik türlerini, mum grafiklerini okumayı ve zaman çerçevelerini öğreneceksin. Grafik Okuma Temelleri dersini tamamlayarak trading'de kritik bir beceri kazanacaksın.",
+    "type": "practice",
+    "xpReward": 30,
+    "icon": "chart.bar.fill",
+    "requirements": {
+      "lessonId": "lesson_8"
+    },
+    "requiredChallengeId": "challenge_trend_following",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "Grafik Okuma Dersini Oku",
+        "description": "Öğren sekmesinden 'Grafik Okuma Temelleri' dersini aç ve oku. Grafik türleri, mum grafikleri ve zaman çerçeveleri hakkında bilgi edin.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Coin Detay Sayfasında Grafiği İncele",
+        "description": "İşlem sekmesinden herhangi bir coin'e tıkla. Coin detay sayfasında fiyat grafiğini incele. 7G, 30G, 90G zaman dilimlerini değiştirerek farklı trendleri gözlemle.",
+        "action": "navigate_to_trade",
+        "icon": "chart.xyaxis.line"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "Grafik Okuma Temelleri dersinin quiz'ini tamamla. Grafik okuma bilgini test et.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      }
+    ]
+  },
+  {
+    "id": "challenge_candlestick_patterns",
+    "title": "Mum Desenlerini Tanı",
+    "description": "Mum Grafikleri ve Desenler dersini tamamla",
+    "detailedDescription": "Mum grafikleri, piyasa psikolojisini ve olası fiyat hareketlerini gösterir. Bu görevde, Doji, Hammer, Engulfing Pattern gibi temel mum desenlerini ve grafik desenlerini (üçgen, bayrak, baş-omuz) öğreneceksin.",
+    "type": "practice",
+    "xpReward": 35,
+    "icon": "chart.xyaxis.line",
+    "requirements": {
+      "lessonId": "lesson_9"
+    },
+    "requiredChallengeId": "challenge_chart_reading",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "Mum Grafikleri Dersini Oku",
+        "description": "'Mum Grafikleri ve Desenler' dersini oku. Temel mum desenlerini ve grafik desenlerini öğren.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Grafikte Desenleri Ara",
+        "description": "Coin detay sayfasında grafiği incele. Öğrendiğin desenleri (üçgen, bayrak vb.) grafikte aramaya çalış. Bu pratik, gerçek trading'de çok faydalı olacak.",
+        "action": "navigate_to_trade",
+        "icon": "magnifyingglass"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "Mum Grafikleri dersinin quiz'ini tamamla ve bilgini test et.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      }
+    ]
+  },
+  {
+    "id": "challenge_technical_indicators",
+    "title": "Teknik Göstergeleri Kullan",
+    "description": "Teknik Göstergeler dersini tamamla",
+    "detailedDescription": "RSI, MACD, Bollinger Bands gibi teknik göstergeler, trading kararlarınızı destekleyen güçlü araçlardır. Bu görevde, bu göstergelerin nasıl çalıştığını ve nasıl kullanılacağını öğreneceksin.",
+    "type": "practice",
+    "xpReward": 35,
+    "icon": "waveform.path.ecg",
+    "requirements": {
+      "lessonId": "lesson_10"
+    },
+    "requiredChallengeId": "challenge_candlestick_patterns",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "Teknik Göstergeler Dersini Oku",
+        "description": "'Teknik Göstergeler (RSI, MACD)' dersini oku. RSI, MACD, Hareketli Ortalamalar ve Bollinger Bands'ı öğren.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Göstergeleri Anla",
+        "description": "Ders içeriğinde her gösterge için trading sinyallerini öğren. RSI'nın aşırı alım/satım seviyelerini, MACD kesişimlerini ve Bollinger Bands'ın nasıl kullanılacağını anla.",
+        "action": "read_content",
+        "icon": "doc.text.fill"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "Teknik Göstergeler dersinin quiz'ini tamamla.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      }
+    ]
+  },
+  {
+    "id": "challenge_order_types",
+    "title": "Emir Türlerini Öğren",
+    "description": "İşlem Türleri ve Emirler dersini tamamla",
+    "detailedDescription": "Market Order, Limit Order, Stop Order gibi farklı emir türleri, trading stratejinize göre farklı avantajlar sunar. Bu görevde, her emir türünün ne zaman kullanılacağını öğreneceksin.",
+    "type": "practice",
+    "xpReward": 30,
+    "icon": "list.bullet.rectangle",
+    "requirements": {
+      "lessonId": "lesson_11"
+    },
+    "requiredChallengeId": "challenge_first_trade",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "İşlem Türleri Dersini Oku",
+        "description": "'İşlem Türleri ve Emirler' dersini oku. Market Order, Limit Order, Stop Order ve diğer emir türlerini öğren.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Uygulamada Emir Türlerini Gör",
+        "description": "İşlem sekmesinde bir coin satın alırken, farklı emir türlerinin nasıl kullanılabileceğini düşün. Stop Loss bölümünde limit emir örneği görebilirsin.",
+        "action": "navigate_to_trade",
+        "icon": "list.bullet"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "İşlem Türleri dersinin quiz'ini tamamla.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      }
+    ]
+  },
+  {
+    "id": "challenge_portfolio_management",
+    "title": "Portföy Yönetimi Uzmanı",
+    "description": "Portföy Yönetimi dersini tamamla",
+    "detailedDescription": "Etkili portföy yönetimi, uzun vadeli trading başarısının anahtarıdır. Bu görevde, portföy çeşitlendirme, pozisyon boyutlandırma ve risk yönetimi tekniklerini öğreneceksin.",
+    "type": "practice",
+    "xpReward": 40,
+    "icon": "briefcase.fill",
+    "requirements": {
+      "lessonId": "lesson_12"
+    },
+    "requiredChallengeId": "challenge_diversify",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "Portföy Yönetimi Dersini Oku",
+        "description": "'Portföy Yönetimi' dersini oku. Çeşitlendirme stratejileri, pozisyon boyutlandırma ve portföy takibi hakkında bilgi edin.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Portföyünü İncele",
+        "description": "Ana sayfada veya Profil sekmesinde portföyünü incele. Hangi coin'lere ne kadar yatırım yaptığını gör. Çeşitlendirme kurallarına uyuyor musun kontrol et.",
+        "action": "navigate_to_profile",
+        "icon": "briefcase"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "Portföy Yönetimi dersinin quiz'ini tamamla.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      }
+    ]
+  },
+  {
+    "id": "challenge_volume_analysis",
+    "title": "Hacim Analizi Yap",
+    "description": "Hacim Analizi dersini tamamla",
+    "detailedDescription": "Hacim, fiyat hareketlerinin güvenilirliğini doğrulayan en önemli göstergelerden biridir. Bu görevde, hacim ve fiyat ilişkisini, hacim desenlerini ve hacim göstergelerini öğreneceksin.",
+    "type": "practice",
+    "xpReward": 35,
+    "icon": "chart.bar.doc.horizontal.fill",
+    "requirements": {
+      "lessonId": "lesson_13"
+    },
+    "requiredChallengeId": "challenge_technical_indicators",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "Hacim Analizi Dersini Oku",
+        "description": "'Hacim Analizi' dersini oku. Hacim nedir, fiyatla ilişkisi nasıldır ve hacim desenleri nelerdir öğren.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Grafikte Hacmi Gözlemle",
+        "description": "Coin detay sayfasında grafiği incele. Fiyat hareketleriyle birlikte hacmin nasıl değiştiğini gözlemle. Yüksek hacimli hareketlerin daha güvenilir olduğunu hatırla.",
+        "action": "navigate_to_trade",
+        "icon": "chart.bar"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "Hacim Analizi dersinin quiz'ini tamamla.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      }
+    ]
+  },
+  {
+    "id": "challenge_scenario_analysis",
+    "title": "İşlem Senaryosu Analizi",
+    "description": "Bir grafik senaryosunu analiz et ve karar ver",
+    "detailedDescription": "Bitcoin'in fiyatı 60.000$ seviyesinde bir dirençle karşılaştı. Grafikte üç kez bu seviyeye dokundu ama geçemedi. Şimdi fiyat 58.000$ destek seviyesine yaklaşıyor ve hacim artıyor. Bu durumda ne yapmalısın? Bu görevde, gerçek bir trading senaryosunu analiz edecek ve doğru kararı vereceksin.",
+    "type": "practice",
+    "xpReward": 50,
+    "icon": "questionmark.circle.fill",
+    "requirements": {
+      "lessonId": "lesson_4",
+      "lessonId2": "lesson_8",
+      "lessonId3": "lesson_13"
+    },
+    "requiredChallengeId": "challenge_volume_analysis",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "Senaryoyu Anla",
+        "description": "Bitcoin 60.000$ direnç seviyesinde üç kez test edildi ama geçemedi. Bu güçlü bir direnç seviyesi. Şimdi fiyat 58.000$ destek seviyesine yaklaşıyor ve hacim artıyor.",
+        "action": "read_content",
+        "icon": "doc.text.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Analiz Yap",
+        "description": "Direnç seviyesi güçlü (üç kez test edildi). Destek seviyesine yaklaşırken hacim artıyor - bu iyi bir işaret. Destek seviyesinde alım yapmak mantıklı olabilir, ama stop loss kullanmayı unutma.",
+        "action": "analyze_scenario",
+        "icon": "brain.head.profile"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Karar Ver",
+        "description": "Bu senaryoda: 1) Destek seviyesinde (58.000$) alım yapabilirsin, 2) Stop loss'u 57.000$ (yaklaşık %1.7) olarak ayarlayabilirsin, 3) Kâr alma hedefi 60.000$ direnç seviyesi olabilir. Bu stratejiyi uygulamada test et.",
+        "action": "complete_action",
+        "icon": "checkmark.circle.fill"
+      }
+    ]
+  },
+  {
+    "id": "challenge_crypto_basics",
+    "title": "Kripto Para Temelleri",
+    "description": "Kripto Para Nedir? dersini tamamla",
+    "detailedDescription": "Kripto para dünyasına giriş yapıyorsun! Bu görevde, blockchain teknolojisini, popüler kripto paraları ve kripto borsalarını öğreneceksin.",
+    "type": "practice",
+    "xpReward": 30,
+    "icon": "bitcoinsign.circle.fill",
+    "requirements": {
+      "lessonId": "lesson_6"
+    },
+    "requiredChallengeId": "challenge_first_trade",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "Kripto Para Dersini Oku",
+        "description": "'Kripto Para Nedir?' dersini oku. Blockchain, merkezi olmayan yapı ve kriptografi kavramlarını öğren.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Farklı Coin'leri Keşfet",
+        "description": "İşlem sekmesinde farklı coin'leri (Bitcoin, Ethereum, Solana vb.) incele. Her birinin fiyatını ve özelliklerini gör.",
+        "action": "navigate_to_trade",
+        "icon": "bitcoinsign.circle"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "Kripto Para dersinin quiz'ini tamamla.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      }
+    ]
+  },
+  {
+    "id": "challenge_exchange_basics",
+    "title": "Borsa Nasıl Çalışır?",
+    "description": "Borsa Nasıl Çalışır? dersini tamamla",
+    "detailedDescription": "Borsalar, finansal piyasaların kalbidir. Bu görevde, borsa türlerini, emir türlerini ve borsa göstergelerini öğreneceksin.",
+    "type": "practice",
+    "xpReward": 30,
+    "icon": "building.columns.fill",
+    "requirements": {
+      "lessonId": "lesson_7"
+    },
+    "requiredChallengeId": "challenge_crypto_basics",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "Borsa Dersini Oku",
+        "description": "'Borsa Nasıl Çalışır?' dersini oku. Borsa türleri, emir türleri ve borsa göstergelerini öğren.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Uygulamada İşlem Yap",
+        "description": "İşlem sekmesinde bir coin satın alırken, farklı emir türlerinin nasıl kullanılabileceğini düşün. Market order ile hızlı işlem, limit order ile fiyat kontrolü yapabilirsin.",
+        "action": "navigate_to_trade",
+        "icon": "arrow.left.arrow.right"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "Borsa dersinin quiz'ini tamamla.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      }
+    ]
+  },
+  {
+    "id": "challenge_fibonacci",
+    "title": "Fibonacci Retracement Kullan",
+    "description": "Fibonacci Retracement dersini tamamla",
+    "detailedDescription": "Fibonacci retracement, fiyat hareketlerinin geri çekilme seviyelerini belirlemek için güçlü bir teknik analiz aracıdır. Bu görevde, Fibonacci seviyelerini nasıl çizeceğinizi ve trading stratejinizde nasıl kullanacağınızı öğreneceksiniz.",
+    "type": "practice",
+    "xpReward": 40,
+    "icon": "waveform.path",
+    "requirements": {
+      "lessonId": "lesson_14"
+    },
+    "requiredChallengeId": "challenge_candlestick_patterns",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "Fibonacci Dersini Oku",
+        "description": "'Fibonacci Retracement' dersini oku. Fibonacci sayıları, retracement seviyeleri ve extension'ları öğren.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Fibonacci Seviyelerini Anla",
+        "description": "Ders içeriğinde %38.2, %50, %61.8 gibi önemli Fibonacci seviyelerini öğren. Bu seviyelerin destek/direnç olarak nasıl kullanıldığını anla.",
+        "action": "read_content",
+        "icon": "doc.text.fill"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "Fibonacci Retracement dersinin quiz'ini tamamla. Fibonacci hesaplamalarını test et.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      }
+    ]
+  },
+  {
+    "id": "challenge_risk_reward",
+    "title": "Risk/Reward Oranını Hesapla",
+    "description": "Risk/Reward Oranı dersini tamamla",
+    "detailedDescription": "Risk/Reward oranı, trading'de en önemli kavramlardan biridir. Bu görevde, risk/reward oranını nasıl hesaplayacağınızı ve trading stratejinizde nasıl kullanacağınızı öğreneceksiniz.",
+    "type": "practice",
+    "xpReward": 35,
+    "icon": "scalemass.fill",
+    "requirements": {
+      "lessonId": "lesson_15"
+    },
+    "requiredChallengeId": "challenge_stop_loss",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "Risk/Reward Dersini Oku",
+        "description": "'Risk/Reward Oranı' dersini oku. Risk/reward oranının nasıl hesaplandığını ve ideal oranların ne olduğunu öğren.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Pratik Hesaplama Yap",
+        "description": "Uygulamada bir coin satın alırken, giriş fiyatınızı, stop loss'unuzu ve kâr alma hedefinizi belirleyin. Risk/reward oranını hesaplayın. Minimum 1:2 oranını hedefleyin.",
+        "action": "navigate_to_trade",
+        "icon": "calculator"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "Risk/Reward Oranı dersinin quiz'ini tamamla.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      }
+    ]
+  },
+  {
+    "id": "challenge_trading_psychology",
+    "title": "Trading Psikolojisini Anla",
+    "description": "Trading Psikolojisi dersini tamamla",
+    "detailedDescription": "Trading psikolojisi, başarılı trading'in %80'ini oluşturur. Bu görevde, duygusal tuzakları, başarılı trader özelliklerini ve psikolojik sağlığı nasıl koruyacağınızı öğreneceksiniz.",
+    "type": "practice",
+    "xpReward": 40,
+    "icon": "brain.head.profile",
+    "requirements": {
+      "lessonId": "lesson_16"
+    },
+    "requiredChallengeId": "challenge_portfolio_management",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "Trading Psikolojisi Dersini Oku",
+        "description": "'Trading Psikolojisi' dersini oku. Duygusal tuzakları, başarılı trader özelliklerini ve psikolojik sağlık tekniklerini öğren.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Kendi Psikolojinizi Analiz Edin",
+        "description": "Son işlemlerinizi düşünün. Hangi duygusal durumlarda işlem yaptınız? Korku, açgözlülük veya umut ile işlem yaptınız mı? Bu durumları fark edin.",
+        "action": "analyze_scenario",
+        "icon": "person.fill"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "Trading Psikolojisi dersinin quiz'ini tamamla.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      }
+    ]
+  },
+  {
+    "id": "challenge_orderbook_master",
+    "title": "Order Book Analizi Ustası",
+    "description": "Order Book Analizi dersini tamamla",
+    "detailedDescription": "Order book analizi, piyasa derinliğini ve likiditeyi anlamak için kritiktir. Bu görevde, order book'u nasıl okuyacağınızı ve trading kararlarınızda nasıl kullanacağınızı öğreneceksiniz.",
+    "type": "practice",
+    "xpReward": 35,
+    "icon": "book.fill",
+    "requirements": {
+      "lessonId": "lesson_17"
+    },
+    "requiredChallengeId": "challenge_exchange_basics",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "Order Book Dersini Oku",
+        "description": "'Order Book Analizi' dersini oku. Alış/satış emirleri, spread, derinlik ve duvarları öğren.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Order Book'u İncele",
+        "description": "Gerçek bir borsada (veya uygulamada mümkünse) order book'u inceleyin. Büyük emirleri (duvarları) ve spread'i gözlemleyin.",
+        "action": "navigate_to_trade",
+        "icon": "magnifyingglass"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "Order Book Analizi dersinin quiz'ini tamamla.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      }
+    ]
+  },
+  {
+    "id": "challenge_swing_trading",
+    "title": "Swing Trading Stratejisi",
+    "description": "Swing Trading Stratejileri dersini tamamla",
+    "detailedDescription": "Swing trading, orta vadeli trendlerden kâr elde etmeye çalışan bir trading stilidir. Bu görevde, swing trading stratejilerini ve nasıl uygulayacağınızı öğreneceksiniz.",
+    "type": "practice",
+    "xpReward": 45,
+    "icon": "arrow.up.arrow.down",
+    "requirements": {
+      "lessonId": "lesson_18"
+    },
+    "requiredChallengeId": "challenge_trend_following",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "Swing Trading Dersini Oku",
+        "description": "'Swing Trading Stratejileri' dersini oku. Pullback trading, breakout trading ve çıkış stratejilerini öğren.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Günlük Grafikte Swing Analizi",
+        "description": "Coin detay sayfasında günlük grafiği incele. Swing yüksek ve düşükleri belirle. Pullback fırsatlarını ara.",
+        "action": "navigate_to_trade",
+        "icon": "chart.xyaxis.line"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "Swing Trading Stratejileri dersinin quiz'ini tamamla.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      }
+    ]
+  },
+  {
+    "id": "challenge_day_trading",
+    "title": "Day Trading Stratejisi",
+    "description": "Day Trading Stratejileri dersini tamamla",
+    "detailedDescription": "Day trading, günlük volatiliteden kâr elde etmeye çalışan bir trading stilidir. Bu görevde, day trading stratejilerini ve risklerini öğreneceksiniz.",
+    "type": "practice",
+    "xpReward": 45,
+    "icon": "sun.max.fill",
+    "requirements": {
+      "lessonId": "lesson_19"
+    },
+    "requiredChallengeId": "challenge_swing_trading",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "Day Trading Dersini Oku",
+        "description": "'Day Trading Stratejileri' dersini oku. Scalping, momentum trading ve range trading'i öğren.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Day Trading İçin Uygun musunuz?",
+        "description": "Ders içeriğinde day trading için gerekli koşulları okuyun. Kendinizi değerlendirin: Tam zamanlı işiniz var mı? Yüksek stresle başa çıkabilir misiniz?",
+        "action": "read_content",
+        "icon": "person.fill.checkmark"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "Day Trading Stratejileri dersinin quiz'ini tamamla.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      }
+    ]
+  },
+  {
+    "id": "challenge_sentiment_analysis",
+    "title": "Market Sentiment Analizi",
+    "description": "Market Sentiment Analizi dersini tamamla",
+    "detailedDescription": "Market sentiment, trader'ların genel olarak piyasaya karşı hissettikleri duygusal durumdur. Bu görevde, sentiment göstergelerini ve nasıl kullanacağınızı öğreneceksiniz.",
+    "type": "practice",
+    "xpReward": 40,
+    "icon": "person.2.fill",
+    "requirements": {
+      "lessonId": "lesson_20"
+    },
+    "requiredChallengeId": "challenge_technical_indicators",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "Sentiment Analizi Dersini Oku",
+        "description": "'Market Sentiment Analizi' dersini oku. Fear & Greed Index, contrarian yaklaşım ve sentiment araçlarını öğren.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Sentiment'i Teknik Analizle Birleştir",
+        "description": "Ders içeriğinde sentiment'i teknik analizle nasıl birleştireceğinizi öğrenin. Aşırı korku + teknik destek = Güçlü alım sinyali.",
+        "action": "read_content",
+        "icon": "chart.line.uptrend.xyaxis"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "Market Sentiment Analizi dersinin quiz'ini tamamla.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      }
+    ]
+  },
+  {
+    "id": "challenge_backtesting",
+    "title": "Backtesting Yap",
+    "description": "Backtesting ve Strateji Testi dersini tamamla",
+    "detailedDescription": "Backtesting, bir trading stratejisini geçmiş veriler üzerinde test etme işlemidir. Bu görevde, backtesting yapmayı ve sonuçları analiz etmeyi öğreneceksiniz.",
+    "type": "practice",
+    "xpReward": 50,
+    "icon": "chart.line.uptrend.xyaxis.circle.fill",
+    "requirements": {
+      "lessonId": "lesson_21"
+    },
+    "requiredChallengeId": "challenge_trading_psychology",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "Backtesting Dersini Oku",
+        "description": "'Backtesting ve Strateji Testi' dersini oku. Backtesting nasıl yapılır, önemli metrikler nelerdir ve hatalardan nasıl kaçınılır öğren.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Basit Bir Strateji Test Edin",
+        "description": "Geçmiş işlemlerinizi gözden geçirin. Basit bir strateji (örn: RSI 30'un altında al) uygulayın ve sonuçları analiz edin.",
+        "action": "analyze_scenario",
+        "icon": "chart.bar.doc.horizontal"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "Backtesting ve Strateji Testi dersinin quiz'ini tamamla.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      }
+    ]
+  },
+  {
+    "id": "challenge_margin_trading",
+    "title": "Margin Trading'i Anla",
+    "description": "Margin Trading ve Kaldıraç dersini tamamla",
+    "detailedDescription": "Margin trading, borç alınan fonlarla işlem yapma işlemidir. Bu görevde, margin trading'in risklerini ve nasıl güvenli kullanılacağını öğreneceksiniz.",
+    "type": "practice",
+    "xpReward": 50,
+    "icon": "arrow.up.arrow.down.circle.fill",
+    "requirements": {
+      "lessonId": "lesson_22"
+    },
+    "requiredChallengeId": "challenge_backtesting",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "Margin Trading Dersini Oku",
+        "description": "'Margin Trading ve Kaldıraç' dersini oku. Kaldıraç oranları, liquidation riski ve güvenli margin trading'i öğren.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Kaldıraç Riskini Hesapla",
+        "description": "Ders içeriğindeki örnekleri inceleyin. 10x kaldıraç ile %10 kayıp durumunda ne olacağını anlayın. Neden düşük kaldıraç kullanılmalı?",
+        "action": "read_content",
+        "icon": "exclamationmark.triangle.fill"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "Margin Trading ve Kaldıraç dersinin quiz'ini tamamla.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      }
+    ]
+  },
+  {
+    "id": "challenge_defi_basics",
+    "title": "DeFi Temellerini Öğren",
+    "description": "DeFi Temelleri dersini tamamla",
+    "detailedDescription": "DeFi, merkezi olmayan finansal uygulamalardır. Bu görevde, DeFi'nin temel kavramlarını ve risklerini öğreneceksiniz.",
+    "type": "practice",
+    "xpReward": 45,
+    "icon": "network",
+    "requirements": {
+      "lessonId": "lesson_23"
+    },
+    "requiredChallengeId": "challenge_margin_trading",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "DeFi Dersini Oku",
+        "description": "'DeFi Temelleri' dersini oku. Akıllı sözleşmeler, liquidity pool'lar, yield farming ve DeFi risklerini öğren.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "DeFi Güvenliğini Anla",
+        "description": "Ders içeriğinde DeFi güvenliği konusunu okuyun. Audit, TVL ve güvenilir projeleri nasıl belirleyeceğinizi öğrenin.",
+        "action": "read_content",
+        "icon": "shield.fill"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "DeFi Temelleri dersinin quiz'ini tamamla.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      }
+    ]
+  },
+  {
+    "id": "challenge_tokenomics",
+    "title": "Tokenomics Analizi",
+    "description": "Tokenomics ve Coin Analizi dersini tamamla",
+    "detailedDescription": "Tokenomics, bir kripto para projesinin ekonomik modelini analiz etme bilimidir. Bu görevde, tokenomics'i nasıl analiz edeceğinizi öğreneceksiniz.",
+    "type": "practice",
+    "xpReward": 45,
+    "icon": "chart.pie.fill",
+    "requirements": {
+      "lessonId": "lesson_24"
+    },
+    "requiredChallengeId": "challenge_defi_basics",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "Tokenomics Dersini Oku",
+        "description": "'Tokenomics ve Coin Analizi' dersini oku. Toplam arz, dolaşımdaki arz, dağıtım modeli ve red flag'leri öğren.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "Bir Coin'in Tokenomics'ini İncele",
+        "description": "Uygulamadaki bir coin'in tokenomics'ini araştırın (mümkünse). Toplam arz, dolaşımdaki arz ve dağıtım modelini kontrol edin.",
+        "action": "navigate_to_trade",
+        "icon": "magnifyingglass"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "Tokenomics ve Coin Analizi dersinin quiz'ini tamamla.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      }
+    ]
+  },
+  {
+    "id": "challenge_trading_journal",
+    "title": "Trading Günlüğü Tut",
+    "description": "Trading Günlüğü ve Performans Analizi dersini tamamla",
+    "detailedDescription": "Trading günlüğü tutmak, başarılı trading'in temel taşlarından biridir. Bu görevde, trading günlüğü tutmayı ve performans analizi yapmayı öğreneceksiniz.",
+    "type": "practice",
+    "xpReward": 40,
+    "icon": "book.closed.fill",
+    "requirements": {
+      "lessonId": "lesson_25"
+    },
+    "requiredChallengeId": "challenge_trading_psychology",
+    "steps": [
+      {
+        "id": "step_1",
+        "number": 1,
+        "title": "Trading Günlüğü Dersini Oku",
+        "description": "'Trading Günlüğü ve Performans Analizi' dersini oku. Günlük tutmanın önemi, kaydedilmesi gerekenler ve performans metriklerini öğren.",
+        "action": "navigate_to_lesson",
+        "icon": "book.fill"
+      },
+      {
+        "id": "step_2",
+        "number": 2,
+        "title": "İşlem Geçmişinizi İnceleyin",
+        "description": "Uygulamada işlem geçmişinizi inceleyin. Hangi işlemler kârlı, hangileri zararlı? Neden? Bu analizi yapın.",
+        "action": "navigate_to_profile",
+        "icon": "chart.bar.doc.horizontal"
+      },
+      {
+        "id": "step_3",
+        "number": 3,
+        "title": "Quiz'i Tamamla",
+        "description": "Trading Günlüğü ve Performans Analizi dersinin quiz'ini tamamla.",
+        "action": "navigate_to_quiz",
+        "icon": "brain.head.profile"
+      }
+    ]
+  }
+]

@@ -1,0 +1,1527 @@
+[
+  {
+    "id": "quiz_1",
+    "lessonId": "lesson_1",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Bir trader, Bitcoin'i 50.000$'dan alıp 55.000$'dan sattı. Aynı dönemde Ethereum'u 3.000$'dan alıp 2.700$'dan sattı. Bu trader'ın toplam performansı için aşağıdakilerden hangisi doğrudur?",
+        "options": [
+          "Her iki işlem de kârlıdır çünkü Bitcoin'den kâr etmiştir",
+          "Toplam kâr/zarar, pozisyon boyutlarına bağlıdır",
+          "Ethereum işlemi zararlı olduğu için trader başarısızdır",
+          "Bitcoin'den %10 kâr ettiği için genel performans pozitiftir"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "Bir coin'in fiyatı son 24 saatte %5 düştü, ancak işlem hacmi önceki güne göre %200 arttı. Bu durum için en doğru yorum hangisidir?",
+        "options": [
+          "Yüksek hacim her zaman yükseliş sinyalidir",
+          "Yüksek hacimli düşüş, güçlü satış baskısı gösterir ve trend devam edebilir",
+          "Hacim fiyat hareketinden bağımsızdır",
+          "Düşük hacim daha önemlidir"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q3",
+        "question": "10.000$ sermayesi olan bir trader, işlem başına %2 risk kuralına uyuyor. Bitcoin'i 60.000$'dan alıyor ve stop loss'u 58.000$ olarak ayarlıyor. Pozisyon boyutu ne kadar olmalıdır?",
+        "options": [
+          "0.1 BTC (6.000$ değerinde)",
+          "0.05 BTC (3.000$ değerinde)",
+          "0.033 BTC (yaklaşık 2.000$ değerinde)",
+          "0.2 BTC (12.000$ değerinde)"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "id": "q4",
+        "question": "Bir trader'ın 20 işleminde %55 başarı oranı var. Ortalama kârı 150$, ortalama zararı 100$. Bu trader'ın profit factor'ü nedir ve uzun vadede kârlı mıdır?",
+        "options": [
+          "Profit factor 1.65, kârlıdır",
+          "Profit factor 0.82, zararlıdır",
+          "Profit factor 1.24, kârlıdır",
+          "Profit factor 2.0, çok kârlıdır"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": "q5",
+        "question": "Trading stratejisi: RSI 30'un altında al, 70'in üzerinde sat. Backtest sonuçları: %40 başarı oranı, ortalama kâr 200$, ortalama zarar 100$. Bu strateji uzun vadede kârlı mıdır?",
+        "options": [
+          "Hayır, çünkü başarı oranı %50'nin altında",
+          "Evet, çünkü risk/reward oranı 1:2 ve profit factor 1.6",
+          "Belirsiz, çünkü yeterli veri yok",
+          "Hayır, çünkü RSI güvenilir değildir"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz_2",
+    "lessonId": "lesson_2",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Bitcoin'i 60.000$'dan aldınız. Volatilite yüksek ve günlük ortalama hareket %3. Stop loss'unuzu %2 (58.800$) koydunuz. İlk gün fiyat 58.900$'a düştü ama sonra 61.000$'a çıktı. Ne yapmalısınız?",
+        "options": [
+          "Stop loss'u kaldırmalısınız çünkü fiyat geri döndü",
+          "Stop loss'u %3'e (58.200$) çıkarmalısınız çünkü volatilite yüksek",
+          "Stop loss'u %1'e (59.400$) yaklaştırmalısınız çünkü fiyat yükseldi",
+          "Stop loss'u aynı tutmalı ve kâr alma hedefini 63.000$ yapmalısınız"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "Ethereum'u 3.000$'dan aldınız, stop loss 2.900$. Fiyat 2.910$'a düştü ama stop loss tetiklenmedi. Sonra 3.100$'a çıktı. Bu durumda stop loss'unuzu nasıl güncellemelisiniz?",
+        "options": [
+          "Stop loss'u kaldırmalısınız çünkü fiyat yükseldi",
+          "Stop loss'u 3.000$'a (breakeven) çıkarmalısınız",
+          "Stop loss'u 2.900$'da tutmalısınız",
+          "Stop loss'u 2.850$'a düşürmelisiniz"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q3",
+        "question": "Bir trader, Bitcoin'i 60.000$'dan alıyor. Risk/reward oranı 1:3 istiyor. Stop loss'u 58.000$ (%3.3 risk) olarak ayarlıyor. Kâr alma hedefi ne olmalıdır?",
+        "options": [
+          "62.000$ (1:1 risk/reward)",
+          "64.000$ (1:2 risk/reward)",
+          "66.000$ (1:3 risk/reward)",
+          "68.000$ (1:4 risk/reward)"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "id": "q4",
+        "question": "Scalping yapıyorsunuz ve çok sıkı stop loss kullanıyorsunuz (%0.5). Ancak stop loss'unuz sürekli tetikleniyor ve küçük fiyat dalgalanmalarında pozisyonlarınız kapanıyor. Ne yapmalısınız?",
+        "options": [
+          "Stop loss'u tamamen kaldırmalısınız",
+          "Stop loss'u %2'ye çıkarmalı ve scalping yerine swing trading yapmalısınız",
+          "Daha az volatil coin'ler seçmeli veya stop loss'u %1'e çıkarmalısınız",
+          "Stop loss kullanmamalısınız"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "id": "q5",
+        "question": "10.000$ sermayeniz var. Bitcoin'i 60.000$'dan alıyorsunuz, stop loss 58.000$. İşlem başına maksimum %2 risk kuralına uyuyorsunuz. Pozisyon boyutu ve maksimum kayıp ne olmalıdır?",
+        "options": [
+          "0.1 BTC, maksimum kayıp 2.000$",
+          "0.05 BTC, maksimum kayıp 1.000$",
+          "0.033 BTC, maksimum kayıp 200$",
+          "0.2 BTC, maksimum kayıp 4.000$"
+        ],
+        "correctAnswer": 3
+      }
+    ]
+  },
+  {
+    "id": "quiz_3",
+    "lessonId": "lesson_3",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Derse göre, işlem başına sermayenizin ne kadarını riske atmalısınız?",
+        "options": [
+          "%5-10",
+          "%1-2",
+          "%50",
+          "%100"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "Risk yönetiminin amacı nedir?",
+        "options": [
+          "Tüm kayıpları ortadan kaldırmak",
+          "Kâr elde edecek kadar uzun süre hayatta kalmak",
+          "Her zaman maksimum kâr elde etmek",
+          "Strateji olmadan işlem yapmak"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q3",
+        "question": "Aşağıdakilerden hangisi risk yönetiminin temel ilkesi DEĞİLDİR?",
+        "options": [
+          "İşlem başına %1-2'den fazla riske atmayın",
+          "Portföyünüzü çeşitlendirin",
+          "Tüm paranızı tek bir varlığa koyun",
+          "Net çıkış kuralları belirleyin"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "id": "q4",
+        "question": "Pozisyon boyutlandırması nedir?",
+        "options": [
+          "Risk toleransınıza göre ne kadar satın alacağınızı hesaplama",
+          "Sadece maksimum miktarda satın alma",
+          "Rastgele miktarda satın alma",
+          "Hiçbir şey satın almama"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": "q5",
+        "question": "Trading günlüğü tutmanın amacı nedir?",
+        "options": [
+          "Sadece kârları kaydetmek",
+          "İşlemlerinizi takip edip hatalardan öğrenmek",
+          "Diğer trader'ları takip etmek",
+          "Sadece kayıpları kaydetmek"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz_4",
+    "lessonId": "lesson_4",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Destek seviyesi nedir?",
+        "options": [
+          "Satış baskısının güçlü olduğu bir fiyat seviyesi",
+          "Alım ilgisinin satış baskısını yenmek için yeterince güçlü olduğu bir fiyat seviyesi",
+          "Ulaşılan en yüksek fiyat",
+          "Her zaman satış yapmanız gereken nokta"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "Fiyat direnci kırdığında genellikle ne olur?",
+        "options": [
+          "Fiyat hemen önceki seviyeye döner",
+          "Fiyat genellikle o yönde güçlü bir şekilde hareket eder",
+          "Önemli bir şey olmaz",
+          "İşlem tamamen durur"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q3",
+        "question": "Güçlü bir destek veya direnç seviyesini nasıl belirleyebilirsiniz?",
+        "options": [
+          "Tahmin ederek",
+          "Fiyatın birden fazla kez tersine döndüğü alanlara bakarak",
+          "Belirlemek imkansızdır",
+          "Başka birine sorarak"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q4",
+        "question": "Alırken hangi seviye yakınında işlem yapmalısınız?",
+        "options": [
+          "Direnç seviyesi",
+          "Destek seviyesi",
+          "Rastgele bir seviye",
+          "En yüksek fiyat"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q5",
+        "question": "Destek ve direnç seviyelerini doğrulamak için ne kullanılabilir?",
+        "options": [
+          "Sadece tahmin",
+          "Hacim ve diğer göstergeler",
+          "Sadece fiyat",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz_5",
+    "lessonId": "lesson_5",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Yükseliş trendini ne karakterize eder?",
+        "options": [
+          "Daha düşük yüksekler ve daha düşük düşükler",
+          "Daha yüksek yüksekler ve daha yüksek düşükler",
+          "Aynı yüksekler ve aynı düşükler",
+          "Hiçbir desen yok"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "Trend takibi için temel kural nedir?",
+        "options": [
+          "Trende karşı savaşın",
+          "Trend sizin arkadaşınızdır (ta ki öyle olmayana kadar)",
+          "Trendlerden tamamen kaçının",
+          "Rastgele işlem yapın"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q3",
+        "question": "Trend takip işleminden ne zaman çıkmalısınız?",
+        "options": [
+          "Asla",
+          "Trend tersine dönme belirtileri gösterdiğinde",
+          "Sadece büyük kârlar elde ettiğinizde",
+          "Tam olarak bir gün sonra"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q4",
+        "question": "Hareketli ortalamalar (MA) ile trend takibi nasıl yapılır?",
+        "options": [
+          "Fiyat MA'nın üzerindeyken satın, altındayken alın",
+          "Fiyat MA'nın üzerindeyken alın, altındayken satın",
+          "MA'yı hiç kullanmayın",
+          "Sadece MA'ya bakarak işlem yapın"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q5",
+        "question": "Momentum göstergeleri (RSI, MACD) ne için kullanılır?",
+        "options": [
+          "Sadece fiyatı görmek için",
+          "Trend gücünü doğrulamaya yardımcı olur ve sapmaları bulmak için",
+          "Hiçbir şey için kullanılmaz",
+          "Sadece kârları hesaplamak için"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz_6",
+    "lessonId": "lesson_6",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Kripto para nedir?",
+        "options": [
+          "Sadece Bitcoin",
+          "Şifreleme teknikleri kullanılarak güvenli hale getirilmiş dijital para birimi",
+          "Sadece fiziksel para",
+          "Sadece banka kartları"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "Blockchain nedir?",
+        "options": [
+          "Bir kripto para türü",
+          "İşlemlerin kaydedildiği dağıtılmış bir defter sistemi",
+          "Bir borsa adı",
+          "Bir trading stratejisi"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q3",
+        "question": "Kripto borsaları ne zaman açıktır?",
+        "options": [
+          "Sadece hafta içi",
+          "7/24 açıktır",
+          "Sadece gündüz",
+          "Sadece gece"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q4",
+        "question": "Kripto paraların en büyük riski nedir?",
+        "options": [
+          "Yüksek volatilite",
+          "Düşük kâr potansiyeli",
+          "Yavaş işlemler",
+          "Yüksek işlem ücretleri"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": "q5",
+        "question": "Ethereum'un temel kullanım alanı nedir?",
+        "options": [
+          "Sadece ödeme",
+          "Akıllı sözleşmeler ve merkezi olmayan uygulamalar",
+          "Sadece yatırım",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz_7",
+    "lessonId": "lesson_7",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Borsa nedir?",
+        "options": [
+          "Sadece bir bina",
+          "Alıcı ve satıcıların finansal araçları alıp sattığı organize bir piyasa",
+          "Sadece kripto para yeri",
+          "Sadece hisse senedi yeri"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "Market Order nedir?",
+        "options": [
+          "Belirli bir fiyattan işlem",
+          "Anında mevcut piyasa fiyatından işlem yapar",
+          "Gelecekteki bir fiyattan işlem",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q3",
+        "question": "Limit Order'ın avantajı nedir?",
+        "options": [
+          "Hızlı işlem",
+          "Fiyat kontrolü",
+          "Garantili kâr",
+          "Hiçbir avantajı yok"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q4",
+        "question": "Bid/Ask Spread nedir?",
+        "options": [
+          "Alış ve satış fiyatları arasındaki fark",
+          "Bir coin'in adı",
+          "Bir trading stratejisi",
+          "Bir grafik türü"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": "q5",
+        "question": "Kripto borsaları ne zaman açıktır?",
+        "options": [
+          "Sadece hafta içi",
+          "7/24 açıktır",
+          "Sadece gündüz",
+          "Sadece gece"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz_8",
+    "lessonId": "lesson_8",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "En popüler grafik türü hangisidir?",
+        "options": [
+          "Çizgi grafik",
+          "Mum grafikleri (Candlestick)",
+          "Bar grafikleri",
+          "Pasta grafik"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "Yeşil mum ne anlama gelir?",
+        "options": [
+          "Kapanış fiyatı açılıştan düşük",
+          "Kapanış fiyatı açılıştan yüksek (yükseliş)",
+          "Fiyat değişmedi",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q3",
+        "question": "Günlük zaman çerçevesi ne için kullanılır?",
+        "options": [
+          "Çok kısa vadeli işlemler",
+          "Orta vadeli analiz",
+          "Sadece scalping",
+          "Hiçbir şey için"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q4",
+        "question": "Grafikte aranacak en önemli şey nedir?",
+        "options": [
+          "Sadece renkler",
+          "Trend yönü, destek/direnç seviyeleri, hacim ve desenler",
+          "Sadece fiyat",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q5",
+        "question": "Birden fazla zaman çerçevesi kullanmanın faydası nedir?",
+        "options": [
+          "Hiçbir faydası yok",
+          "Büyük resmi görmek için uzun zaman çerçevesi, giriş noktası için kısa zaman çerçevesi",
+          "Sadece karışıklık yaratır",
+          "Sadece zaman kaybı"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz_9",
+    "lessonId": "lesson_9",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Doji mum deseni ne gösterir?",
+        "options": [
+          "Güçlü yükseliş",
+          "Belirsizlik",
+          "Güçlü düşüş",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "Hammer deseni hangi sinyali verir?",
+        "options": [
+          "Yükseliş trendinde düşüş sinyali",
+          "Düşüş trendinde yükseliş sinyali",
+          "Belirsizlik",
+          "Hiçbir sinyal vermez"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q3",
+        "question": "Baş ve Omuzlar deseni ne gösterir?",
+        "options": [
+          "Yükseliş sinyali",
+          "Klasik düşüş sinyali",
+          "Belirsizlik",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q4",
+        "question": "Yükselen üçgen deseni ne gösterir?",
+        "options": [
+          "Düşüş trendinde devam sinyali",
+          "Yükseliş trendinde devam sinyali",
+          "Belirsizlik",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q5",
+        "question": "Desenleri kullanırken ne yapmalısınız?",
+        "options": [
+          "Sadece desenlere güvenin",
+          "Hacimle doğrulayın ve stop loss kullanın",
+          "Hiçbir şey yapmayın",
+          "Sadece tahmin edin"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz_10",
+    "lessonId": "lesson_10",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "RSI göstergesi ne ölçer?",
+        "options": [
+          "Sadece fiyat",
+          "Bir varlığın aşırı alım veya aşırı satım durumunu",
+          "Sadece hacim",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "RSI 70'in üzerinde ne anlama gelir?",
+        "options": [
+          "Aşırı satım, alış sinyali",
+          "Aşırı alım, satış sinyali olabilir",
+          "Normal seviye",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q3",
+        "question": "MACD çizgisi sinyal çizgisini yukarı keserse ne olur?",
+        "options": [
+          "Satış sinyali",
+          "Alış sinyali",
+          "Hiçbir şey",
+          "Belirsizlik"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q4",
+        "question": "Bollinger Bands ne gösterir?",
+        "options": [
+          "Sadece fiyat",
+          "Fiyatın volatilitesini ve olası aşırı alım/satım seviyelerini",
+          "Sadece hacim",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q5",
+        "question": "Göstergeleri kullanırken ne yapmalısınız?",
+        "options": [
+          "Tek bir göstergeye güvenin",
+          "Birden fazla göstergeyi birlikte kullanın ve fiyat hareketiyle doğrulayın",
+          "Hiçbir gösterge kullanmayın",
+          "Sadece tahmin edin"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz_11",
+    "lessonId": "lesson_11",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Market Order'ın avantajı nedir?",
+        "options": [
+          "Fiyat kontrolü",
+          "Hızlı işlem garantisi",
+          "Garantili kâr",
+          "Hiçbir avantajı yok"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "Long pozisyon nedir?",
+        "options": [
+          "Bir varlığı ödünç alıp satma",
+          "Bir varlığı satın alıp fiyatın yükselmesini bekleme",
+          "Hiçbir şey yapmama",
+          "Sadece satış"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q3",
+        "question": "Scalping nedir?",
+        "options": [
+          "Uzun vadeli işlemler",
+          "Çok kısa vadeli işlemler (saniyeler/dakikalar)",
+          "Sadece günlük işlemler",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q4",
+        "question": "10x kaldıraç ile 1.000$ ile ne kadar pozisyon açabilirsiniz?",
+        "options": [
+          "1.000$",
+          "10.000$",
+          "100$",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q5",
+        "question": "Stop Limit Order nedir?",
+        "options": [
+          "Sadece market order",
+          "Stop order ile limit order'ın birleşimi",
+          "Sadece limit order",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz_12",
+    "lessonId": "lesson_12",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Portföy çeşitlendirme neden önemlidir?",
+        "options": [
+          "Tüm yumurtaları tek sepete koymamak",
+          "Sadece bir coin'e yatırım yapmak",
+          "Hiçbir şey yapmamak",
+          "Sadece kâr için"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": "q2",
+        "question": "Tek bir coin'e maksimum ne kadar yatırım yapmalısınız?",
+        "options": [
+          "%100",
+          "%20-30",
+          "%50",
+          "%10"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q3",
+        "question": "Yeniden dengeleme nedir?",
+        "options": [
+          "Portföyü silmek",
+          "Portföy dağılımını hedef oranlara geri getirme",
+          "Sadece yeni coin eklemek",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q4",
+        "question": "Risk tabanlı pozisyon boyutlandırma nedir?",
+        "options": [
+          "Her coin'e eşit yatırım",
+          "Risk seviyesine göre pozisyon boyutu",
+          "Sadece maksimum yatırım",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q5",
+        "question": "Portföy psikolojisinde ne yapmamalısınız?",
+        "options": [
+          "Sabırlı olmak",
+          "Favori coin'inize aşırı bağlanmak",
+          "Uzun vadeli stratejiye sadık kalmak",
+          "Düzenli inceleme yapmak"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz_13",
+    "lessonId": "lesson_13",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Hacim nedir?",
+        "options": [
+          "Sadece fiyat",
+          "Belirli bir zaman diliminde yapılan toplam işlem miktarı",
+          "Sadece grafik",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "Yükseliş + Yüksek Hacim ne gösterir?",
+        "options": [
+          "Zayıf yükseliş",
+          "Güçlü yükseliş trendi, alıcılar hakim",
+          "Belirsizlik",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q3",
+        "question": "Hacim sapması (Volume Divergence) nedir?",
+        "options": [
+          "Fiyat yeni yüksek yaparken hacim artıyorsa",
+          "Fiyat yeni yüksek yaparken hacim azalıyorsa, trend zayıflıyor",
+          "Hacim hiç değişmiyorsa",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q4",
+        "question": "VWAP nedir?",
+        "options": [
+          "Sadece bir grafik",
+          "Hacim ağırlıklı ortalama fiyat",
+          "Sadece bir gösterge",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q5",
+        "question": "Kırılımları doğrulamak için ne kullanılır?",
+        "options": [
+          "Sadece fiyat",
+          "Yüksek hacim",
+          "Sadece tahmin",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz_14",
+    "lessonId": "lesson_14",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Bitcoin 50.000$'dan 70.000$'a yükseldi, sonra 60.000$'a geri çekildi. Fibonacci retracement çiziyorsunuz. %61.8 seviyesi nerede olur?",
+        "options": [
+          "62.640$",
+          "57.640$",
+          "65.000$",
+          "55.000$"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "Ethereum yükseliş trendinde. Swing düşük 2.800$, swing yüksek 3.500$. %38.2 Fibonacci seviyesinde alım yapıyorsunuz. Giriş fiyatı ne olmalıdır?",
+        "options": [
+          "3.133$",
+          "3.233$",
+          "2.933$",
+          "3.000$"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q3",
+        "question": "Fibonacci extension kullanarak hedef belirliyorsunuz. Giriş 60.000$, swing yüksek 65.000$, swing düşük 58.000$. %161.8 extension seviyesi nedir?",
+        "options": [
+          "71.320$",
+          "68.500$",
+          "73.200$",
+          "70.000$"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": "q4",
+        "question": "Fibonacci seviyeleri hangi durumda daha güvenilirdir?",
+        "options": [
+          "Tek başına kullanıldığında",
+          "Destek/direnç seviyeleriyle örtüştüğünde ve hacimle doğrulandığında",
+          "Sadece yükseliş trendlerinde",
+          "Sadece düşüş trendlerinde"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q5",
+        "question": "Altın oran (1.618) Fibonacci dizisinde nasıl ortaya çıkar?",
+        "options": [
+          "Her Fibonacci sayısının bir öncekine bölümü yaklaşık 1.618'e yaklaşır",
+          "Sadece %61.8 retracement seviyesinde kullanılır",
+          "Sadece extension'larda kullanılır",
+          "Fibonacci ile ilgisi yoktur"
+        ],
+        "correctAnswer": 1
+      }
+    ]
+  },
+  {
+    "id": "quiz_15",
+    "lessonId": "lesson_15",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "10.000$ sermayeniz var. Bitcoin'i 60.000$'dan alıyorsunuz, stop loss 58.000$, hedef 66.000$. Risk/reward oranı nedir ve bu işlem için pozisyon boyutu ne olmalıdır?",
+        "options": [
+          "1:3 risk/reward, 0.05 BTC pozisyon",
+          "1:2 risk/reward, 0.033 BTC pozisyon",
+          "1:3 risk/reward, 0.033 BTC pozisyon (işlem başına %2 risk)",
+          "1:4 risk/reward, 0.1 BTC pozisyon"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "id": "q2",
+        "question": "Bir trader'ın %45 başarı oranı var. Ortalama kârı 300$, ortalama zararı 150$. Bu trader uzun vadede kârlı mıdır?",
+        "options": [
+          "Hayır, çünkü başarı oranı %50'nin altında",
+          "Evet, çünkü profit factor 1.8 ve risk/reward 1:2",
+          "Belirsiz, yeterli veri yok",
+          "Hayır, çünkü ortalama zarar çok yüksek"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q3",
+        "question": "Ethereum'u 3.000$'dan alıyorsunuz. Minimum 1:2 risk/reward istiyorsunuz. Stop loss'u 2.900$ (%3.3 risk) koydunuz. Kâr alma hedefi en az ne olmalıdır?",
+        "options": [
+          "3.100$",
+          "3.200$",
+          "3.300$",
+          "3.400$"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q4",
+        "question": "Bir işlemde 200$ risk ediyorsunuz ve 1:3 risk/reward oranı hedefliyorsunuz. Potansiyel kârınız ne kadar olmalıdır?",
+        "options": [
+          "400$",
+          "500$",
+          "600$",
+          "800$"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "id": "q5",
+        "question": "Risk/reward oranı 1:1 olan bir strateji için başarı oranı en az ne olmalıdır ki uzun vadede kârlı olsun?",
+        "options": [
+          "%40",
+          "%50",
+          "%60",
+          "%70"
+        ],
+        "correctAnswer": 3
+      }
+    ]
+  },
+  {
+    "id": "quiz_16",
+    "lessonId": "lesson_16",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Bir trader, kârlı bir pozisyonda kâr alma hedefini sürekli yükseltiyor ve stop loss'u kaldırıyor. Sonunda pozisyon zarara dönüyor. Bu trader hangi duygusal tuzaktan etkilenmiştir?",
+        "options": [
+          "Korku",
+          "Açgözlülük",
+          "Umut",
+          "FOMO"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "Bir trader, zararlı bir pozisyonu 'fiyat geri dönecek' diye tutuyor ve stop loss'u görmezden geliyor. Bu hangi psikolojik hatadır?",
+        "options": [
+          "Korku",
+          "Açgözlülük",
+          "Umut (wishful thinking)",
+          "Disiplin"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "id": "q3",
+        "question": "Trading günlüğünde hangi bilgiler kaydedilmelidir?",
+        "options": [
+          "Sadece kâr/zarar miktarı",
+          "İşlem detayları, strateji, risk yönetimi, duygusal durum",
+          "Sadece coin adı ve fiyat",
+          "Sadece tarih"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q4",
+        "question": "Başarılı bir trader'ın en önemli özelliği nedir?",
+        "options": [
+          "Her zaman kâr etmek",
+          "Disiplin ve plana sadık kalmak",
+          "Hızlı karar vermek",
+          "Çok fazla işlem yapmak"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q5",
+        "question": "Trading'de psikolojinin önemi nedir?",
+        "options": [
+          "Hiç önemli değildir, sadece teknik analiz önemlidir",
+          "Trading başarısının %80'ini oluşturur",
+          "Sadece yeni başlayanlar için önemlidir",
+          "Sadece kayıplarda önemlidir"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz_17",
+    "lessonId": "lesson_17",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Order book'ta 60.000$ seviyesinde 50 BTC satış emri (wall) var. 59.900$'da 200 BTC alış emri var. Bu durum için en doğru yorum hangisidir?",
+        "options": [
+          "60.000$ güçlü destek, fiyat yükselir",
+          "60.000$ güçlü direnç, 59.900$ güçlü destek - fiyat 59.900-60.000 arasında kalabilir",
+          "Order book önemli değildir",
+          "Fiyat kesinlikle düşecektir"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "Order book'ta alış emirleri satış emirlerinden çok daha fazla. Bu ne anlama gelir?",
+        "options": [
+          "Kesinlikle fiyat düşecektir",
+          "Potansiyel yükseliş sinyali - alıcılar hakim",
+          "Hiçbir şey ifade etmez",
+          "Fiyat kesinlikle yükselecektir"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q3",
+        "question": "Order book'ta 'sahte duvar' nedir?",
+        "options": [
+          "Gerçek büyük emirler",
+          "Büyük emirler koyup sonra iptal eden manipülatörler",
+          "Sadece alış emirleri",
+          "Sadece satış emirleri"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q4",
+        "question": "Spread nedir ve düşük spread ne anlama gelir?",
+        "options": [
+          "Alış ve satış fiyatları arasındaki fark, düşük spread yüksek likidite gösterir",
+          "Sadece bir coin'in adı",
+          "Bir trading stratejisi",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": "q5",
+        "question": "Order book analizi hangi durumda daha güvenilirdir?",
+        "options": [
+          "Düşük likiditeli coin'lerde",
+          "Yüksek likiditeli coin'lerde",
+          "Her zaman aynı güvenilirlikte",
+          "Hiçbir zaman güvenilir değildir"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz_18",
+    "lessonId": "lesson_18",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Swing trading için ideal zaman çerçevesi hangisidir?",
+        "options": [
+          "1 dakika grafikler",
+          "Günlük ve haftalık grafikler",
+          "Sadece saatlik grafikler",
+          "Sadece aylık grafikler"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "Swing trading'de pullback stratejisi nedir?",
+        "options": [
+          "Trend yönünde geri çekilmelerde alım yapma",
+          "Trende karşı işlem yapma",
+          "Sadece yükseliş trendlerinde işlem yapma",
+          "Sadece düşüş trendlerinde işlem yapma"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": "q3",
+        "question": "Bitcoin günlük grafikte yükseliş trendinde. 60.000$ destek seviyesinde, RSI 40. Swing trading için giriş kriterleri uygun mu?",
+        "options": [
+          "Evet, destek seviyesinde ve RSI aşırı satım bölgesinden çıkıyor",
+          "Hayır, RSI çok düşük",
+          "Hayır, destek seviyesi önemli değil",
+          "Belirsiz"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": "q4",
+        "question": "Swing trading'de pozisyon boyutu ne kadar olmalıdır?",
+        "options": [
+          "Sermayenin %50'si",
+          "Sermayenin %5-10'u",
+          "Sermayenin tamamı",
+          "Sermayenin %1'i"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q5",
+        "question": "Swing trading için ideal koşullar nelerdir?",
+        "options": [
+          "Düşük likidite, yüksek volatilite",
+          "Yüksek likidite, yeterli volatilite, güçlü trend",
+          "Düşük volatilite",
+          "Trend olmadan"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz_19",
+    "lessonId": "lesson_19",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Day trading için ideal zaman çerçevesi hangisidir?",
+        "options": [
+          "Aylık grafikler",
+          "Saatlik ve 15 dakikalık grafikler",
+          "Sadece günlük grafikler",
+          "Sadece haftalık grafikler"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "Day trading'de gün sonu kuralı nedir?",
+        "options": [
+          "Gün sonunda tüm pozisyonları kapatmak",
+          "Gün sonunda daha fazla pozisyon açmak",
+          "Gün sonunda stop loss kaldırmak",
+          "Hiçbir kural yok"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": "q3",
+        "question": "Day trading'de maksimum günlük kayıp limiti ne olmalıdır?",
+        "options": [
+          "Sermayenin %10'u",
+          "Sermayenin %2'si",
+          "Sermayenin %50'si",
+          "Limit olmamalı"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q4",
+        "question": "Day trading için uygun değilsiniz eğer:",
+        "options": [
+          "Tam zamanlı işiniz varsa, yüksek stresle başa çıkamıyorsanız, yeterli deneyiminiz yoksa",
+          "Sadece küçük sermayeniz varsa",
+          "Sadece kripto paraları sevmiyorsanız",
+          "Sadece gündüz çalışıyorsanız"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": "q5",
+        "question": "Day trading'de scalping stratejisi nedir?",
+        "options": [
+          "Uzun vadeli pozisyonlar",
+          "Çok kısa vadeli işlemler (dakikalar), küçük kârlar, yüksek hacim",
+          "Sadece günlük işlemler",
+          "Sadece haftalık işlemler"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz_20",
+    "lessonId": "lesson_20",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Fear & Greed Index 20 (aşırı korku) gösteriyor. Bitcoin son 2 haftada %30 düştü ve teknik analiz destek seviyesinde. Ne yapmalısınız?",
+        "options": [
+          "Kesinlikle satmalısınız çünkü korku var",
+          "Potansiyel alım fırsatı - aşırı korku + teknik destek",
+          "Hiçbir şey yapmamalısınız",
+          "Sadece teknik analize bakmalısınız"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "Fear & Greed Index 85 (aşırı açgözlülük). Ethereum son 1 ayda %50 yükseldi ve teknik direnç seviyesinde. Ne yapmalısınız?",
+        "options": [
+          "Daha fazla almalısınız çünkü açgözlülük var",
+          "Dikkatli olmalı, kâr alma düşünmeli - aşırı açgözlülük + teknik direnç",
+          "Hiçbir şey yapmamalısınız",
+          "Sadece sentiment'e bakmalısınız"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q3",
+        "question": "Contrarian yaklaşım nedir?",
+        "options": [
+          "Aşırı sentiment'in tersine işlem yapma",
+          "Her zaman sentiment'e göre işlem yapma",
+          "Sentiment'i görmezden gelme",
+          "Sadece teknik analiz kullanma"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": "q4",
+        "question": "Market sentiment analizi nasıl kullanılmalıdır?",
+        "options": [
+          "Tek başına karar verme aracı olarak",
+          "Teknik analizle birleştirilerek bir araç olarak",
+          "Hiçbir zaman kullanılmamalı",
+          "Sadece haberlerde kullanılmalı"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q5",
+        "question": "FOMO (Fear of Missing Out) nedir?",
+        "options": [
+          "Kâr alma stratejisi",
+          "Son dakika haberlerine göre ani kararlar, planlanmamış işlemler",
+          "Risk yönetimi tekniği",
+          "Teknik analiz göstergesi"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz_21",
+    "lessonId": "lesson_21",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Backtesting'de overfitting nedir?",
+        "options": [
+          "Stratejiyi geçmiş verilere çok iyi uydurma, gelecekte çalışmayabilir",
+          "Yeterli veri kullanma",
+          "Gerçekçi parametreler kullanma",
+          "Stratejiyi test etme"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": "q2",
+        "question": "Backtest sonuçları: 100 işlem, %55 win rate, ortalama kâr 200$, ortalama zarar 120$. Profit factor nedir?",
+        "options": [
+          "1.83",
+          "1.65",
+          "2.0",
+          "1.5"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": "q3",
+        "question": "Backtesting'de minimum ne kadar veri kullanılmalıdır?",
+        "options": [
+          "1 hafta",
+          "6-12 ay, en az 100-200 işlem",
+          "1 ay",
+          "Sadece son 1 gün"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q4",
+        "question": "Walk-forward analysis nedir?",
+        "options": [
+          "Sadece geçmiş verilerle test etme",
+          "Stratejiyi sürekli güncelleme, geçmiş verilerle optimize edip gelecekte test etme",
+          "Sadece gelecek verilerle test etme",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q5",
+        "question": "Backtesting'de işlem maliyetlerini hesaba katmamak ne tür bir hatadır?",
+        "options": [
+          "Overfitting",
+          "Look-ahead bias",
+          "Gerçek kârı abartma, gerçekçi olmayan sonuçlar",
+          "Survivorship bias"
+        ],
+        "correctAnswer": 3
+      }
+    ]
+  },
+  {
+    "id": "quiz_22",
+    "lessonId": "lesson_22",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "10.000$ sermayeniz var, 10x kaldıraç kullanıyorsunuz. Bitcoin'i 60.000$'dan alıyorsunuz, stop loss 58.000$. Pozisyon boyutu ve risk ne olur?",
+        "options": [
+          "0.167 BTC (10.000$), risk %3.3",
+          "1.67 BTC (100.000$), risk sermayenin %33'ü (ÇOK YÜKSEK!)",
+          "0.5 BTC (30.000$), risk %10",
+          "0.1 BTC (6.000$), risk %5"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "Margin trading'de liquidation (likidasyon) nedir?",
+        "options": [
+          "Kâr alma",
+          "Sermaye teminat gereksinimini karşılamazsa pozisyonun otomatik kapanması",
+          "Pozisyon açma",
+          "Stop loss"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q3",
+        "question": "Güvenli margin trading için kaldıraç oranı ne olmalıdır?",
+        "options": [
+          "20x-50x",
+          "2x-5x",
+          "100x",
+          "Kaldıraç kullanmamalı"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q4",
+        "question": "5x kaldıraç ile 1.000$ sermaye ile ne kadar pozisyon açabilirsiniz ve %20 kayıp durumunda ne olur?",
+        "options": [
+          "5.000$ pozisyon, %20 kayıp = 1.000$ kayıp (tüm sermaye)",
+          "2.000$ pozisyon, %20 kayıp = 400$ kayıp",
+          "10.000$ pozisyon, %20 kayıp = 2.000$ kayıp",
+          "1.000$ pozisyon, %20 kayıp = 200$ kayıp"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": "q5",
+        "question": "Margin trading için uygun değilsiniz eğer:",
+        "options": [
+          "Deneyimli trader'sanız",
+          "Yeni başlayan trader'sanız, yeterli deneyiminiz yoksa",
+          "Küçük kaldıraç kullanıyorsanız",
+          "Risk yönetimi yapıyorsanız"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz_23",
+    "lessonId": "lesson_23",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "DeFi'de liquidity pool nedir?",
+        "options": [
+          "Sadece bir coin",
+          "Kullanıcıların fon sağladığı havuzlar, karşılığında faiz kazanırlar",
+          "Bir trading stratejisi",
+          "Bir grafik türü"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "DeFi'de impermanent loss nedir?",
+        "options": [
+          "Kalıcı kayıp",
+          "Liquidity sağlarken fiyat değişiminden kayıp",
+          "Sadece kâr",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q3",
+        "question": "DeFi güvenliği için ne yapılmalıdır?",
+        "options": [
+          "Sadece yeni projelere yatırım yapın",
+          "Audit'ten geçmiş projeler, yüksek TVL, güvenilir ekip",
+          "Hiçbir şey yapmayın",
+          "Sadece küçük projelere yatırım yapın"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q4",
+        "question": "DEX (Merkezi Olmayan Borsa) nedir?",
+        "options": [
+          "Merkezi bir otorite tarafından yönetilen borsa",
+          "Kullanıcıların doğrudan birbirleriyle işlem yaptığı borsa",
+          "Sadece Bitcoin için borsa",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q5",
+        "question": "DeFi'ye yatırım yaparken ne yapmalısınız?",
+        "options": [
+          "Tüm paranızı tek bir projeye koyun",
+          "Küçük başlayın, araştırın, güvenliğe dikkat edin, çeşitlendirin",
+          "Hiçbir şey yapmayın",
+          "Sadece büyük projelere yatırım yapın"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz_24",
+    "lessonId": "lesson_24",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Tokenomics analizinde 'red flag' (kırmızı bayrak) nedir?",
+        "options": [
+          "Team'e %50+ coin ayrılması, kısa vesting, yüksek enflasyon, sınırlı kullanım",
+          "Adil dağıtım",
+          "Uzun vesting",
+          "Düşük enflasyon"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": "q2",
+        "question": "Market Cap ve Fully Diluted Market Cap arasındaki fark nedir?",
+        "options": [
+          "Hiçbir fark yok",
+          "Market Cap = Fiyat × Dolaşımdaki arz, FDV = Fiyat × Toplam arz",
+          "Sadece fiyat",
+          "Sadece arz"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q3",
+        "question": "Bir projede team allocation %40, vesting 4 yıl. Bu iyi mi kötü mü?",
+        "options": [
+          "Çok kötü, hemen satmalısınız",
+          "Team allocation yüksek ama uzun vesting var, orta risk",
+          "Mükemmel, hiç risk yok",
+          "Belirsiz"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q4",
+        "question": "Circulating supply ve total supply arasındaki fark neden önemlidir?",
+        "options": [
+          "Hiçbir fark yok",
+          "Dolaşımdaki arz piyasa fiyatını etkiler, gelecekteki unlock'lar fiyatı düşürebilir",
+          "Sadece total supply önemlidir",
+          "Sadece circulating supply önemlidir"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q5",
+        "question": "Tokenomics analizi yaparken neye dikkat edilmelidir?",
+        "options": [
+          "Sadece fiyata bakın",
+          "Dağıtım modeli, vesting schedule, kullanım durumları, enflasyon oranı",
+          "Sadece team allocation'a bakın",
+          "Hiçbir şeye bakmayın"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "id": "quiz_25",
+    "lessonId": "lesson_25",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Trading günlüğünde kaydedilmesi gerekenler nelerdir?",
+        "options": [
+          "Sadece kâr/zarar",
+          "İşlem detayları, strateji, risk yönetimi, duygusal durum",
+          "Sadece coin adı",
+          "Sadece tarih"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q2",
+        "question": "20 işlemde %55 win rate, ortalama kâr 150$, ortalama zarar 100$. Profit factor nedir?",
+        "options": [
+          "1.24",
+          "1.65",
+          "2.0",
+          "1.5"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": "q3",
+        "question": "Trading günlüğü analizi ne sıklıkla yapılmalıdır?",
+        "options": [
+          "Hiçbir zaman",
+          "Haftalık veya aylık",
+          "Sadece yılda bir",
+          "Sadece kayıplarda"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q4",
+        "question": "Sharpe Ratio nedir?",
+        "options": [
+          "Sadece kâr oranı",
+          "Risk ayarlı getiri ölçümü",
+          "Sadece zarar oranı",
+          "Hiçbir şey"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": "q5",
+        "question": "Trading günlüğü tutmanın en önemli faydası nedir?",
+        "options": [
+          "Sadece kârları kaydetmek",
+          "Hatalardan öğrenmek, stratejiyi geliştirmek, duygusal kararları azaltmak",
+          "Sadece zararları kaydetmek",
+          "Hiçbir faydası yok"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  }
+]
