@@ -33,65 +33,22 @@
 
 ## Ekran Görüntüleri
 
-### Ana Sayfa & Dashboard
-
-<p align="center">
-  <img src="screenshots/01_home.png" width="250" alt="Ana Sayfa"/>
-  &nbsp;&nbsp;
-  <img src="screenshots/02_dashboard.png" width="250" alt="Dashboard - Portföy & Piyasa"/>
-</p>
-
-<p align="center">
-  <sub>Hoş geldin ekranı, sanal bakiye, XP takibi ve piyasa durumu</sub>
-</p>
-
-### İşlem & Coin Detay
-
-<p align="center">
-  <img src="screenshots/03_trade.png" width="250" alt="İşlem Ekranı"/>
-  &nbsp;&nbsp;
-  <img src="screenshots/04_coin_detail.png" width="250" alt="Coin Detay"/>
-  &nbsp;&nbsp;
-  <img src="screenshots/05_coin_analysis.png" width="250" alt="Coin Analiz"/>
-</p>
-
-<p align="center">
-  <sub>Canlı fiyatlar, favori coinler, detaylı coin analizi ve fiyat performansı</sub>
-</p>
-
-### Öğrenme Yolu & Dersler
-
-<p align="center">
-  <img src="screenshots/06_learning.png" width="250" alt="Öğrenme Yolu"/>
-  &nbsp;&nbsp;
-  <img src="screenshots/07_lesson.png" width="250" alt="Ders İçeriği"/>
-</p>
-
-<p align="center">
-  <sub>Seviye bazlı öğrenme yolu, interaktif dersler ve quiz sistemi</sub>
-</p>
-
-### AI Asistan
-
-<p align="center">
-  <img src="screenshots/08_ai_assistant.png" width="250" alt="AI Trading Asistanı"/>
-</p>
-
-<p align="center">
-  <sub>Hızlı sorular ve serbest metin ile AI destekli trading eğitimi</sub>
-</p>
-
-### Profil & İstatistikler
-
-<p align="center">
-  <img src="screenshots/10_profile_stats.png" width="250" alt="Profil İstatistikleri"/>
-  &nbsp;&nbsp;
-  <img src="screenshots/09_profile_menu.png" width="250" alt="Profil Menü"/>
-</p>
-
-<p align="center">
-  <sub>Detaylı istatistikler, başarımlar, trading günlüğü ve portföy analizi</sub>
-</p>
+<table>
+  <tr>
+    <td align="center"><img src="screenshots/01_home.png" width="160" alt="Ana Sayfa"/><br/><sub>Ana Sayfa</sub></td>
+    <td align="center"><img src="screenshots/02_dashboard.png" width="160" alt="Dashboard"/><br/><sub>Portföy & Piyasa</sub></td>
+    <td align="center"><img src="screenshots/03_trade.png" width="160" alt="İşlem"/><br/><sub>İşlem</sub></td>
+    <td align="center"><img src="screenshots/04_coin_detail.png" width="160" alt="Coin Detay"/><br/><sub>Coin Detay</sub></td>
+    <td align="center"><img src="screenshots/05_coin_analysis.png" width="160" alt="Coin Analiz"/><br/><sub>Fiyat Analizi</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="screenshots/06_learning.png" width="160" alt="Öğrenme Yolu"/><br/><sub>Öğrenme Yolu</sub></td>
+    <td align="center"><img src="screenshots/07_lesson.png" width="160" alt="Ders İçeriği"/><br/><sub>Ders İçeriği</sub></td>
+    <td align="center"><img src="screenshots/08_ai_assistant.png" width="160" alt="AI Asistan"/><br/><sub>AI Asistan</sub></td>
+    <td align="center"><img src="screenshots/10_profile_stats.png" width="160" alt="Profil"/><br/><sub>Profil & İstatistik</sub></td>
+    <td align="center"><img src="screenshots/09_profile_menu.png" width="160" alt="Profil Menü"/><br/><sub>Profil Menü</sub></td>
+  </tr>
+</table>
 
 ---
 
