@@ -1,7 +1,7 @@
 # EduTrade - Kripto Para Eğitim Simülatörü
 
 <p align="center">
-  <img src="tasarım project/Assets.xcassets/AppIcon.appiconset/AppIcon.png" width="120" height="120" alt="EduTrade Icon"/>
+  <img src="tasarım project/Assets.xcassets/AppIcon.appiconset/AppIcon.png" width="120" height="120" alt="EduTrade Icon" style="border-radius: 22px;"/>
 </p>
 
 <p align="center">
@@ -28,6 +28,70 @@
 - **Öğrenerek pratik** — Duolingo tarzı öğrenme yolu ile adım adım ilerleme
 - **AI desteği** — OpenRouter API entegrasyonu ile anlık sorularınıza cevap
 - **Gerçek veriler** — CoinGecko API ile canlı kripto para fiyatları
+
+---
+
+## Ekran Görüntüleri
+
+### Ana Sayfa & Dashboard
+
+<p align="center">
+  <img src="screenshots/01_home.png" width="250" alt="Ana Sayfa"/>
+  &nbsp;&nbsp;
+  <img src="screenshots/02_dashboard.png" width="250" alt="Dashboard - Portföy & Piyasa"/>
+</p>
+
+<p align="center">
+  <sub>Hoş geldin ekranı, sanal bakiye, XP takibi ve piyasa durumu</sub>
+</p>
+
+### İşlem & Coin Detay
+
+<p align="center">
+  <img src="screenshots/03_trade.png" width="250" alt="İşlem Ekranı"/>
+  &nbsp;&nbsp;
+  <img src="screenshots/04_coin_detail.png" width="250" alt="Coin Detay"/>
+  &nbsp;&nbsp;
+  <img src="screenshots/05_coin_analysis.png" width="250" alt="Coin Analiz"/>
+</p>
+
+<p align="center">
+  <sub>Canlı fiyatlar, favori coinler, detaylı coin analizi ve fiyat performansı</sub>
+</p>
+
+### Öğrenme Yolu & Dersler
+
+<p align="center">
+  <img src="screenshots/06_learning.png" width="250" alt="Öğrenme Yolu"/>
+  &nbsp;&nbsp;
+  <img src="screenshots/07_lesson.png" width="250" alt="Ders İçeriği"/>
+</p>
+
+<p align="center">
+  <sub>Seviye bazlı öğrenme yolu, interaktif dersler ve quiz sistemi</sub>
+</p>
+
+### AI Asistan
+
+<p align="center">
+  <img src="screenshots/08_ai_assistant.png" width="250" alt="AI Trading Asistanı"/>
+</p>
+
+<p align="center">
+  <sub>Hızlı sorular ve serbest metin ile AI destekli trading eğitimi</sub>
+</p>
+
+### Profil & İstatistikler
+
+<p align="center">
+  <img src="screenshots/10_profile_stats.png" width="250" alt="Profil İstatistikleri"/>
+  &nbsp;&nbsp;
+  <img src="screenshots/09_profile_menu.png" width="250" alt="Profil Menü"/>
+</p>
+
+<p align="center">
+  <sub>Detaylı istatistikler, başarımlar, trading günlüğü ve portföy analizi</sub>
+</p>
 
 ---
 
@@ -198,12 +262,6 @@ Cmd + U
 | `CoinPriceServiceTests` | Fiyat servisi |
 | `ValidationHelperTests` | Giriş doğrulama |
 | `StringDecimalExtensionTests` | String uzantıları |
-
----
-
-## Ekran Görüntüleri
-
-> Ekran görüntüleri yakında eklenecektir.
 
 ---
 

@@ -983,7 +983,7 @@ struct TradeSheet: View {
         
         if orderType == .limit {
             guard let limitPriceValue = limitPrice.toDouble, limitPriceValue > 0 else {
-                viewModel.errorHandler.handle(.invalidInput("Geçerli bir limit fiyatı girin"))
+                ErrorHandler.shared.handle(.invalidInput("Geçerli bir limit fiyatı girin"))
                 HapticFeedback.error()
                 return
             }

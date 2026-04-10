@@ -339,6 +339,7 @@ struct ModernLevelPathCard: View {
 struct LevelDetailView: View {
     let level: Level
     @ObservedObject var viewModel: LearningViewModel
+    @EnvironmentObject var tradingVM: TradingViewModel
     @Environment(\.dismiss) var dismiss
     @State private var navigateToTrade = false
     @State private var selectedLesson: Lesson?

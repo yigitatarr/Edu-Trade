@@ -830,7 +830,7 @@ struct TradingTab: View {
     private var winRate: Double {
         let buyTrades = tradingVM.trades.filter { $0.type == .buy }
         guard !buyTrades.isEmpty else { return 0 }
-        let coins = tradingVM.dataManager.coins
+        let coins = DataManager.shared.coins
         let profitableTrades = buyTrades.filter { trade in
             guard let coin = coins.first(where: { $0.symbol == trade.coinSymbol }) else {
                 return false
