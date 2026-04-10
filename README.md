@@ -33,22 +33,25 @@
 
 ## Ekran Görüntüleri
 
-<table>
-  <tr>
-    <td align="center"><img src="screenshots/01_home.png" width="160" alt="Ana Sayfa"/><br/><sub>Ana Sayfa</sub></td>
-    <td align="center"><img src="screenshots/02_dashboard.png" width="160" alt="Dashboard"/><br/><sub>Portföy & Piyasa</sub></td>
-    <td align="center"><img src="screenshots/03_trade.png" width="160" alt="İşlem"/><br/><sub>İşlem</sub></td>
-    <td align="center"><img src="screenshots/04_coin_detail.png" width="160" alt="Coin Detay"/><br/><sub>Coin Detay</sub></td>
-    <td align="center"><img src="screenshots/05_coin_analysis.png" width="160" alt="Coin Analiz"/><br/><sub>Fiyat Analizi</sub></td>
-  </tr>
-  <tr>
-    <td align="center"><img src="screenshots/06_learning.png" width="160" alt="Öğrenme Yolu"/><br/><sub>Öğrenme Yolu</sub></td>
-    <td align="center"><img src="screenshots/07_lesson.png" width="160" alt="Ders İçeriği"/><br/><sub>Ders İçeriği</sub></td>
-    <td align="center"><img src="screenshots/08_ai_assistant.png" width="160" alt="AI Asistan"/><br/><sub>AI Asistan</sub></td>
-    <td align="center"><img src="screenshots/10_profile_stats.png" width="160" alt="Profil"/><br/><sub>Profil & İstatistik</sub></td>
-    <td align="center"><img src="screenshots/09_profile_menu.png" width="160" alt="Profil Menü"/><br/><sub>Profil Menü</sub></td>
-  </tr>
-</table>
+<p align="center">
+  <img src="screenshots/01_home.png" width="150" alt="Ana Sayfa"/>
+  <img src="screenshots/02_dashboard.png" width="150" alt="Portföy & Piyasa"/>
+  <img src="screenshots/03_trade.png" width="150" alt="İşlem"/>
+  <img src="screenshots/04_coin_detail.png" width="150" alt="Coin Detay"/>
+  <img src="screenshots/05_coin_analysis.png" width="150" alt="Fiyat Analizi"/>
+</p>
+
+<p align="center">
+  <img src="screenshots/06_learning.png" width="150" alt="Öğrenme Yolu"/>
+  <img src="screenshots/07_lesson.png" width="150" alt="Ders İçeriği"/>
+  <img src="screenshots/08_ai_assistant.png" width="150" alt="AI Asistan"/>
+  <img src="screenshots/10_profile_stats.png" width="150" alt="Profil & İstatistik"/>
+  <img src="screenshots/09_profile_menu.png" width="150" alt="Profil Menü"/>
+</p>
+
+<p align="center">
+  <sub>Ana Sayfa · Portföy & Piyasa · İşlem · Coin Detay · Fiyat Analizi · Öğrenme Yolu · Ders İçeriği · AI Asistan · Profil · Profil Menü</sub>
+</p>
 
 ---
 
