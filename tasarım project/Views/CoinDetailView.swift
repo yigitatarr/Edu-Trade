@@ -46,7 +46,7 @@ struct CoinDetailView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color(.systemGroupedBackground)
                     .ignoresSafeArea()
@@ -88,15 +88,11 @@ struct CoinDetailView: View {
                         PricePerformanceSection(coin: displayCoin, coinDetail: coinDetail)
                             .padding(.horizontal)
                         
-                        // Supply Information
-                        if coinDetail != nil {
-                            SupplyInfoSection(coinDetail: coinDetail!)
+                        if let detail = coinDetail {
+                            SupplyInfoSection(coinDetail: detail)
                                 .padding(.horizontal)
-                        }
-                        
-                        // All-Time High/Low
-                        if coinDetail != nil {
-                            ATHATLSection(coin: displayCoin, coinDetail: coinDetail!)
+                            
+                            ATHATLSection(coin: displayCoin, coinDetail: detail)
                                 .padding(.horizontal)
                         }
                         
@@ -625,8 +621,7 @@ struct SimpleLineChart: View {
                                 path.addLine(to: CGPoint(x: x, y: y))
                             }
                         }
-                        // Close the path
-                        if let lastX = data.last {
+                        if !data.isEmpty {
                             let x = CGFloat(data.count - 1) / CGFloat(max(data.count - 1, 1)) * width
                             path.addLine(to: CGPoint(x: x, y: height))
                         }
@@ -1049,11 +1044,13 @@ struct ATHATLRow: View {
     let isATH: Bool
     
     private var percentage: Double {
-        if isATH {
-            return ((currentPrice - Double(value.replacingOccurrences(of: "$", with: ""))!) / Double(value.replacingOccurrences(of: "$", with: ""))!) * 100
-        } else {
-            return ((currentPrice - Double(value.replacingOccurrences(of: "$", with: ""))!) / Double(value.replacingOccurrences(of: "$", with: ""))!) * 100
+        let cleanedValue = value.replacingOccurrences(of: "$", with: "")
+            .replacingOccurrences(of: ",", with: "")
+            .trimmingCharacters(in: .whitespaces)
+        guard let parsedValue = Double(cleanedValue), parsedValue != 0 else {
+            return 0
         }
+        return ((currentPrice - parsedValue) / parsedValue) * 100
     }
     
     var body: some View {
@@ -1192,7 +1189,7 @@ struct QuickPriceAlertSheet: View {
     @State private var condition: AlertCondition = .above
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section {
                     HStack {
@@ -1275,7 +1272,7 @@ struct QuickLimitOrderSheet: View {
     @State private var takeProfit: String = ""
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section {
                     HStack {

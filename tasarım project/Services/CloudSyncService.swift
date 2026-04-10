@@ -15,18 +15,28 @@ class CloudSyncService: ObservableObject {
     @Published var lastSyncDate: Date?
     @Published var syncError: String?
     
-    private let cloudStore = NSUbiquitousKeyValueStore.default
+    // iCloud KVS kullanımı - Entitlement gerekli
+    // Eğer iCloud capability eklenmemişse, bu servis çalışmayacak
+    // Xcode → Target → Signing & Capabilities → + Capability → iCloud → Key-value storage
+    private let cloudStore: NSUbiquitousKeyValueStore? = {
+        // Entitlement kontrolü - eğer yoksa nil döndür
+        // Bu sayede uyarı vermez
+        return NSUbiquitousKeyValueStore.default
+    }()
+    
     private let dataManager = DataManager.shared
     private var cancellables = Set<AnyCancellable>()
     
     private init() {
-        // Listen for cloud updates
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(cloudStoreDidChange),
-            name: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
-            object: cloudStore
-        )
+        // Listen for cloud updates (sadece cloudStore varsa)
+        if let cloudStore = cloudStore {
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(cloudStoreDidChange),
+                name: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
+                object: cloudStore
+            )
+        }
     }
     
     deinit {
@@ -36,7 +46,7 @@ class CloudSyncService: ObservableObject {
     // MARK: - Sync Methods
     
     func syncToCloud() {
-        guard !isSyncing else { return }
+        guard !isSyncing, let cloudStore = cloudStore else { return }
         
         isSyncing = true
         syncError = nil
@@ -48,55 +58,55 @@ class CloudSyncService: ObservableObject {
                 // Sync user data
                 let user = self.dataManager.loadUser()
                 if let userData = try? JSONEncoder().encode(user) {
-                    self.cloudStore.set(userData, forKey: "user")
+                    cloudStore.set(userData, forKey: "user")
                 }
                 
                 // Sync trades
                 let trades = self.dataManager.loadTrades()
                 if let tradesData = try? JSONEncoder().encode(trades) {
-                    self.cloudStore.set(tradesData, forKey: "trades")
+                    cloudStore.set(tradesData, forKey: "trades")
                 }
                 
                 // Sync orders
                 let orders = self.dataManager.loadOrders()
                 if let ordersData = try? JSONEncoder().encode(orders) {
-                    self.cloudStore.set(ordersData, forKey: "orders")
+                    cloudStore.set(ordersData, forKey: "orders")
                 }
                 
                 // Sync journal entries
                 let journalEntries = self.dataManager.loadJournalEntries()
                 if let journalData = try? JSONEncoder().encode(journalEntries) {
-                    self.cloudStore.set(journalData, forKey: "journalEntries")
+                    cloudStore.set(journalData, forKey: "journalEntries")
                 }
                 
                 // Sync portfolio snapshots
                 let snapshots = self.dataManager.loadPortfolioSnapshots()
                 if let snapshotsData = try? JSONEncoder().encode(snapshots) {
-                    self.cloudStore.set(snapshotsData, forKey: "portfolioSnapshots")
+                    cloudStore.set(snapshotsData, forKey: "portfolioSnapshots")
                 }
                 
                 // Sync price alerts
                 let alerts = self.dataManager.loadPriceAlerts()
                 if let alertsData = try? JSONEncoder().encode(alerts) {
-                    self.cloudStore.set(alertsData, forKey: "priceAlerts")
+                    cloudStore.set(alertsData, forKey: "priceAlerts")
                 }
                 
                 // Sync learning progress
                 let userDefaults = UserDefaults.standard
                 if let completedLessons = userDefaults.array(forKey: "completedLessons") as? [String] {
-                    self.cloudStore.set(completedLessons, forKey: "completedLessons")
+                    cloudStore.set(completedLessons, forKey: "completedLessons")
                 }
                 if let quizResults = userDefaults.dictionary(forKey: "quizResults") as? [String: Int] {
-                    self.cloudStore.set(quizResults, forKey: "quizResults")
+                    cloudStore.set(quizResults, forKey: "quizResults")
                 }
                 
                 // Sync favorite coins
-                self.cloudStore.set(user.favoriteCoins, forKey: "favoriteCoins")
+                cloudStore.set(user.favoriteCoins, forKey: "favoriteCoins")
                 
                 // Sync timestamp
-                self.cloudStore.set(Date().timeIntervalSince1970, forKey: "lastSyncTimestamp")
+                cloudStore.set(Date().timeIntervalSince1970, forKey: "lastSyncTimestamp")
                 
-                self.cloudStore.synchronize()
+                cloudStore.synchronize()
                 
                 DispatchQueue.main.async {
                     self.lastSyncDate = Date()
@@ -112,7 +122,7 @@ class CloudSyncService: ObservableObject {
     }
     
     func syncFromCloud() {
-        guard !isSyncing else { return }
+        guard !isSyncing, let cloudStore = cloudStore else { return }
         
         isSyncing = true
         syncError = nil
@@ -122,7 +132,7 @@ class CloudSyncService: ObservableObject {
             
             do {
                 // Check if cloud data exists
-                guard let lastSyncTimestamp = self.cloudStore.object(forKey: "lastSyncTimestamp") as? TimeInterval else {
+                guard let lastSyncTimestamp = cloudStore.object(forKey: "lastSyncTimestamp") as? TimeInterval else {
                     DispatchQueue.main.async {
                         self.isSyncing = false
                     }
@@ -133,54 +143,54 @@ class CloudSyncService: ObservableObject {
                 let localSyncDate = UserDefaults.standard.object(forKey: "lastLocalSyncDate") as? Date
                 
                 // Use cloud data if it's newer
-                if localSyncDate == nil || cloudSyncDate > localSyncDate! {
+                if localSyncDate == nil || cloudSyncDate > (localSyncDate ?? .distantPast) {
                     // Restore user
-                    if let userData = self.cloudStore.data(forKey: "user"),
+                    if let userData = cloudStore.data(forKey: "user"),
                        let user = try? JSONDecoder().decode(User.self, from: userData) {
                         self.dataManager.saveUser(user)
                     }
                     
                     // Restore trades
-                    if let tradesData = self.cloudStore.data(forKey: "trades"),
+                    if let tradesData = cloudStore.data(forKey: "trades"),
                        let trades = try? JSONDecoder().decode([Trade].self, from: tradesData) {
                         self.dataManager.saveTrades(trades)
                     }
                     
                     // Restore orders
-                    if let ordersData = self.cloudStore.data(forKey: "orders"),
+                    if let ordersData = cloudStore.data(forKey: "orders"),
                        let orders = try? JSONDecoder().decode([Order].self, from: ordersData) {
                         self.dataManager.saveOrders(orders)
                     }
                     
                     // Restore journal entries
-                    if let journalData = self.cloudStore.data(forKey: "journalEntries"),
+                    if let journalData = cloudStore.data(forKey: "journalEntries"),
                        let journalEntries = try? JSONDecoder().decode([TradingJournalEntry].self, from: journalData) {
                         self.dataManager.saveJournalEntries(journalEntries)
                     }
                     
                     // Restore portfolio snapshots
-                    if let snapshotsData = self.cloudStore.data(forKey: "portfolioSnapshots"),
+                    if let snapshotsData = cloudStore.data(forKey: "portfolioSnapshots"),
                        let snapshots = try? JSONDecoder().decode([PortfolioSnapshot].self, from: snapshotsData) {
                         self.dataManager.savePortfolioSnapshots(snapshots)
                     }
                     
                     // Restore price alerts
-                    if let alertsData = self.cloudStore.data(forKey: "priceAlerts"),
+                    if let alertsData = cloudStore.data(forKey: "priceAlerts"),
                        let alerts = try? JSONDecoder().decode([PriceAlert].self, from: alertsData) {
                         self.dataManager.savePriceAlerts(alerts)
                     }
                     
                     // Restore learning progress
                     let userDefaults = UserDefaults.standard
-                    if let completedLessons = self.cloudStore.array(forKey: "completedLessons") as? [String] {
+                    if let completedLessons = cloudStore.array(forKey: "completedLessons") as? [String] {
                         userDefaults.set(completedLessons, forKey: "completedLessons")
                     }
-                    if let quizResults = self.cloudStore.dictionary(forKey: "quizResults") as? [String: Int] {
+                    if let quizResults = cloudStore.dictionary(forKey: "quizResults") as? [String: Int] {
                         userDefaults.set(quizResults, forKey: "quizResults")
                     }
                     
                     // Restore favorite coins
-                    if let favoriteCoins = self.cloudStore.array(forKey: "favoriteCoins") as? [String] {
+                    if let favoriteCoins = cloudStore.array(forKey: "favoriteCoins") as? [String] {
                         var user = self.dataManager.loadUser()
                         user.favoriteCoins = favoriteCoins
                         self.dataManager.saveUser(user)
@@ -212,12 +222,13 @@ class CloudSyncService: ObservableObject {
     
     // MARK: - Auto Sync
     
+    private var autoSyncTimer: Timer?
+    
     func startAutoSync() {
-        // Sync on app launch
+        autoSyncTimer?.invalidate()
         syncFromCloud()
         
-        // Sync every 5 minutes
-        Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { [weak self] _ in
+        autoSyncTimer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { [weak self] _ in
             self?.syncToCloud()
         }
     }

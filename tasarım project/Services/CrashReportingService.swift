@@ -81,7 +81,7 @@ class CrashReportingService {
         let errorLog = CrashLog(
             id: UUID().uuidString,
             type: "Error",
-            message: context != nil ? "\(context!): \(error.localizedDescription)" : error.localizedDescription,
+            message: context.map { "\($0): \(error.localizedDescription)" } ?? error.localizedDescription,
             stackTrace: Thread.callStackSymbols.joined(separator: "\n"),
             timestamp: Date(),
             appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown",

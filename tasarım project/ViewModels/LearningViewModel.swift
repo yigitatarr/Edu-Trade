@@ -68,6 +68,7 @@ class LearningViewModel: ObservableObject {
     }
     
     func submitQuizScore(lessonId: String, score: Int, totalQuestions: Int) {
+        guard totalQuestions > 0 else { return }
         let percentage = (score * 100) / totalQuestions
         quizResults[lessonId] = percentage
         
@@ -193,7 +194,8 @@ class LearningViewModel: ObservableObject {
             if calendar.isDateInToday(lastDate) {
                 // Bugün zaten aktivite yapılmış, streak artırma
                 return
-            } else if calendar.isDate(lastDate, inSameDayAs: calendar.date(byAdding: .day, value: -1, to: today)!) {
+            } else if let yesterday = calendar.date(byAdding: .day, value: -1, to: today),
+                      calendar.isDate(lastDate, inSameDayAs: yesterday) {
                 // Dün aktivite yapılmış, streak artır
                 user.progress.streak += 1
             } else {

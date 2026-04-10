@@ -29,7 +29,7 @@ struct QuizView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 0) {
                 // Progress Bar
                 GeometryReader { geometry in
@@ -220,7 +220,7 @@ struct OptionButton: View {
         Button(action: onTap) {
             HStack(spacing: 12) {
                 // Letter indicator
-                Text(String(Character(UnicodeScalar(65 + index)!))) // A, B, C, D
+                Text(index < 26 ? String(Character(UnicodeScalar(65 + index)!)) : "\(index + 1)")
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .foregroundColor(.primary)

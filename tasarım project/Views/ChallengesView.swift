@@ -25,7 +25,7 @@ struct ChallengesView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 // Clean background
                 Color(.systemGroupedBackground)
@@ -69,7 +69,7 @@ struct ChallengesView: View {
                     }
                 }
             }
-            .navigationTitle("Görevler")
+            .navigationTitle(LocalizationHelper.shared.string(for: "learning.challenges"))
             .navigationBarTitleDisplayMode(.large)
             .onAppear {
                 // Ensure challenges are loaded
@@ -82,6 +82,7 @@ struct ChallengesView: View {
             }
             .sheet(item: $selectedChallenge) { challenge in
                 ChallengeDetailView(challenge: challenge, viewModel: viewModel)
+                    .environmentObject(TradingViewModel())
             }
         }
     }
@@ -386,4 +387,5 @@ struct EmptyChallengesView: View {
 
 #Preview {
     ChallengesView(viewModel: LearningViewModel())
+        .environmentObject(TradingViewModel())
 }

@@ -18,6 +18,7 @@ enum OrderStatus: String, Codable {
     case pending = "pending"
     case executed = "executed"
     case cancelled = "cancelled"
+    case failed = "failed"
 }
 
 struct Order: Identifiable, Codable {

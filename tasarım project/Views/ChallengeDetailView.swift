@@ -10,6 +10,7 @@ import SwiftUI
 struct ChallengeDetailView: View {
     let challenge: Challenge
     @ObservedObject var viewModel: LearningViewModel
+    @EnvironmentObject var tradingVM: TradingViewModel
     @Environment(\.dismiss) var dismiss
     @State private var navigateToTrade = false
     @State private var selectedLesson: Lesson?
@@ -24,7 +25,7 @@ struct ChallengeDetailView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 0) {
                     // Hero Header with Gradient
@@ -92,7 +93,7 @@ struct ChallengeDetailView: View {
                 }
             }
             .sheet(isPresented: $navigateToTrade) {
-                TradeView(viewModel: TradingViewModel())
+                TradeView(viewModel: tradingVM)
             }
             .sheet(item: $selectedLesson) { lesson in
                 LessonDetailView(
@@ -109,6 +110,16 @@ struct ChallengeDetailView: View {
             .sheet(item: $lessonForQuiz) { lesson in
                 if let quiz = viewModel.quizzes.first(where: { $0.lessonId == lesson.id }) {
                     QuizView(quiz: quiz, viewModel: viewModel, lessonId: lesson.id)
+                } else {
+                    VStack(spacing: 16) {
+                        Image(systemName: "questionmark.circle")
+                            .font(.system(size: 48))
+                            .foregroundColor(.secondary)
+                        Text("Bu ders için quiz henüz hazır değil.")
+                            .font(.headline)
+                            .foregroundColor(.secondary)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
         }
@@ -794,4 +805,5 @@ struct CompletedBadge: View {
         ),
         viewModel: LearningViewModel()
     )
+    .environmentObject(TradingViewModel())
 }

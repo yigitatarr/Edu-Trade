@@ -26,16 +26,15 @@ struct EduTradeApp: App {
             CloudSyncService.shared.startAutoSync()
         }
         
-        // AI Service API Key'i ayarla (kod içinden)
-        // Hugging Face API key almak için: https://huggingface.co/settings/tokens
-        // Buraya kendi API key'inizi ekleyin:
-        // AIService.shared.setDefaultAPIKey("hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+        // API key kullanıcı tarafından AI Asistan ekranından girilir
+        // Kaynak koda hardcode edilmez (güvenlik)
     }
     
     var body: some Scene {
         WindowGroup {
             if onboardingVM.hasCompletedOnboarding {
                 HomeView()
+                    .tint(.appPrimary)
                     .preferredColorScheme(colorScheme)
                     .environmentObject(settingsVM)
                     .environmentObject(localizationHelper)

@@ -11,28 +11,11 @@ struct AIAssistantView: View {
     @StateObject private var viewModel = AIAssistantViewModel()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 0) {
-                // API Key uyarısı - Sadece bilgilendirme amaçlı
+                // API Key uyarısı ve giriş alanı
                 if !viewModel.checkAPIKey() {
-                    VStack(spacing: 12) {
-                        HStack {
-                            Image(systemName: "exclamationmark.triangle.fill")
-                                .foregroundColor(.orange)
-                            Text("API Anahtarı Gerekli")
-                                .font(.headline)
-                            Spacer()
-                        }
-                        
-                        Text("AI asistanını kullanmak için Hugging Face API anahtarı gereklidir. Lütfen geliştirici ile iletişime geçin.")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                    }
-                    .padding()
-                    .background(Color.orange.opacity(0.1))
-                    .cornerRadius(12)
-                    .padding()
+                    APIKeyInputSection(viewModel: viewModel)
                 }
                 
                 // Messages
@@ -124,7 +107,7 @@ struct AIAssistantView: View {
                     .background(Color(.systemBackground))
                 }
             }
-            .navigationTitle("AI Asistan")
+            .navigationTitle(LocalizationHelper.shared.string(for: "ai.title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -205,32 +188,104 @@ struct MessageBubble: View {
     let message: AIMessage
     
     var body: some View {
-        HStack {
-            if message.isUser {
-                Spacer()
-            }
-            
-            VStack(alignment: message.isUser ? .trailing : .leading, spacing: 4) {
-                Text(message.content)
-                    .font(.body)
-                    .foregroundColor(message.isUser ? .white : .primary)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
-                    .background(
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(message.isUser ? Color.blue : Color(.systemGray5))
-                    )
+        GeometryReader { geometry in
+            HStack {
+                if message.isUser {
+                    Spacer()
+                }
                 
-                Text(message.timestamp, style: .time)
-                    .font(.caption2)
-                    .foregroundColor(.secondary)
-            }
-            .frame(maxWidth: UIScreen.main.bounds.width * 0.75, alignment: message.isUser ? .trailing : .leading)
-            
-            if !message.isUser {
-                Spacer()
+                VStack(alignment: message.isUser ? .trailing : .leading, spacing: 4) {
+                    Text(message.content)
+                        .font(.body)
+                        .foregroundColor(message.isUser ? .white : .primary)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(message.isUser ? Color.blue : Color(.systemGray5))
+                        )
+                    
+                    Text(message.timestamp, style: .time)
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                }
+                .frame(maxWidth: geometry.size.width * 0.75, alignment: message.isUser ? .trailing : .leading)
+                
+                if !message.isUser {
+                    Spacer()
+                }
             }
         }
+        .fixedSize(horizontal: false, vertical: true)
+    }
+}
+
+// MARK: - API Key Input Section
+struct APIKeyInputSection: View {
+    @ObservedObject var viewModel: AIAssistantViewModel
+    @State private var apiKeyInput = ""
+    @State private var showingAPIKeyField = false
+    
+    var body: some View {
+        VStack(spacing: 12) {
+            HStack {
+                Image(systemName: "key.fill")
+                    .foregroundColor(.orange)
+                Text("API Anahtarı Gerekli")
+                    .font(.headline)
+                Spacer()
+            }
+            
+            Text("AI asistanını kullanmak için OpenRouter API anahtarı gereklidir.")
+                .font(.caption)
+                .foregroundColor(.secondary)
+            
+            if showingAPIKeyField {
+                VStack(spacing: 10) {
+                    SecureField("sk-or-v1-...", text: $apiKeyInput)
+                        .textFieldStyle(.roundedBorder)
+                        .font(.system(size: 14, design: .monospaced))
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                    
+                    Button(action: {
+                        guard !apiKeyInput.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+                        AIService.shared.setAPIKey(apiKeyInput.trimmingCharacters(in: .whitespaces))
+                        apiKeyInput = ""
+                        showingAPIKeyField = false
+                        HapticFeedback.success()
+                    }) {
+                        Text("Kaydet")
+                            .font(.system(size: 14, weight: .semibold))
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 10)
+                            .background(apiKeyInput.isEmpty ? Color.gray : Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    .disabled(apiKeyInput.isEmpty)
+                }
+            } else {
+                Button(action: {
+                    showingAPIKeyField = true
+                }) {
+                    HStack(spacing: 6) {
+                        Image(systemName: "plus.circle.fill")
+                        Text("API Anahtarı Ekle")
+                    }
+                    .font(.system(size: 14, weight: .semibold))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 10)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                }
+            }
+        }
+        .padding()
+        .background(Color.orange.opacity(0.1))
+        .cornerRadius(12)
+        .padding()
     }
 }
 

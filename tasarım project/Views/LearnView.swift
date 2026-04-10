@@ -55,6 +55,16 @@ struct LearnView: View {
         .sheet(item: $lessonForQuiz) { lesson in
             if let quiz = viewModel.quizzes.first(where: { $0.lessonId == lesson.id }) {
                 QuizView(quiz: quiz, viewModel: viewModel, lessonId: lesson.id)
+            } else {
+                VStack(spacing: 16) {
+                    Image(systemName: "questionmark.circle")
+                        .font(.system(size: 48))
+                        .foregroundColor(.secondary)
+                    Text("Bu ders için quiz henüz hazır değil.")
+                        .font(.headline)
+                        .foregroundColor(.secondary)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
         .accessibilitySupport()
@@ -93,7 +103,7 @@ struct AllLessonsView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 // Clean background
                 Color(.systemGroupedBackground)
@@ -114,7 +124,7 @@ struct AllLessonsView: View {
                                 Image(systemName: "magnifyingglass")
                                     .foregroundColor(.secondary)
                                 TextField("Ders ara...", text: $searchText)
-                                    .textFieldStyle(PlainTextFieldStyle())
+                                    .textFieldStyle(.plain)
                                 if !searchText.isEmpty {
                                     Button(action: { searchText = "" }) {
                                         Image(systemName: "xmark.circle.fill")
@@ -485,7 +495,7 @@ struct LessonDetailView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color(.systemGroupedBackground)
                     .ignoresSafeArea()
@@ -608,4 +618,5 @@ struct LessonDetailView: View {
 
 #Preview {
     LearnView(viewModel: LearningViewModel())
+        .environmentObject(TradingViewModel())
 }

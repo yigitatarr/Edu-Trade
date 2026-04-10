@@ -98,8 +98,23 @@ struct AdvancedPortfolioAnalysisView: View {
         .background(Color(.systemGroupedBackground))
     }
     
+    private var filteredTrades: [Trade] {
+        let allTrades = tradingVM.trades
+        let now = Date()
+        switch selectedTimeframe {
+        case .week:
+            return allTrades.filter { now.timeIntervalSince($0.timestamp) <= 7 * 86400 }
+        case .month:
+            return allTrades.filter { now.timeIntervalSince($0.timestamp) <= 30 * 86400 }
+        case .threeMonths:
+            return allTrades.filter { now.timeIntervalSince($0.timestamp) <= 90 * 86400 }
+        case .all:
+            return allTrades
+        }
+    }
+    
     private func calculateRiskMetrics() -> RiskMetrics {
-        let trades = tradingVM.trades
+        let trades = filteredTrades
         let coins = dataManager.coins
         
         // Calculate volatility

@@ -13,6 +13,7 @@ struct ProfileView: View {
     @ObservedObject var learningVM: LearningViewModel
     @State private var showingResetAlert = false
     @State private var selectedTab = 0
+    @StateObject private var settingsVM = SettingsViewModel()
     
     private var user: User {
         tradingVM.user
@@ -36,18 +37,17 @@ struct ProfileView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
                     // Enhanced Profile Header
                     EnhancedProfileHeader(
+                        userName: settingsVM.settings.userName,
                         balance: user.balance,
                         totalValue: totalPortfolioValue,
                         profit: totalProfit,
                         profitPercentage: profitPercentage,
-                        level: progress.currentLevel,
-                        xp: progress.totalXP,
-                        streak: progress.streak
+                        progress: progress
                     )
                     
                     // Tab Selector
@@ -210,12 +210,12 @@ struct ProfileView: View {
                 }
                 .padding()
             }
-            .navigationTitle("Profil")
+            .navigationTitle(LocalizationHelper.shared.string(for: "nav.profile"))
             .accessibilitySupport()
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: SettingsView(
-                        viewModel: SettingsViewModel(),
+                        viewModel: settingsVM,
                         tradingVM: tradingVM,
                         learningVM: learningVM
                     )) {
@@ -254,23 +254,18 @@ struct ProfileView: View {
 
 // MARK: - Enhanced Profile Header
 struct EnhancedProfileHeader: View {
+    let userName: String
     let balance: Double
     let totalValue: Double
     let profit: Double
     let profitPercentage: Double
-    let level: Int
-    let xp: Int
-    let streak: Int
+    let progress: UserProgress
     
-    private var nextLevelXP: Int {
-        level * 100
-    }
-    
-    private var levelProgress: Double {
-        guard nextLevelXP > 0 else { return 0 }
-        let currentLevelXP = xp % (level * 100)
-        return Double(currentLevelXP) / Double(nextLevelXP)
-    }
+    private var level: Int { progress.currentLevel }
+    private var xp: Int { progress.totalXP }
+    private var streak: Int { progress.streak }
+    private var nextLevelXP: Int { level * 100 }
+    private var levelProgress: Double { progress.levelProgress }
     
     var body: some View {
         VStack(spacing: 16) {
@@ -306,7 +301,7 @@ struct EnhancedProfileHeader: View {
             }
             
             // Name
-            Text("Trader")
+            Text(userName)
                 .font(.title2)
                 .fontWeight(.bold)
             
@@ -700,7 +695,6 @@ struct ProfileRecentTradeRow: View {
 struct PortfolioTab: View {
     @ObservedObject var tradingVM: TradingViewModel
     let totalPortfolioValue: Double
-    @State private var selectedTimeframe = 7 // days
     
     private let coins = DataManager.shared.coins
     
@@ -834,13 +828,16 @@ struct TradingTab: View {
     }
     
     private var winRate: Double {
-        guard !tradingVM.trades.isEmpty else { return 0 }
-        // Basit bir win rate hesaplaması - gerçek kâr/zarar analizi için daha karmaşık olabilir
-        let profitableTrades = tradingVM.trades.filter { trade in
-            // Bu basit bir örnek, gerçekte daha detaylı analiz gerekir
-            return true
+        let buyTrades = tradingVM.trades.filter { $0.type == .buy }
+        guard !buyTrades.isEmpty else { return 0 }
+        let coins = tradingVM.dataManager.coins
+        let profitableTrades = buyTrades.filter { trade in
+            guard let coin = coins.first(where: { $0.symbol == trade.coinSymbol }) else {
+                return false
+            }
+            return coin.price > trade.price
         }
-        return Double(profitableTrades.count) / Double(tradingVM.trades.count) * 100
+        return Double(profitableTrades.count) / Double(buyTrades.count) * 100
     }
     
     var body: some View {

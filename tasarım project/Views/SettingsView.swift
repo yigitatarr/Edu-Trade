@@ -15,8 +15,11 @@ struct SettingsView: View {
     @ObservedObject var localizationHelper = LocalizationHelper.shared
     @State private var showingResetAlert = false
     @State private var showingExportSheet = false
+    @State private var showingProfileEdit = false
     @State private var exportData: String?
     @State private var restoreDelegate: RestoreDelegate?
+    @State private var showExportError = false
+    @State private var exportErrorMessage = ""
     @Environment(\.dismiss) var dismiss
     
     private func formatDate(_ date: Date) -> String {
@@ -71,7 +74,8 @@ struct SettingsView: View {
                 rootViewController.present(activityVC, animated: true)
             }
         } catch {
-            print("CSV export error: \(error)")
+            exportErrorMessage = "CSV dışa aktarma hatası: \(error.localizedDescription)"
+            showExportError = true
         }
     }
     
@@ -92,21 +96,21 @@ struct SettingsView: View {
                 rootViewController.present(activityVC, animated: true)
             }
         } catch {
-            print("PDF export error: \(error)")
+            exportErrorMessage = "PDF dışa aktarma hatası: \(error.localizedDescription)"
+            showExportError = true
         }
     }
     
     var body: some View {
-        NavigationView {
-            List {
-                // Profile Section
-                Section {
-                    ProfileSettingsRow(
-                        userName: viewModel.settings.userName,
-                        userAvatar: viewModel.settings.userAvatar,
-                        onEdit: {
-                            // Profile edit action
-                        }
+        List {
+            // Profile Section
+            Section {
+                ProfileSettingsRow(
+                    userName: viewModel.settings.userName,
+                    userAvatar: viewModel.settings.userAvatar,
+                    onEdit: {
+                        showingProfileEdit = true
+                    }
                     )
                 } header: {
                     Text("Profil")
@@ -367,50 +371,55 @@ struct SettingsView: View {
                             .foregroundColor(.secondary)
                     }
                     
-                    Link(destination: URL(string: "https://github.com")!) {
-                        HStack {
-                            Text("Gizlilik Politikası")
-                            Spacer()
-                            Image(systemName: "arrow.up.right.square")
-                                .foregroundColor(.secondary)
-                        }
+                    HStack {
+                        Text("Gizlilik Politikası")
+                        Spacer()
+                        Text("Yakında")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
                     }
                     
-                    Link(destination: URL(string: "https://github.com")!) {
-                        HStack {
-                            Text("Kullanım Koşulları")
-                            Spacer()
-                            Image(systemName: "arrow.up.right.square")
-                                .foregroundColor(.secondary)
-                        }
+                    HStack {
+                        Text("Kullanım Koşulları")
+                        Spacer()
+                        Text("Yakında")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
                     }
                 } header: {
                     Text("Hakkında")
                 }
-            }
-            .navigationTitle("Ayarlar")
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Tamam") {
-                        viewModel.saveSettings()
-                        dismiss()
-                    }
+        }
+        .navigationTitle(LocalizationHelper.shared.string(for: "profile.settings"))
+        .navigationBarTitleDisplayMode(.large)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Tamam") {
+                    viewModel.saveSettings()
+                    dismiss()
                 }
             }
-            .alert("Tüm Verileri Sıfırla", isPresented: $showingResetAlert) {
-                Button("İptal", role: .cancel) {}
-                Button("Sıfırla", role: .destructive) {
-                    resetAllData()
-                }
-            } message: {
-                Text("Tüm verilerinizi sıfırlamak istediğinizden emin misiniz? Bu işlem geri alınamaz.")
+        }
+        .alert("Tüm Verileri Sıfırla", isPresented: $showingResetAlert) {
+            Button("İptal", role: .cancel) {}
+            Button("Sıfırla", role: .destructive) {
+                resetAllData()
             }
-            .sheet(isPresented: $showingExportSheet) {
-                if let exportData = exportData {
-                    ExportDataView(data: exportData)
-                }
+        } message: {
+            Text("Tüm verilerinizi sıfırlamak istediğinizden emin misiniz? Bu işlem geri alınamaz.")
+        }
+        .alert("Dışa Aktarma Hatası", isPresented: $showExportError) {
+            Button("Tamam", role: .cancel) {}
+        } message: {
+            Text(exportErrorMessage)
+        }
+        .sheet(isPresented: $showingExportSheet) {
+            if let exportData = exportData {
+                ExportDataView(data: exportData)
             }
+        }
+        .sheet(isPresented: $showingProfileEdit) {
+            ProfileEditView(viewModel: viewModel)
         }
         .onChange(of: viewModel.settings.theme) {
             viewModel.saveSettings()
@@ -538,7 +547,7 @@ struct ExportDataView: View {
     @State private var showingShareSheet = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     Text("Verilerinizi kopyalayın veya paylaşın")
@@ -608,5 +617,88 @@ struct ShareSheet: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
+}
+
+// MARK: - Profile Edit View
+struct ProfileEditView: View {
+    @ObservedObject var viewModel: SettingsViewModel
+    @State private var userName: String = ""
+    @State private var selectedAvatar: String = "person.circle.fill"
+    @Environment(\.dismiss) var dismiss
+    
+    private let avatarOptions = [
+        "person.circle.fill",
+        "person.crop.circle.fill",
+        "face.smiling.inverse",
+        "star.circle.fill",
+        "bitcoinsign.circle.fill",
+        "chart.line.uptrend.xyaxis.circle.fill",
+        "shield.checkered",
+        "graduationcap.circle.fill",
+        "flame.circle.fill",
+        "bolt.circle.fill"
+    ]
+    
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section("Kullanıcı Adı") {
+                    TextField("Kullanıcı adınız", text: $userName)
+                        .textFieldStyle(.plain)
+                }
+                
+                Section("Avatar") {
+                    LazyVGrid(columns: [
+                        GridItem(.flexible()),
+                        GridItem(.flexible()),
+                        GridItem(.flexible()),
+                        GridItem(.flexible()),
+                        GridItem(.flexible())
+                    ], spacing: 16) {
+                        ForEach(avatarOptions, id: \.self) { avatar in
+                            Button(action: {
+                                selectedAvatar = avatar
+                                HapticFeedback.selection()
+                            }) {
+                                Image(systemName: avatar)
+                                    .font(.system(size: 32))
+                                    .foregroundColor(selectedAvatar == avatar ? .white : .blue)
+                                    .frame(width: 56, height: 56)
+                                    .background(
+                                        Circle()
+                                            .fill(selectedAvatar == avatar ? Color.blue : Color.blue.opacity(0.1))
+                                    )
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                    }
+                    .padding(.vertical, 8)
+                }
+            }
+            .navigationTitle("Profil Düzenle")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("İptal") {
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Kaydet") {
+                        viewModel.settings.userName = userName.isEmpty ? "Trader" : userName
+                        viewModel.settings.userAvatar = selectedAvatar
+                        viewModel.saveSettings()
+                        HapticFeedback.success()
+                        dismiss()
+                    }
+                    .fontWeight(.semibold)
+                }
+            }
+            .onAppear {
+                userName = viewModel.settings.userName
+                selectedAvatar = viewModel.settings.userAvatar
+            }
+        }
+    }
 }
 

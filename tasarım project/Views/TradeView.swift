@@ -93,7 +93,7 @@ struct TradeView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 if coins.isEmpty && !priceService.isLoading {
                     EmptyStateView(
@@ -113,7 +113,7 @@ struct TradeView: View {
                                 Image(systemName: "magnifyingglass")
                                     .foregroundColor(.secondary)
                                 TextField("Coin ara...", text: $searchText)
-                                    .textFieldStyle(PlainTextFieldStyle())
+                                    .textFieldStyle(.plain)
                                 if !searchText.isEmpty {
                                     Button(action: { searchText = "" }) {
                                         Image(systemName: "xmark.circle.fill")
@@ -360,22 +360,6 @@ struct TradeView: View {
                                                 
                                                 Button {
                                                     selectedCoin = coin
-                                                    showingPriceAlertSheet = true
-                                                } label: {
-                                                    Label("Fiyat Alarmı Koy", systemImage: "bell.fill")
-                                                }
-                                                
-                                                Button {
-                                                    selectedCoin = coin
-                                                    showingLimitOrderSheet = true
-                                                } label: {
-                                                    Label("Limit Emri Oluştur", systemImage: "list.bullet.rectangle.portrait.fill")
-                                                }
-                                                
-                                                Divider()
-                                                
-                                                Button {
-                                                    selectedCoin = coin
                                                     showingCoinDetail = true
                                                 } label: {
                                                     Label("Grafik ve Analiz", systemImage: "chart.line.uptrend.xyaxis")
@@ -508,7 +492,7 @@ struct TradeView: View {
                 }
             }
             .loadingOverlay(isLoading: priceService.isLoading && coins.isEmpty, message: "Fiyatlar güncelleniyor...")
-            .navigationTitle("İşlem")
+            .navigationTitle(LocalizationHelper.shared.string(for: "nav.trade"))
             .accessibilitySupport()
             .errorAlert()
             .overlay(alignment: .top) {
@@ -854,7 +838,7 @@ struct TradeSheet: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 // Background
                 Color(.systemGroupedBackground)
@@ -997,24 +981,25 @@ struct TradeSheet: View {
         
         let tradeCoin = displayCoin
         
-        // Handle market vs limit orders
         if orderType == .limit {
-            // Create limit order
-            if let limitPriceValue = limitPrice.toDouble, limitPriceValue > 0 {
-                viewModel.createLimitOrder(
-                    coin: tradeCoin,
-                    amount: amount,
-                    limitPrice: limitPriceValue,
-                    stopLoss: stopLoss,
-                    takeProfit: takeProfit
-                )
-                HapticFeedback.success()
-                tradeAmount = ""
-                stopLossPrice = ""
-                limitPrice = ""
-                takeProfitPrice = ""
-                onDismiss()
+            guard let limitPriceValue = limitPrice.toDouble, limitPriceValue > 0 else {
+                viewModel.errorHandler.handle(.invalidInput("Geçerli bir limit fiyatı girin"))
+                HapticFeedback.error()
+                return
             }
+            viewModel.createLimitOrder(
+                coin: tradeCoin,
+                amount: amount,
+                limitPrice: limitPriceValue,
+                stopLoss: stopLoss,
+                takeProfit: takeProfit
+            )
+            HapticFeedback.success()
+            tradeAmount = ""
+            stopLossPrice = ""
+            limitPrice = ""
+            takeProfitPrice = ""
+            onDismiss()
         } else {
             // Execute market order immediately
             if isBuying {
@@ -1099,7 +1084,7 @@ struct TradeHistoryView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 0) {
                 // Filters
                 VStack(spacing: 12) {
@@ -1108,7 +1093,7 @@ struct TradeHistoryView: View {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.secondary)
                         TextField("Ara...", text: $searchText)
-                            .textFieldStyle(PlainTextFieldStyle())
+                            .textFieldStyle(.plain)
                         if !searchText.isEmpty {
                             Button(action: { searchText = "" }) {
                                 Image(systemName: "xmark.circle.fill")
@@ -1530,15 +1515,13 @@ struct BuySellToggle: View {
             }
             
             Button(action: { isBuying = false }) {
-                HStack(spacing: 6) {
+                HStack(spacing: 8) {
                     Image(systemName: "arrow.up.circle.fill")
-                        .font(.system(size: 16))
                     Text("Sat")
-                        .font(.system(size: 16, weight: .bold))
-                        .lineLimit(1)
+                        .font(.system(size: 18, weight: .bold))
                 }
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 14)
+                .padding(.vertical, 16)
                 .background(
                     !isBuying ?
                         LinearGradient(
@@ -1857,7 +1840,7 @@ struct TradeSummaryCard: View {
                 
                 if let takeProfit = takeProfit {
                     HStack {
-                        Text("Take Profit:")
+                        Text("Kâr Al:")
                             .font(.system(size: 14))
                             .foregroundColor(.secondary)
                         Spacer()
@@ -2027,7 +2010,7 @@ struct CoinFilterSheet: View {
     @State private var isFavoriteFilter: Bool? = nil
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section("Fiyat Aralığı") {
                     HStack {
@@ -2312,7 +2295,7 @@ struct TakeProfitSection: View {
                         .font(.system(size: 16))
                         .foregroundColor(.green)
                     
-                    Text("Take Profit (Opsiyonel)")
+                    Text("Kâr Al (Opsiyonel)")
                         .font(.system(size: 15, weight: .bold))
                         .foregroundColor(.primary)
                         .lineLimit(1)

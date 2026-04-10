@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Security
 
 class AIService: ObservableObject {
     static let shared = AIService()
@@ -13,83 +14,104 @@ class AIService: ObservableObject {
     @Published var isLoading = false
     @Published var errorMessage: String?
     
-    // Hugging Face API - Ücretsiz tier
-    // Not: Bazı modeller için API key gerekebilir, bazıları için gerekmez
-    // Hugging Face Router Inference endpoint (root): https://router.huggingface.co
-    // Model is iletilir: body["model"] = "<repo-id>"
-    private let baseURL = "https://router.huggingface.co"
+    // OpenRouter API endpoint (OpenAI-compatible)
+    private let baseURL = "https://openrouter.ai/api/v1/chat/completions"
     
-    // Alternatif: API key olmadan çalışan endpoint (daha sınırlı)
-    // private let baseURL = "https://api-inference.huggingface.co/models"
+    // Keychain key
+    private let keychainServiceKey = "com.edutrade.openrouter.apikey"
     
-    // API Key - Kod içinde tanımlı, kullanıcıdan istemiyoruz
-    // Not: Gerçek kullanımda bu key'i güvenli bir şekilde saklamak gerekir (Keychain, environment variables, etc.)
-    // Hugging Face'den ücretsiz API key almak için: https://huggingface.co/settings/tokens
-    // Buraya kendi API key'inizi ekleyin
+    // API Key - Keychain'den okunur (UserDefaults fallback)
     private var apiKey: String {
-        // Önce UserDefaults'tan kontrol et (kullanıcı özel key eklemişse)
-        if let key = UserDefaults.standard.string(forKey: "huggingFaceAPIKey"), !key.isEmpty {
+        // Once Keychain'den oku
+        if let key = readFromKeychain(), !key.isEmpty {
             return key
         }
-        // Varsayılan API key - Buraya kendi Hugging Face API key'inizi ekleyin
-        // Örnek: "hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-        // API key almak için: https://huggingface.co/settings/tokens
-        // Not: Bu değer boş bırakılmıştır, kullanıcı kendi API key'ini eklemelidir
-        let defaultAPIKey = "" // API key buraya eklenmelidir
-        
-        // Eğer default key boşsa, kullanıcıdan isteme, sadece hata döndür
-        return defaultAPIKey
+        // Fallback: UserDefaults (eski versiyondan migration)
+        if let key = UserDefaults.standard.string(forKey: "openRouterAPIKey"), !key.isEmpty {
+            // Keychain'e tasi ve UserDefaults'tan sil
+            saveToKeychain(key)
+            UserDefaults.standard.removeObject(forKey: "openRouterAPIKey")
+            return key
+        }
+        return ""
     }
     
-    // Mantıklı cevaplar için küçük ve erişilebilir modeller
-    // Primary: gpt2 (en erişilebilir açık model)
-    // Fallback: google/flan-t5-small
-    private let primaryModelName = "gpt2"
-    private let fallbackModelName = "google/flan-t5-small"
+    // OpenRouter modelleri
+    // Primary: google/gemini-2.0-flash-001 (ucuz, hızlı, Türkçe desteği iyi)
+    // Fallback: meta-llama/llama-3.1-8b-instruct:free (ücretsiz yedek)
+    private let primaryModelName = "google/gemini-2.0-flash-001"
+    private let fallbackModelName = "meta-llama/llama-3.1-8b-instruct:free"
+    
+    // Sistem prompt'u - EduTrade AI Asistanı (optimize edilmiş)
+    private let systemPrompt = """
+    Sen EduTrade AI'sın. Kripto para trading eğitimi veren bir iOS uygulamasının asistanısın.
+
+    Uygulama: 100.000 USDT demo bakiye, 80+ coin, 25 ders (8 seviye), quiz'ler, başarımlar, XP sistemi.
+    Dersler: Trading Temelleri, Stop Loss, Risk Yönetimi, Destek/Direnç, Trend Takibi, Kripto Para Nedir, Borsa, Grafik Okuma, Mum Desenleri, RSI/MACD, İşlem Türleri, Portföy Yönetimi, Hacim Analizi, Fibonacci, Risk/Reward, Trading Psikolojisi, Order Book, Swing Trading, Day Trading, Market Sentiment, Backtesting, Margin Trading, DeFi, Tokenomics, Trading Günlüğü.
+
+    Kurallar:
+    - Türkçe, kısa ve öz cevap ver (2-3 paragraf)
+    - Basit örneklerle açıkla
+    - ASLA yatırım tavsiyesi verme
+    - İlgili derse yönlendir: "Uygulamadaki 'X' dersine bakabilirsin"
+    - Samimi ve teşvik edici ol
+    """
     
     private init() {}
     
-    // MARK: - API Key Management
+    // MARK: - API Key Management (Keychain)
     
     func setAPIKey(_ key: String) {
-        UserDefaults.standard.set(key, forKey: "huggingFaceAPIKey")
+        saveToKeychain(key)
     }
     
     func hasAPIKey() -> Bool {
-        // API key varsa true döndür
         return !apiKey.isEmpty
     }
     
-    // API key'i kod içinden set etmek için (geliştirme amaçlı)
     func setDefaultAPIKey(_ key: String) {
-        // Bu fonksiyon sadece geliştirme amaçlı
-        // Production'da API key'i kod içinde saklamak yerine güvenli bir yöntem kullanın
-        UserDefaults.standard.set(key, forKey: "huggingFaceAPIKey")
+        saveToKeychain(key)
+    }
+    
+    private func saveToKeychain(_ value: String) {
+        let data = Data(value.utf8)
+        
+        // Once mevcut kaydi sil
+        let deleteQuery: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: keychainServiceKey
+        ]
+        SecItemDelete(deleteQuery as CFDictionary)
+        
+        // Yeni kaydi ekle
+        let addQuery: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: keychainServiceKey,
+            kSecValueData as String: data,
+            kSecAttrAccessible as String: kSecAttrAccessibleWhenUnlockedThisDeviceOnly
+        ]
+        SecItemAdd(addQuery as CFDictionary, nil)
+    }
+    
+    private func readFromKeychain() -> String? {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: keychainServiceKey,
+            kSecReturnData as String: true,
+            kSecMatchLimit as String: kSecMatchLimitOne
+        ]
+        
+        var result: AnyObject?
+        let status = SecItemCopyMatching(query as CFDictionary, &result)
+        
+        guard status == errSecSuccess, let data = result as? Data else {
+            return nil
+        }
+        
+        return String(data: data, encoding: .utf8)
     }
     
     // MARK: - AI Chat
-    
-    private func createPrompt(for modelName: String, question: String, context: String?) -> String {
-        // T5 modelleri için instruction formatı
-        if modelName.contains("flan-t5") || modelName.contains("t5") {
-            let systemPrompt = "Sen kripto para ve trading konularında uzman bir eğitim asistanısın. Türkçe olarak, açık ve anlaşılır bir şekilde cevap ver. Yatırım tavsiyesi verme, sadece eğitim amaçlı bilgi ver."
-            
-            if let context = context {
-                return "Soru: \(question). Bağlam: \(context). \(systemPrompt) Cevap:"
-            } else {
-                return "Soru: \(question). \(systemPrompt) Cevap:"
-            }
-        } else {
-            // Diğer modeller için basit format
-            let systemContext = "Kripto para trading asistanı. Soru:"
-            
-            if let context = context {
-                return "\(systemContext) \(question). Bağlam: \(context). Cevap:"
-            } else {
-                return "\(systemContext) \(question). Cevap:"
-            }
-        }
-    }
     
     func askQuestion(_ question: String, context: String? = nil) async throws -> String {
         guard hasAPIKey() else {
@@ -99,95 +121,69 @@ class AIService: ObservableObject {
         isLoading = true
         defer { isLoading = false }
         
-        // Önce primary model'i dene, çalışmazsa fallback
+        // Kullanıcı mesajını oluştur
+        var userMessage = question
+        if let context = context {
+            userMessage = "\(question)\n\nBağlam bilgisi: \(context)"
+        }
+        
+        // Önce primary modeli dene, çalışmazsa fallback
         let modelsToTry = [primaryModelName, fallbackModelName]
         
-        // Her model için deneme yap
         for model in modelsToTry {
-            guard let modelURL = URL(string: baseURL) else {
+            do {
+                let result = try await performChatRequest(model: model, userMessage: userMessage)
+                return result
+            } catch AIError.modelNotFound {
+                print("⚠️ Model desteklenmiyor (\(model)), sonraki model deneniyor...")
                 continue
-            }
-            
-            // Model tipine göre prompt formatı oluştur
-            let formattedPrompt = createPrompt(for: model, question: question, context: context)
-            
-            // Retry mekanizması ile istek gönder (model yükleniyor hatası için)
-            for attempt in 1...3 {
-                do {
-                    let result = try await performAPIRequest(url: modelURL, prompt: formattedPrompt, modelName: model)
-                    return result
-                } catch AIError.modelLoading {
-                    if attempt < 3 {
-                        // Model yükleniyor, 5 saniye bekle ve tekrar dene
-                        print("⚠️ Model yükleniyor (\(model)), \(attempt * 5) saniye bekleniyor...")
-                        let seconds = Double(attempt * 5)
-                        await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
-                            DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-                                continuation.resume()
-                            }
-                        }
-                        continue
-                    } else {
-                        // Model yüklenemedi, bir sonraki model'e geç
-                        print("⚠️ Model yüklenemedi (\(model)), bir sonraki model deneniyor...")
-                        break
-                    }
-                } catch AIError.modelNotFound {
-                    // Model bulunamadı, bir sonraki model'e geç
-                    print("⚠️ Model bulunamadı (\(model)), bir sonraki model deneniyor...")
-                    break
-                } catch {
-                    // Diğer hatalar için son deneme değilse tekrar dene
-                    if attempt < 3 {
-                        continue
-                    } else {
-                        // Son deneme başarısız, bir sonraki model'e geç
-                        print("⚠️ Model hatası (\(model)): \(error.localizedDescription), bir sonraki model deneniyor...")
-                        break
-                    }
+            } catch AIError.rateLimitExceeded {
+                print("⚠️ Rate limit (\(model)), 5 saniye bekleniyor...")
+                try? await _Concurrency.Task.sleep(nanoseconds: 5_000_000_000)
+                continue
+            } catch {
+                if model == fallbackModelName {
+                    throw error
                 }
+                print("⚠️ Hata (\(model)): \(error.localizedDescription), sonraki model deneniyor...")
+                continue
             }
         }
         
         throw AIError.modelNotFound
     }
     
-    private func performAPIRequest(url: URL, prompt: String, modelName: String) async throws -> String {
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        
-        // API key varsa Authorization header'ı ekle
-        if !apiKey.isEmpty {
-            request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+    // MARK: - OpenAI Chat Completions Request
+    
+    private func performChatRequest(model: String, userMessage: String) async throws -> String {
+        guard let url = URL(string: baseURL) else {
+            throw AIError.invalidURL
         }
         
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.timeoutInterval = 60 // Daha uzun timeout
+        request.timeoutInterval = 60
         
-        // Debug: Request bilgilerini logla
-        print("🔍 AI Request - Model: \(modelName)")
-        print("🔍 AI Request - URL: \(url.absoluteString)")
-        print("🔍 AI Request - Has API Key: \(!apiKey.isEmpty)")
-        print("🔍 AI Request - API Key prefix: \(apiKey.prefix(10))...")
-        print("🔍 AI Request - Prompt: \(prompt.prefix(200))...")
-        
+        // OpenAI Chat Completions formatı
         let requestBody: [String: Any] = [
-            "inputs": prompt,
-            "model": modelName,
-            "parameters": [
-                "max_new_tokens": 512,
-                "temperature": 0.7,
-                "top_p": 0.9,
-                "return_full_text": false,
-                "do_sample": true
+            "model": model,
+            "messages": [
+                ["role": "system", "content": systemPrompt],
+                ["role": "user", "content": userMessage]
             ],
-            "options": [
-                "wait_for_model": true
-            ]
+            "max_tokens": 512,
+            "temperature": 0.7,
+            "top_p": 0.9
         ]
         
         request.httpBody = try JSONSerialization.data(withJSONObject: requestBody)
+        
+        // Debug log
+        print("🔍 AI Request - Model: \(model)")
+        print("🔍 AI Request - URL: \(baseURL)")
+        print("🔍 AI Request - Message: \(userMessage.prefix(100))...")
         
         let (data, response) = try await URLSession.shared.data(for: request)
         
@@ -195,74 +191,36 @@ class AIService: ObservableObject {
             throw AIError.invalidResponse
         }
         
+        // Hata kontrolü
         guard httpResponse.statusCode == 200 else {
-            // Hata detaylarını logla
-            if let errorData = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                print("API Error Response: \(errorData)")
-            } else if let errorString = String(data: data, encoding: .utf8) {
-                print("API Error String: \(errorString)")
+            if let errorString = String(data: data, encoding: .utf8) {
+                print("❌ API Error (\(httpResponse.statusCode)): \(errorString)")
             }
-            print("API Request URL: \(url.absoluteString)")
-            print("API Status Code: \(httpResponse.statusCode)")
             
-            if httpResponse.statusCode == 503 {
-                // Model yükleniyor, biraz bekle
-                throw AIError.modelLoading
-            } else if httpResponse.statusCode == 401 {
-                throw AIError.invalidAPIKey
-            } else if httpResponse.statusCode == 429 {
-                throw AIError.rateLimitExceeded
-            } else if httpResponse.statusCode == 410 || httpResponse.statusCode == 404 {
-                // Model artık mevcut değil veya bulunamadı
-                throw AIError.modelNotFound
+            switch httpResponse.statusCode {
+            case 401: throw AIError.invalidAPIKey
+            case 429: throw AIError.rateLimitExceeded
+            case 404: throw AIError.modelNotFound
+            case 500, 502, 503: throw AIError.apiError("Sunucu hatası, lütfen tekrar deneyin")
+            default: throw AIError.apiError("HTTP \(httpResponse.statusCode)")
             }
-            throw AIError.apiError("HTTP \(httpResponse.statusCode)")
         }
         
-        // Hugging Face API response formatını kontrol et
-        // Bazen array, bazen direkt object dönebilir
-        var generatedText: String = ""
-        
-        if let jsonArray = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]],
-           let firstResponse = jsonArray.first,
-           let text = firstResponse["generated_text"] as? String {
-            generatedText = text
-        } else if let jsonObject = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-                  let text = jsonObject["generated_text"] as? String {
-            generatedText = text
-        } else {
-            // Debug için raw response'u göster
+        // Response parse et (OpenAI Chat Completions formatı)
+        guard let jsonObject = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let choices = jsonObject["choices"] as? [[String: Any]],
+              let firstChoice = choices.first,
+              let message = firstChoice["message"] as? [String: Any],
+              let content = message["content"] as? String else {
             if let rawString = String(data: data, encoding: .utf8) {
-                print("Raw API Response: \(rawString)")
-                print("Model: \(modelName), Status: \(httpResponse.statusCode)")
+                print("⚠️ Raw Response: \(rawString)")
             }
             throw AIError.invalidResponse
         }
         
-        // Cevabı temizle
-        var cleanedResponse = generatedText
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .replacingOccurrences(of: "\n\n", with: "\n")
+        let cleanedResponse = content.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        // Model formatını temizle
-        cleanedResponse = cleanedResponse
-            .replacingOccurrences(of: "</s>", with: "")
-            .replacingOccurrences(of: "[INST]", with: "")
-            .replacingOccurrences(of: "[/INST]", with: "")
-            .replacingOccurrences(of: "<s>", with: "")
-            .replacingOccurrences(of: "Cevap:", with: "")
-            .replacingOccurrences(of: "Answer:", with: "")
-        
-        // Eğer cevap prompt'u içeriyorsa, sadece yeni kısmı al
-        if cleanedResponse.contains(prompt) {
-            if let range = cleanedResponse.range(of: prompt) {
-                cleanedResponse = String(cleanedResponse[range.upperBound...])
-            }
-        }
-        
-        cleanedResponse = cleanedResponse.trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        print("✅ AI Response - Model: \(modelName), Response length: \(cleanedResponse.count)")
+        print("✅ AI Response - Model: \(model), Length: \(cleanedResponse.count)")
         
         return cleanedResponse.isEmpty ? "Üzgünüm, şu anda cevap veremiyorum. Lütfen tekrar deneyin." : cleanedResponse
     }
@@ -334,16 +292,15 @@ enum AIError: LocalizedError {
         case .apiError(let message):
             return "API Hatası: \(message)"
         case .modelLoading:
-            return "Model yükleniyor, lütfen 10-15 saniye sonra tekrar deneyin"
+            return "Model yükleniyor, lütfen tekrar deneyin"
         case .missingAPIKey:
-            return "API anahtarı bulunamadı. Lütfen ayarlardan Hugging Face API anahtarınızı ekleyin."
+            return "API anahtarı bulunamadı. Lütfen ayarlardan OpenRouter API anahtarınızı ekleyin."
         case .invalidAPIKey:
             return "Geçersiz API anahtarı. Lütfen ayarlardan kontrol edin."
         case .rateLimitExceeded:
             return "Çok fazla istek gönderildi. Lütfen birkaç dakika sonra tekrar deneyin."
         case .modelNotFound:
-            return "Model bulunamadı. Lütfen daha sonra tekrar deneyin veya geliştirici ile iletişime geçin."
+            return "Model bulunamadı. Lütfen daha sonra tekrar deneyin."
         }
     }
 }
-

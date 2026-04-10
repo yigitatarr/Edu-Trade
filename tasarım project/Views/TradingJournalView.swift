@@ -11,6 +11,7 @@ struct TradingJournalView: View {
     @ObservedObject var tradingVM: TradingViewModel
     @State private var selectedEntry: TradingJournalEntry?
     @State private var showingEntrySheet = false
+    @State private var showingNewEntrySheet = false
     @State private var searchText = ""
     @State private var selectedCoin: String? = nil
     
@@ -37,7 +38,7 @@ struct TradingJournalView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 0) {
                 // Search and Filter
                 VStack(spacing: 12) {
@@ -46,7 +47,7 @@ struct TradingJournalView: View {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.secondary)
                         TextField("Ara...", text: $searchText)
-                            .textFieldStyle(PlainTextFieldStyle())
+                            .textFieldStyle(.plain)
                         if !searchText.isEmpty {
                             Button(action: { searchText = "" }) {
                                 Image(systemName: "xmark.circle.fill")
@@ -105,10 +106,22 @@ struct TradingJournalView: View {
                     .listStyle(PlainListStyle())
                 }
             }
-            .navigationTitle("Trading Günlüğü")
+            .navigationTitle(LocalizationHelper.shared.string(for: "journal.title"))
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        showingNewEntrySheet = true
+                    }) {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
             .sheet(item: $selectedEntry) { entry in
                 JournalEntryDetailView(entry: entry, tradingVM: tradingVM)
+            }
+            .sheet(isPresented: $showingNewEntrySheet) {
+                NewJournalEntryView(tradingVM: tradingVM)
             }
         }
     }
@@ -212,7 +225,7 @@ struct JournalEntryDetailView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     // Header
@@ -397,6 +410,103 @@ struct JournalEntryDetailView: View {
     
     private func formatCurrency(_ value: Double) -> String {
         String(format: "$%.2f", value)
+    }
+}
+
+// MARK: - New Journal Entry View
+struct NewJournalEntryView: View {
+    @ObservedObject var tradingVM: TradingViewModel
+    @Environment(\.dismiss) var dismiss
+    @State private var selectedTrade: Trade?
+    @State private var notes = ""
+    @State private var strategy = ""
+    @State private var emotions = ""
+    @State private var lessonsLearned = ""
+    @State private var rating = 3
+    
+    private var recentTrades: [Trade] {
+        Array(tradingVM.trades.prefix(20))
+    }
+    
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section("İşlem Seç") {
+                    if recentTrades.isEmpty {
+                        Text("Henüz işlem yapılmamış")
+                            .foregroundColor(.secondary)
+                    } else {
+                        Picker("İşlem", selection: $selectedTrade) {
+                            Text("İşlem Seçin").tag(nil as Trade?)
+                            ForEach(recentTrades) { trade in
+                                Text("\(trade.type == .buy ? "Alış" : "Satış") - \(trade.coinSymbol) \(String(format: "%.4f @ $%.2f", trade.amount, trade.price))")
+                                    .tag(trade as Trade?)
+                            }
+                        }
+                    }
+                }
+                
+                Section("Değerlendirme") {
+                    HStack {
+                        Text("Puan")
+                        Spacer()
+                        HStack(spacing: 4) {
+                            ForEach(1...5, id: \.self) { index in
+                                Image(systemName: index <= rating ? "star.fill" : "star")
+                                    .font(.title3)
+                                    .foregroundColor(index <= rating ? .yellow : .gray.opacity(0.3))
+                                    .onTapGesture { rating = index }
+                            }
+                        }
+                    }
+                }
+                
+                Section("Strateji") {
+                    TextEditor(text: $strategy)
+                        .frame(minHeight: 60)
+                }
+                
+                Section("Duygular") {
+                    TextEditor(text: $emotions)
+                        .frame(minHeight: 60)
+                }
+                
+                Section("Notlar") {
+                    TextEditor(text: $notes)
+                        .frame(minHeight: 80)
+                }
+                
+                Section("Öğrenilenler") {
+                    TextEditor(text: $lessonsLearned)
+                        .frame(minHeight: 60)
+                }
+            }
+            .navigationTitle("Yeni Kayıt")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("İptal") { dismiss() }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Kaydet") {
+                        guard let trade = selectedTrade else { return }
+                        tradingVM.addJournalEntry(
+                            tradeId: trade.id,
+                            coinSymbol: trade.coinSymbol,
+                            notes: notes,
+                            strategy: strategy,
+                            emotions: emotions,
+                            lessonsLearned: lessonsLearned,
+                            rating: rating
+                        )
+                        HapticFeedback.success()
+                        dismiss()
+                    }
+                    .disabled(selectedTrade == nil)
+                    .fontWeight(.semibold)
+                }
+            }
+        }
     }
 }
 

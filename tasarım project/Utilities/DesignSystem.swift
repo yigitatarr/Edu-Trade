@@ -134,6 +134,11 @@ struct GlassmorphismModifier: ViewModifier {
             .background(
                 RoundedRectangle(cornerRadius: AppCornerRadius.large)
                     .fill(.ultraThinMaterial)
+                    .opacity(opacity > 0 ? 1.0 : 0.0)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: AppCornerRadius.large)
+                            .fill(Color.white.opacity(opacity))
+                    )
             )
     }
 }

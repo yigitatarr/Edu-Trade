@@ -141,10 +141,135 @@ class SettingsViewModel: ObservableObject {
             dataManager.saveUser(user)
         }
         
-        // Import trades
         if let tradesData = importData["trades"] as? [[String: Any]] {
-            // Trades are complex, we'll just note that import happened
-            // Full import would require more complex parsing
+            var importedTrades: [Trade] = []
+            for tradeDict in tradesData {
+                guard let idString = tradeDict["id"] as? String,
+                      let id = UUID(uuidString: idString),
+                      let coinSymbol = tradeDict["coinSymbol"] as? String,
+                      let typeString = tradeDict["type"] as? String,
+                      let amount = tradeDict["amount"] as? Double,
+                      let price = tradeDict["price"] as? Double,
+                      let timestamp = tradeDict["timestamp"] as? TimeInterval else {
+                    continue
+                }
+                let tradeType: TradeType = typeString == "buy" ? .buy : .sell
+                let coinName = (tradeDict["coinName"] as? String) ?? coinSymbol
+                let trade = Trade(
+                    id: id,
+                    coinSymbol: coinSymbol,
+                    coinName: coinName,
+                    type: tradeType,
+                    amount: amount,
+                    price: price,
+                    timestamp: Date(timeIntervalSince1970: timestamp)
+                )
+                importedTrades.append(trade)
+            }
+            if !importedTrades.isEmpty {
+                dataManager.saveTrades(importedTrades)
+            }
+        }
+        
+        if let ordersData = importData["orders"] as? [[String: Any]] {
+            var importedOrders: [Order] = []
+            for orderDict in ordersData {
+                guard let idString = orderDict["id"] as? String,
+                      let id = UUID(uuidString: idString),
+                      let coinSymbol = orderDict["coinSymbol"] as? String,
+                      let typeString = orderDict["type"] as? String,
+                      let type = OrderType(rawValue: typeString),
+                      let amount = orderDict["amount"] as? Double else {
+                    continue
+                }
+                let limitPrice = orderDict["limitPrice"] as? Double
+                let statusString = (orderDict["status"] as? String) ?? "pending"
+                let status = OrderStatus(rawValue: statusString) ?? .pending
+                let order = Order(
+                    id: id,
+                    coinSymbol: coinSymbol,
+                    coinName: coinSymbol,
+                    type: type,
+                    amount: amount,
+                    limitPrice: limitPrice,
+                    status: status
+                )
+                importedOrders.append(order)
+            }
+            if !importedOrders.isEmpty {
+                dataManager.saveOrders(importedOrders)
+            }
+        }
+        
+        if let journalData = importData["journalEntries"] as? [[String: Any]] {
+            var importedEntries: [TradingJournalEntry] = []
+            for entryDict in journalData {
+                guard let idString = entryDict["id"] as? String,
+                      let id = UUID(uuidString: idString),
+                      let tradeIdString = entryDict["tradeId"] as? String,
+                      let tradeId = UUID(uuidString: tradeIdString),
+                      let coinSymbol = entryDict["coinSymbol"] as? String else {
+                    continue
+                }
+                let entry = TradingJournalEntry(
+                    id: id,
+                    tradeId: tradeId,
+                    coinSymbol: coinSymbol,
+                    notes: (entryDict["notes"] as? String) ?? "",
+                    rating: (entryDict["rating"] as? Int) ?? 3
+                )
+                importedEntries.append(entry)
+            }
+            if !importedEntries.isEmpty {
+                dataManager.saveJournalEntries(importedEntries)
+            }
+        }
+        
+        if let alertsData = importData["priceAlerts"] as? [[String: Any]] {
+            var importedAlerts: [PriceAlert] = []
+            for alertDict in alertsData {
+                guard let idString = alertDict["id"] as? String,
+                      let id = UUID(uuidString: idString),
+                      let coinSymbol = alertDict["coinSymbol"] as? String,
+                      let targetPrice = alertDict["targetPrice"] as? Double,
+                      let conditionString = alertDict["condition"] as? String,
+                      let condition = AlertCondition(rawValue: conditionString) else {
+                    continue
+                }
+                let isActive = (alertDict["isActive"] as? Bool) ?? true
+                let alert = PriceAlert(
+                    id: id,
+                    coinSymbol: coinSymbol,
+                    coinName: coinSymbol,
+                    targetPrice: targetPrice,
+                    condition: condition,
+                    isActive: isActive
+                )
+                importedAlerts.append(alert)
+            }
+            if !importedAlerts.isEmpty {
+                dataManager.savePriceAlerts(importedAlerts)
+            }
+        }
+        
+        if let snapshotsData = importData["portfolioSnapshots"] as? [[String: Any]] {
+            var importedSnapshots: [PortfolioSnapshot] = []
+            for snapDict in snapshotsData {
+                guard let dateTimestamp = snapDict["date"] as? TimeInterval,
+                      let totalValue = snapDict["totalValue"] as? Double,
+                      let profit = snapDict["profit"] as? Double else {
+                    continue
+                }
+                let snapshot = PortfolioSnapshot(
+                    date: Date(timeIntervalSince1970: dateTimestamp),
+                    totalValue: totalValue,
+                    profit: profit
+                )
+                importedSnapshots.append(snapshot)
+            }
+            if !importedSnapshots.isEmpty {
+                dataManager.savePortfolioSnapshots(importedSnapshots)
+            }
         }
         
         return true

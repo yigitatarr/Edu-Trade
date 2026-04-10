@@ -28,10 +28,11 @@ struct User: Codable {
         self.favoriteCoins = []
     }
     
+    /// Portfoy degeri guncel coin fiyatlarina ihtiyac duyar.
+    /// Bu property dogru deger donduremez, bunun yerine
+    /// `TradingViewModel.calculateTotalPortfolioValue(with:)` kullanin.
+    @available(*, deprecated, message: "TradingViewModel.calculateTotalPortfolioValue(with:) kullanin")
     var totalPortfolioValue: Double {
-        // This will be calculated based on current coin prices
-        // Note: This requires access to current coin prices, so it's better to calculate in ViewModel
-        // This is kept for backward compatibility but should use TradingViewModel.calculateTotalPortfolioValue instead
         return 0.0
     }
 }

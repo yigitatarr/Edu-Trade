@@ -20,7 +20,7 @@ class LocalizationHelper: ObservableObject {
     private init() {
         // Try to load from SettingsViewModel first
         let settingsVM = SettingsViewModel()
-        if settingsVM.settings.language != .turkish || settingsVM.settings.language != .english {
+        if settingsVM.settings.language == .turkish || settingsVM.settings.language == .english {
             self.currentLanguage = settingsVM.settings.language
         } else if let savedLanguage = UserDefaults.standard.string(forKey: "appLanguage"),
            let language = AppLanguage(rawValue: savedLanguage) {
@@ -142,6 +142,62 @@ class LocalizationHelper: ObservableObject {
             "empty.noTrades": [.turkish: "İşlem bulunamadı", .english: "No trades found"],
             "empty.noLessons": [.turkish: "Ders bulunamadı", .english: "No lessons found"],
             "empty.noFavorites": [.turkish: "Favori coin yok", .english: "No favorite coins"],
+            
+            // AI Assistant
+            "ai.title": [.turkish: "AI Asistan", .english: "AI Assistant"],
+            "ai.thinking": [.turkish: "AI düşünüyor...", .english: "AI is thinking..."],
+            "ai.welcome": [.turkish: "Merhaba! Ben EduTrade AI asistanınızım.", .english: "Hello! I'm your EduTrade AI assistant."],
+            "ai.apiKeyWarning": [.turkish: "AI Asistan kullanmak için OpenRouter API anahtarı gereklidir.", .english: "An OpenRouter API key is required to use the AI Assistant."],
+            "ai.enterApiKey": [.turkish: "API Anahtarı Girin", .english: "Enter API Key"],
+            "ai.apiKeySaved": [.turkish: "API anahtarı kaydedildi", .english: "API key saved"],
+            
+            // Home / Dashboard
+            "home.welcome": [.turkish: "Hoş Geldin", .english: "Welcome"],
+            "home.portfolio": [.turkish: "Portföyüm", .english: "My Portfolio"],
+            "home.viewAll": [.turkish: "Tümünü Gör", .english: "View All"],
+            "home.quickActions": [.turkish: "Hızlı İşlemler", .english: "Quick Actions"],
+            "home.market": [.turkish: "Piyasa", .english: "Market"],
+            "home.totalBalance": [.turkish: "Toplam Bakiye", .english: "Total Balance"],
+            "home.dailyChange": [.turkish: "Günlük Değişim", .english: "Daily Change"],
+            
+            // Trading Statistics
+            "stats.title": [.turkish: "İstatistikler", .english: "Statistics"],
+            "stats.totalTrades": [.turkish: "Toplam İşlem", .english: "Total Trades"],
+            "stats.profitFactor": [.turkish: "Kâr Faktörü", .english: "Profit Factor"],
+            "stats.avgProfit": [.turkish: "Ort. Kâr", .english: "Avg. Profit"],
+            "stats.avgLoss": [.turkish: "Ort. Zarar", .english: "Avg. Loss"],
+            "stats.bestTrade": [.turkish: "En İyi İşlem", .english: "Best Trade"],
+            "stats.worstTrade": [.turkish: "En Kötü İşlem", .english: "Worst Trade"],
+            
+            // Onboarding
+            "onboarding.skip": [.turkish: "Atla", .english: "Skip"],
+            "onboarding.next": [.turkish: "Devam", .english: "Next"],
+            "onboarding.start": [.turkish: "Başla", .english: "Start"],
+            
+            // Leaderboard
+            "leaderboard.title": [.turkish: "Liderlik Tablosu", .english: "Leaderboard"],
+            "leaderboard.you": [.turkish: "(Siz)", .english: "(You)"],
+            
+            // Alerts
+            "alert.title": [.turkish: "Fiyat Alarmları", .english: "Price Alerts"],
+            "alert.create": [.turkish: "Alarm Oluştur", .english: "Create Alert"],
+            "alert.active": [.turkish: "Aktif Alarmlar", .english: "Active Alerts"],
+            "alert.triggered": [.turkish: "Tetiklenen Alarmlar", .english: "Triggered Alerts"],
+            
+            // Journal
+            "journal.title": [.turkish: "Trading Günlüğü", .english: "Trading Journal"],
+            "journal.newEntry": [.turkish: "Yeni Kayıt", .english: "New Entry"],
+            "journal.strategy": [.turkish: "Strateji", .english: "Strategy"],
+            "journal.emotions": [.turkish: "Duygular", .english: "Emotions"],
+            "journal.lessons": [.turkish: "Çıkarılan Dersler", .english: "Lessons Learned"],
+            "journal.notes": [.turkish: "Notlar", .english: "Notes"],
+            "journal.rating": [.turkish: "Değerlendirme", .english: "Rating"],
+            
+            // Orders
+            "orders.pending": [.turkish: "Bekleyen Emirler", .english: "Pending Orders"],
+            "orders.executed": [.turkish: "Gerçekleşen Emirler", .english: "Executed Orders"],
+            "orders.failed": [.turkish: "Başarısız Emirler", .english: "Failed Orders"],
+            "orders.cancel": [.turkish: "Emri İptal Et", .english: "Cancel Order"],
         ]
         
         return strings[key]?[language] ?? key

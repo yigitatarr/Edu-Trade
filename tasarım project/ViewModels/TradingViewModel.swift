@@ -36,8 +36,7 @@ class TradingViewModel: ObservableObject {
         savePortfolioSnapshot()
         checkPriceAlerts()
         
-        // Listen for price updates to check pending orders
-        NotificationCenter.default.addObserver(
+        priceUpdateObserver = NotificationCenter.default.addObserver(
             forName: NSNotification.Name("CoinPricesUpdated"),
             object: nil,
             queue: .main
@@ -46,15 +45,19 @@ class TradingViewModel: ObservableObject {
         }
     }
     
+    private var priceUpdateObserver: NSObjectProtocol?
+    
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        if let observer = priceUpdateObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
     }
     
-    func buyCoin(_ coin: Coin, amount: Double, price: Double, stopLoss: Double? = nil) {
-        // Validation
+    @discardableResult
+    func buyCoin(_ coin: Coin, amount: Double, price: Double, stopLoss: Double? = nil) -> Bool {
         guard amount > 0 else {
             errorHandler.handle(.invalidAmount)
-            return
+            return false
         }
         
         let totalCost = amount * price
@@ -63,38 +66,33 @@ class TradingViewModel: ObservableObject {
         switch ValidationHelper.validateBalance(totalCost, available: user.balance) {
         case .failure(let error):
             errorHandler.handle(error)
-            return
+            return false
         case .success:
             break
         }
         
-        // Validate stop loss if provided
         if let stopLoss = stopLoss, stopLoss > 0 {
             switch ValidationHelper.validateStopLoss(stopLoss, buyPrice: price) {
             case .failure(let error):
                 errorHandler.handle(error)
-                return
+                return false
             case .success:
                 break
             }
         }
         
-        // Update balance
         user.balance -= totalCost
         
-        // Update portfolio
         if let existingAmount = user.portfolio[coin.symbol] {
             user.portfolio[coin.symbol] = existingAmount + amount
         } else {
             user.portfolio[coin.symbol] = amount
         }
         
-        // Set stop loss if provided
         if let stopLoss = stopLoss, stopLoss > 0 && stopLoss < price {
             user.stopLossLevels[coin.symbol] = stopLoss
         }
         
-        // Create trade record
         let trade = Trade(
             id: UUID(),
             coinSymbol: coin.symbol,
@@ -108,69 +106,54 @@ class TradingViewModel: ObservableObject {
         trades.insert(trade, at: 0)
         user.numberOfTrades += 1
         
-        // Save to persistence
         dataManager.saveUser(user)
         dataManager.saveTrades(trades)
         
-        // Sync to iCloud if enabled
         if CloudSyncService.shared.isAutoSyncEnabled {
             CloudSyncService.shared.syncToCloud()
         }
         
-        // Check achievements
         checkAchievements()
-        
-        // Check challenges
         checkChallenges()
-        
-        // Check stop loss triggers
         checkStopLossTriggers()
-        
-        // Update leaderboard
         LeaderboardViewModel.shared.updateCurrentUserEntry()
+        return true
     }
     
-    func sellCoin(_ coin: Coin, amount: Double, price: Double) {
-        // Validation
+    @discardableResult
+    func sellCoin(_ coin: Coin, amount: Double, price: Double) -> Bool {
         guard amount > 0 else {
             errorHandler.handle(.invalidAmount)
-            return
+            return false
         }
         
         guard let currentAmount = user.portfolio[coin.symbol] else {
             errorHandler.handle(.insufficientCoins)
-            return
+            return false
         }
         
         // Validate coin amount
         switch ValidationHelper.validateCoinAmount(amount, available: currentAmount) {
         case .failure(let error):
             errorHandler.handle(error)
-            return
+            return false
         case .success:
             break
         }
         
-        // Remove stop loss if selling all coins
         if currentAmount == amount {
             user.stopLossLevels.removeValue(forKey: coin.symbol)
         }
         
         let totalValue = amount * price
-        
-        // Update balance
         user.balance += totalValue
-        
-        // Update portfolio
         user.portfolio[coin.symbol] = currentAmount - amount
         
-        // If amount becomes zero, remove from portfolio
         if let updatedAmount = user.portfolio[coin.symbol],
            updatedAmount <= 0.0001 {
             user.portfolio.removeValue(forKey: coin.symbol)
         }
         
-        // Create trade record
         let trade = Trade(
             id: UUID(),
             coinSymbol: coin.symbol,
@@ -184,18 +167,13 @@ class TradingViewModel: ObservableObject {
         trades.insert(trade, at: 0)
         user.numberOfTrades += 1
         
-        // Save to persistence
         dataManager.saveUser(user)
         dataManager.saveTrades(trades)
         
-        // Haptic feedback
         HapticFeedback.medium()
-        
-        // Check achievements
         checkAchievements()
-        
-        // Check challenges
         checkChallenges()
+        return true
     }
     
     func checkChallenges() {
@@ -388,23 +366,35 @@ class TradingViewModel: ObservableObject {
     private func executeOrder(at index: Int, coin: Coin, executionPrice: Double) {
         let order = orders[index]
         
+        var success = false
         switch order.type {
         case .limitBuy:
-            buyCoin(coin, amount: order.amount, price: executionPrice, stopLoss: order.stopLoss)
+            success = buyCoin(coin, amount: order.amount, price: executionPrice, stopLoss: order.stopLoss)
         case .limitSell:
-            sellCoin(coin, amount: order.amount, price: executionPrice)
+            success = sellCoin(coin, amount: order.amount, price: executionPrice)
         default:
             break
         }
         
-        orders[index].status = .executed
-        orders[index].executedAt = Date()
+        if success {
+            orders[index].status = .executed
+            orders[index].executedAt = Date()
+        } else {
+            orders[index].status = .failed
+        }
         dataManager.saveOrders(orders)
     }
     
-    // MARK: - Trading Statistics
+    // MARK: - Trading Statistics (cached)
+    
+    private var cachedStatistics: TradingStatistics?
+    private var lastStatisticsTradeCount: Int = -1
     
     func getTradingStatistics() -> TradingStatistics {
+        // Cache'den dondur eger trade sayisi degismediyse
+        if let cached = cachedStatistics, lastStatisticsTradeCount == trades.count {
+            return cached
+        }
         let winningTrades = trades.filter { trade in
             if trade.type == .buy {
                 // For buy trades, check if current price is higher
@@ -428,14 +418,30 @@ class TradingViewModel: ObservableObject {
         let winRate = totalTrades > 0 ? Double(winningTrades.count) / Double(totalTrades) * 100 : 0
         
         let totalProfit = calculateTotalProfit()
-        let averageProfit = winningTrades.isEmpty ? 0 : totalProfit / Double(winningTrades.count)
-        let averageLoss = losingTrades.isEmpty ? 0 : abs(totalProfit) / Double(losingTrades.count)
         
-        let profitFactor = averageLoss > 0 ? averageProfit / averageLoss : 0
+        // Kazanan trade'lerin ortalama karini hesapla
+        let winProfit = winningTrades.reduce(0.0) { total, trade in
+            if let coin = dataManager.coins.first(where: { $0.symbol == trade.coinSymbol }) {
+                return total + (trade.amount * (coin.price - trade.price))
+            }
+            return total
+        }
+        let averageProfit = winningTrades.isEmpty ? 0 : winProfit / Double(winningTrades.count)
+        
+        // Kaybeden trade'lerin ortalama zararini hesapla
+        let lossAmount = losingTrades.reduce(0.0) { total, trade in
+            if let coin = dataManager.coins.first(where: { $0.symbol == trade.coinSymbol }) {
+                return total + abs(trade.amount * (coin.price - trade.price))
+            }
+            return total
+        }
+        let averageLoss = losingTrades.isEmpty ? 0 : lossAmount / Double(losingTrades.count)
+        
+        let profitFactor = averageLoss > 0 ? averageProfit / averageLoss : (averageProfit > 0 ? Double.infinity : 0)
         
         let mostProfitableCoin = getMostProfitableCoin()
         
-        return TradingStatistics(
+        let stats = TradingStatistics(
             totalTrades: totalTrades,
             winningTrades: winningTrades.count,
             losingTrades: losingTrades.count,
@@ -445,6 +451,12 @@ class TradingViewModel: ObservableObject {
             profitFactor: profitFactor,
             mostProfitableCoin: mostProfitableCoin
         )
+        
+        // Cache'e kaydet
+        cachedStatistics = stats
+        lastStatisticsTradeCount = trades.count
+        
+        return stats
     }
     
     private func calculateTotalProfit() -> Double {

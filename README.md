@@ -1,377 +1,242 @@
-# 🚀 EduTrade - Educational Virtual Trading Simulator
+# EduTrade - Kripto Para Eğitim Simülatörü
 
-<div align="center">
+<p align="center">
+  <img src="tasarım project/Assets.xcassets/AppIcon.appiconset/AppIcon.png" width="120" height="120" alt="EduTrade Icon"/>
+</p>
 
-![iOS](https://img.shields.io/badge/iOS-18.5+-blue.svg)
-![Swift](https://img.shields.io/badge/Swift-5.0+-orange.svg)
-![SwiftUI](https://img.shields.io/badge/SwiftUI-2.0+-blue.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
+<p align="center">
+  <strong>Gerçek para riski olmadan kripto para trading'i öğrenin.</strong>
+</p>
 
-**EduTrade**, kullanıcıların kripto para birimleri trading kavramlarını öğrenmelerini ve demo para ile pratik yapmalarını sağlayan modern bir iOS mobil uygulamasıdır.
-
-[Özellikler](#-özellikler) • [Ekran Görüntüleri](#-ekran-görüntüleri) • [Kurulum](#-kurulum) • [Mimari](#-mimari) • [Katkıda Bulunma](#-katkıda-bulunma)
-
-</div>
-
----
-
-## 📱 Hakkında
-
-EduTrade, gerçek para riski olmadan trading deneyimi kazandırırken, kapsamlı eğitim içerikleri ve interaktif quiz sistemi ile trading bilgilerini geliştirmelerine yardımcı olan kapsamlı bir eğitim platformudur. Uygulama, yeni başlayanlar için güvenli bir öğrenme ortamı sunar.
-
-### 🎯 Hedef Kitle
-
-- Trading'e yeni başlayanlar
-- Risk almadan trading pratiği yapmak isteyenler
-- Trading stratejilerini ve teknikleri öğrenmek isteyenler
-- Kripto para piyasalarını keşfetmek isteyenler
+<p align="center">
+  <img src="https://img.shields.io/badge/Platform-iOS%2018+-blue?logo=apple" alt="Platform"/>
+  <img src="https://img.shields.io/badge/Swift-5.9+-orange?logo=swift" alt="Swift"/>
+  <img src="https://img.shields.io/badge/Architecture-MVVM-green" alt="Architecture"/>
+  <img src="https://img.shields.io/badge/UI-SwiftUI-purple" alt="SwiftUI"/>
+  <img src="https://img.shields.io/badge/License-MIT-lightgrey" alt="License"/>
+</p>
 
 ---
 
-## ✨ Özellikler
+## Hakkında
 
-### 🏠 Ana Dashboard
-- **Hoş Geldin Kartı**: Bakiye, seviye, XP ve günlük seri takibi
-- **Hızlı Aksiyonlar**: İşlem yapma, öğrenme ve AI asistan erişimi
-- **Trading Performans Metrikleri**: Başarı oranı, profit factor ve toplam kâr/zarar
-- **Detaylı Portföy Görünümü**: Toplam değer, kâr/zarar analizi ve coin dağılımı
-- **Piyasa Durumu**: En çok yükselen ve düşen coinler
-- **Aktif Bildirimler**: Fiyat alarmları ve limit emirleri
+**EduTrade**, kripto para dünyasına adım atmak isteyen yeni başlayanlar için tasarlanmış kapsamlı bir **eğitim simülasyon uygulamasıdır**. Kullanıcılar sanal para ile gerçek piyasa verilerini takip ederek alım-satım yapabilir, interaktif dersler ve quiz'lerle trading bilgilerini geliştirebilir ve AI destekli asistandan anlık destek alabilir.
 
-### 💰 Trading Modülü
-- **100,000 USDT Başlangıç Bakiyesi**: Demo para ile güvenli pratik
-- **Çoklu Coin Desteği**: BTC, ETH, ADA, BNB, SOL ve daha fazlası
-- **Al/Sat İşlemleri**: Gerçekçi trading simülasyonu
-- **Fiyat Alarmları**: Coin fiyatları için özel bildirimler
-- **Limit Emirleri**: Gelişmiş emir yönetimi
-- **Trading Günlüğü**: Tüm işlemlerin detaylı kaydı
-- **Portföy Analizi**: Gelişmiş portföy analiz araçları
+### Neden EduTrade?
 
-### 📚 Eğitim Modülü
-- **5 Kapsamlı Ders**: Trading temellerinden ileri tekniklere
-  - Trading Temelleri
-  - Risk Yönetimi
-  - Teknik Analiz Temelleri
-  - Stop Loss Stratejileri
-  - Trend Takibi
-- **İnteraktif Quiz Sistemi**: Her ders için 3-5 soruluk quiz'ler
-- **İlerleme Takibi**: XP, seviye ve günlük seri sistemi
-- **Öğrenme Yolu**: Modüler eğitim yapısı
-
-### 🤖 AI Asistan
-- **Trading Soruları**: Kripto para ve teknik analiz konularında sorular
-- **Hızlı Sorular**: Yaygın sorular için hızlı erişim
-- **Akıllı Yanıtlar**: AI destekli eğitim desteği
-
-### 🏆 Başarım Sistemi
-- **6 Farklı Başarım**: 
-  - 🎯 First Trade - İlk trade yapıldı
-  - 📈 Progressive Trader - 10 trade tamamlandı
-  - 💯 Centurion - 100 trade tamamlandı
-  - 📖 Scholar - Tüm dersler tamamlandı
-  - 🧠 Master Quizzer - Tüm quiz'lerde %100 skor
-  - 🌐 Diversifier - Portföyde 5 farklı coin
-
-### 👤 Profil ve İstatistikler
-- **Detaylı İstatistikler**: Trade sayısı, quiz skorları, ders ilerlemesi
-- **Portföy Analizi**: Coin dağılımı ve performans grafikleri
-- **Trading Performansı**: Başarı oranı ve kâr/zarar analizi
-- **Liderlik Tablosu**: Diğer kullanıcılarla rekabet
-
-### 🎨 Kullanıcı Deneyimi
-- **Modern UI/UX**: SwiftUI ile tasarlanmış modern arayüz
-- **Dark/Light Mode**: Sistem teması desteği
-- **iPad Desteği**: Sidebar layout ile optimize edilmiş iPad deneyimi
-- **Çoklu Dil Desteği**: Türkçe ve İngilizce
-- **Erişilebilirlik**: VoiceOver ve erişilebilirlik özellikleri
-- **Haptic Feedback**: Dokunsal geri bildirimler
+- **Risk yok** — 100.000$ sanal bakiye ile gerçekçi trading deneyimi
+- **Öğrenerek pratik** — Duolingo tarzı öğrenme yolu ile adım adım ilerleme
+- **AI desteği** — OpenRouter API entegrasyonu ile anlık sorularınıza cevap
+- **Gerçek veriler** — CoinGecko API ile canlı kripto para fiyatları
 
 ---
 
-## 📸 Ekran Görüntüleri
+## Özellikler
 
-### Ana Ekran (Home)
-Ana dashboard, kullanıcının bakiye, portföy ve performans bilgilerini tek bakışta gösterir.
+### Trading Simülasyonu
+- Canlı kripto para fiyatları (CoinGecko API)
+- Market ve Limit emir desteği
+- Stop Loss ve Take Profit mekanizmaları
+- Portföy yönetimi ve detaylı analiz
+- Fiyat alarmları ve bildirimler
+- İşlem geçmişi ve trading günlüğü
 
-![Home Screen](screenshots/home.png)
-
-**Özellikler:**
-- Hoş geldin kartı ile bakiye ve seviye gösterimi
-- XP ve günlük seri takibi
-- Hızlı aksiyon butonları
-- Trading performans metrikleri
-- Detaylı portföy görünümü
-
-### Trading Ekranı
-Coin listesi, fiyat takibi ve işlem yapma arayüzü.
-
-![Trading Screen](screenshots/trading.png)
-
-**Özellikler:**
-- Mevcut bakiye gösterimi
-- Coin arama ve filtreleme
-- Favori coin'ler
-- Fiyat alarmları ve limit emirleri
-- Gerçek zamanlı fiyat değişimleri
-
-### Öğrenme Yolu
-Modüler eğitim yapısı ve ilerleme takibi.
-
-![Learning Path](screenshots/learning-path.png)
-
-**Özellikler:**
-- Seviye ve XP gösterimi
-- Modül bazlı eğitim yapısı
-- Ders ve quiz ilerlemesi
-- Pratik görevleri
+### Eğitim Sistemi
+- 20+ interaktif ders (Temel Analiz, Teknik Analiz, Risk Yönetimi vb.)
+- Her ders sonunda quiz değerlendirmesi
+- Duolingo tarzı seviye bazlı öğrenme yolu
+- Pratik görevler ve challenge'lar
+- XP ve seviye sistemi ile gamification
 
 ### AI Asistan
-Trading soruları için AI destekli yardım.
-
-![AI Assistant](screenshots/ai-assistant.png)
-
-**Özellikler:**
-- Hızlı sorular
-- Özel soru sorma
-- Trading, kripto para ve teknik analiz desteği
+- OpenRouter API ile yapay zeka destekli soru-cevap
+- Kripto para ve trading konusunda uzman asistan
+- Türkçe dil desteği
+- Anlık yardım ve açıklamalar
 
 ### Profil ve İstatistikler
-Kullanıcı performansı ve portföy analizi.
+- Detaylı trading istatistikleri (Win Rate, Profit Factor, vb.)
+- Portföy grafikleri ve performans analizi
+- Başarım (Achievement) sistemi
+- Liderlik tablosu
+- Gelişmiş portföy risk analizi
 
-![Profile](screenshots/profile.png)
-
-**Özellikler:**
-- Toplam değer ve kâr/zarar
-- Trading performans metrikleri
-- Portföy dağılımı
-- Detaylı istatistikler
-
-### Quiz Sistemi
-İnteraktif quiz arayüzü.
-
-![Quiz](screenshots/quiz.png)
-
-**Özellikler:**
-- Çoktan seçmeli sorular
-- İlerleme çubuğu
-- Anında geri bildirim
+### Teknik Altyapı
+- iCloud senkronizasyon desteği
+- Veri dışa aktarma (CSV, PDF, JSON)
+- Çoklu dil desteği (Türkçe / İngilizce)
+- Karanlık / Aydınlık / Sistem tema desteği
+- iPad ve iPhone uyumlu (Universal)
+- Offline kullanım desteği
 
 ---
 
-## 🛠 Teknik Detaylar
+## Mimari
 
-### Platform ve Teknolojiler
-
-- **Platform**: iOS (iPhone & iPad)
-- **Programlama Dili**: Swift 5.0+
-- **UI Framework**: SwiftUI
-- **Minimum iOS**: 18.5+
-- **Mimari**: MVVM (Model-View-ViewModel)
-- **Veri Depolama**: UserDefaults (local persistence)
-- **Veri Formatı**: JSON (mock data)
-
-### Sistem Mimarisi
+Proje **MVVM (Model-View-ViewModel)** mimarisi ile geliştirilmiştir.
 
 ```
-Views (SwiftUI) → ViewModels (MVVM) → Models → Persistence (UserDefaults)
-  ├─ HomeView          ├─ TradingViewModel      ├─ Coin
-  ├─ TradeView         ├─ LearningViewModel     ├─ Trade
-  ├─ LearnView         ├─ AIAssistantViewModel  ├─ Lesson
-  ├─ QuizView          ├─ SettingsViewModel     ├─ Quiz
-  ├─ ProfileView       └─ DataManager          ├─ User
-  └─ AIAssistantView                             └─ Achievement
-```
-
-### Proje Yapısı
-
-```
-tasarım project/
-├── Models/              # Veri modelleri
-│   ├── Coin.swift
-│   ├── Trade.swift
+EduTrade/
+├── Models/              # Veri modelleri (18 dosya)
 │   ├── User.swift
+│   ├── Trade.swift
+│   ├── Coin.swift
+│   ├── Order.swift
+│   ├── Quiz.swift
+│   ├── Challenge.swift
 │   └── ...
-├── Views/               # SwiftUI görünümleri
-│   ├── HomeView.swift
-│   ├── TradeView.swift
-│   ├── LearnView.swift
+├── Views/               # SwiftUI görünümleri (21 dosya)
+│   ├── HomeView.swift           # Ana ekran (iPhone/iPad adaptive)
+│   ├── TradeView.swift          # İşlem ekranı
+│   ├── LearnView.swift          # Eğitim ekranı
+│   ├── AIAssistantView.swift    # AI Asistan
+│   ├── ProfileView.swift        # Profil ve istatistikler
+│   ├── CoinDetailView.swift     # Coin detay sayfası
 │   └── ...
-├── ViewModels/          # MVVM ViewModeller
+├── ViewModels/          # İş mantığı (7 dosya)
 │   ├── TradingViewModel.swift
 │   ├── LearningViewModel.swift
+│   ├── AIAssistantViewModel.swift
+│   ├── DataManager.swift
 │   └── ...
-├── Services/            # Servis katmanı
-│   ├── AIService.swift
-│   ├── CoinPriceService.swift
+├── Services/            # Servis katmanı (10 dosya)
+│   ├── AIService.swift          # OpenRouter API entegrasyonu
+│   ├── CoinPriceService.swift   # CoinGecko fiyat servisi
+│   ├── CloudSyncService.swift   # iCloud senkronizasyon
+│   ├── ExportService.swift      # CSV/PDF dışa aktarma
+│   ├── NotificationService.swift
 │   └── ...
-├── Utilities/           # Yardımcı sınıflar
-│   ├── DesignSystem.swift
-│   ├── LocalizationHelper.swift
+├── Utilities/           # Yardımcı araçlar (7 dosya)
+│   ├── DesignSystem.swift       # Renk ve stil tokenları
+│   ├── LocalizationHelper.swift # Çoklu dil desteği
+│   ├── ValidationHelper.swift   # Giriş doğrulama
+│   ├── HapticFeedback.swift
 │   └── ...
-└── Resources/           # JSON veri dosyaları
-    ├── coins.json
-    ├── learnData.json
-    └── ...
+└── Extensions/
+    └── String+Decimal.swift
 ```
 
----
-
-## 🚀 Kurulum
-
-### Gereksinimler
-
-- Xcode 15.0 veya üzeri
-- iOS 18.5+ SDK
-- Swift 5.0+
-- macOS 13.0+ (geliştirme için)
-
-### Adımlar
-
-1. **Repository'yi klonlayın:**
-   ```bash
-   git clone https://github.com/yigitatarr/edutrade-project.git
-   cd edutrade-project
-   ```
-
-2. **Xcode'da açın:**
-   ```bash
-   open "tasarım project.xcodeproj"
-   ```
-
-3. **Projeyi derleyin:**
-   - Xcode'da `Cmd + B` ile projeyi derleyin
-   - Simulator veya gerçek cihazda çalıştırın (`Cmd + R`)
-
-### Yapılandırma
-
-#### AI Servisi (Opsiyonel)
-AI Asistan özelliğini kullanmak için Hugging Face API key'inizi ekleyin:
-
-1. [Hugging Face](https://huggingface.co/settings/tokens) adresinden API key alın
-2. `tasar_m_projectApp.swift` dosyasında API key'i ayarlayın:
-   ```swift
-   AIService.shared.setDefaultAPIKey("hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-   ```
+**Toplam:** 66 Swift dosyası, ~20.000 satır kod
 
 ---
 
-## 📖 Kullanım
+## Gereksinimler
 
-### İlk Kullanım
-
-1. Uygulamayı açtığınızda onboarding ekranı görüntülenir
-2. Onboarding'i tamamladıktan sonra 100,000 USDT başlangıç bakiyesi ile başlarsınız
-3. Ana ekrandan trading, öğrenme veya AI asistan özelliklerine erişebilirsiniz
-
-### Trading Yapma
-
-1. **Trade** sekmesine gidin
-2. İstediğiniz coin'i seçin
-3. **Al** veya **Sat** butonuna tıklayın
-4. Miktarı girin ve işlemi onaylayın
-
-### Eğitim Alma
-
-1. **Öğren** sekmesine gidin
-2. Bir modül seçin
-3. Dersleri okuyun
-4. Quiz'leri tamamlayın ve XP kazanın
-
-### AI Asistan Kullanımı
-
-1. **AI Asistan** sekmesine gidin
-2. Hızlı sorulardan birini seçin veya kendi sorunuzu yazın
-3. AI'dan anında yanıt alın
+| Gereksinim | Minimum |
+|---|---|
+| iOS | 18.0+ |
+| Xcode | 16.0+ |
+| Swift | 5.9+ |
+| Cihaz | iPhone / iPad |
 
 ---
 
-## 🧪 Test
+## Kurulum
 
-Proje, kapsamlı unit testler içerir:
+### 1. Projeyi Klonlayın
 
 ```bash
-# Testleri çalıştırma
-Cmd + U (Xcode'da)
+git clone https://github.com/yigitatarr/Edu-Trade.git
+cd Edu-Trade
 ```
 
-Test dosyaları:
-- `CoinPriceServiceTests.swift`
-- `DataManagerTests.swift`
-- `LearningViewModelTests.swift`
-- `TradingViewModelTests.swift`
-- `ValidationHelperTests.swift`
+### 2. Xcode'da Açın
+
+```bash
+open "tasarım project.xcodeproj"
+```
+
+### 3. Build & Run
+
+- Xcode'da hedef cihazı seçin (iPhone Simulator veya fiziksel cihaz)
+- `Cmd + R` ile çalıştırın
+
+### 4. AI Asistan Kurulumu (Opsiyonel)
+
+AI Asistan özelliğini kullanmak için:
+
+1. [OpenRouter](https://openrouter.ai/) adresinden ücretsiz hesap oluşturun
+2. API key alın
+3. Uygulamada **AI Asistan** sekmesine gidin
+4. API key'inizi girin ve kaydedin
 
 ---
 
-## 🤝 Katkıda Bulunma
+## Kullanılan Teknolojiler
 
-Katkılarınızı bekliyoruz! Lütfen şu adımları izleyin:
+| Teknoloji | Kullanım Alanı |
+|---|---|
+| **SwiftUI** | Kullanıcı arayüzü |
+| **Swift Charts** | Grafik ve görselleştirme |
+| **Combine** | Reaktif programlama |
+| **async/await** | Asenkron işlemler |
+| **CoinGecko API** | Canlı kripto para verileri |
+| **OpenRouter API** | AI asistan (GPT modelleri) |
+| **UserDefaults** | Yerel veri saklama |
+| **Keychain** | Güvenli API key saklama |
+| **iCloud KVS** | Bulut senkronizasyonu |
+| **UNNotification** | Bildirim sistemi |
+| **NavigationStack** | Modern navigasyon |
+| **NavigationSplitView** | iPad uyumlu arayüz |
+
+---
+
+## Testler
+
+Proje birim testleri içermektedir:
+
+```bash
+# Xcode'da testleri çalıştırma
+Cmd + U
+```
+
+| Test Dosyası | Kapsam |
+|---|---|
+| `TradingViewModelTests` | Alım-satım işlemleri |
+| `LearningViewModelTests` | Öğrenme ve XP sistemi |
+| `DataManagerTests` | Veri yönetimi |
+| `CoinPriceServiceTests` | Fiyat servisi |
+| `ValidationHelperTests` | Giriş doğrulama |
+| `StringDecimalExtensionTests` | String uzantıları |
+
+---
+
+## Ekran Görüntüleri
+
+> Ekran görüntüleri yakında eklenecektir.
+
+---
+
+## Güvenlik
+
+- API anahtarları **Keychain** ile güvenli şekilde saklanır
+- Kaynak kodda hardcoded API key bulunmaz
+- Hassas veriler cihaz dışına çıkmaz
+
+---
+
+## Katkıda Bulunma
 
 1. Bu repository'yi fork edin
-2. Feature branch oluşturun (`git checkout -b feature/AmazingFeature`)
-3. Değişikliklerinizi commit edin (`git commit -m 'Add some AmazingFeature'`)
-4. Branch'inizi push edin (`git push origin feature/AmazingFeature`)
-5. Bir Pull Request açın
-
-### Katkı Kuralları
-
-- Kod standartlarına uyun
-- Yeni özellikler için test yazın
-- README'yi güncelleyin
-- Commit mesajlarını açıklayıcı yazın
+2. Feature branch oluşturun (`git checkout -b feature/yeni-ozellik`)
+3. Değişikliklerinizi commit edin (`git commit -m 'Yeni özellik eklendi'`)
+4. Branch'inizi push edin (`git push origin feature/yeni-ozellik`)
+5. Pull Request açın
 
 ---
 
-## 📄 Lisans
+## Lisans
 
-Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakın.
-
----
-
-## 👨‍💻 Geliştirici
-
-**Yiğit Atar**
-
-- GitHub: [@yigitatarr](https://github.com/yigitatarr)
-- Repository: [edutrade-project](https://github.com/yigitatarr/edutrade-project)
+Bu proje [MIT Lisansı](LICENSE) altında lisanslanmıştır.
 
 ---
 
-## 🗺 Yol Haritası
+## Geliştirici
 
-- [ ] Gerçek zamanlı fiyat entegrasyonu
-- [ ] Daha fazla coin desteği
-- [ ] Grafik ve teknik analiz araçları
-- [ ] Sosyal özellikler (arkadaşlar, paylaşım)
-- [ ] Push bildirimleri
-- [ ] iCloud senkronizasyonu
-- [ ] Apple Watch desteği
-- [ ] Widget desteği
+**Yiğit Atar** — [@yigitatarr](https://github.com/yigitatarr)
 
 ---
 
-## 📞 İletişim
-
-Sorularınız veya önerileriniz için:
-
-- Issue açın: [GitHub Issues](https://github.com/yigitatarr/edutrade-project/issues)
-- Pull Request gönderin: [GitHub Pull Requests](https://github.com/yigitatarr/edutrade-project/pulls)
-
----
-
-## 🙏 Teşekkürler
-
-- SwiftUI topluluğu
-- Tüm katkıda bulunanlar
-- Test eden kullanıcılar
-
----
-
-<div align="center">
-
-**⭐ Bu projeyi beğendiyseniz yıldız vermeyi unutmayın! ⭐**
-
-Made with ❤️ using SwiftUI
-
-</div>
-
+<p align="center">
+  <sub>EduTrade ile güvenle öğrenin, risksiz pratik yapın.</sub>
+</p>

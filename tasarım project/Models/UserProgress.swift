@@ -33,14 +33,14 @@ struct UserProgress: Codable {
     }
     
     var xpToNextLevel: Int {
-        let nextLevelXP = currentLevel * 100 // Her seviye için 100 XP
-        return nextLevelXP - currentLevelXP
+        let nextLevelXP = currentLevel * 100
+        return max(0, nextLevelXP - currentLevelXP)
     }
     
     var levelProgress: Double {
         let levelXP = currentLevel * 100
         guard levelXP > 0 else { return 0 }
-        return Double(currentLevelXP) / Double(levelXP)
+        return min(1.0, Double(currentLevelXP) / Double(levelXP))
     }
 }
 

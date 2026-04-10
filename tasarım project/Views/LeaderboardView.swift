@@ -9,10 +9,9 @@ import SwiftUI
 
 struct LeaderboardView: View {
     @ObservedObject var viewModel = LeaderboardViewModel.shared
-    @State private var selectedTab = 0
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color(.systemGroupedBackground)
                     .ignoresSafeArea()
@@ -49,7 +48,7 @@ struct LeaderboardView: View {
                             VStack(spacing: 12) {
                                 // Top 3 podium
                                 if viewModel.entries.count >= 3 {
-                                    TopThreePodium(entries: Array(viewModel.entries.prefix(3)))
+                                    TopThreePodium(entries: Array(viewModel.entries.prefix(3)), sortOption: viewModel.sortOption)
                                         .padding(.horizontal)
                                         .padding(.top)
                                 }
@@ -71,7 +70,7 @@ struct LeaderboardView: View {
                     }
                 }
             }
-            .navigationTitle("Liderlik Tablosu")
+            .navigationTitle(LocalizationHelper.shared.string(for: "leaderboard.title"))
             .navigationBarTitleDisplayMode(.large)
             .onAppear {
                 viewModel.updateCurrentUserEntry()
@@ -130,34 +129,18 @@ struct SortButton: View {
 
 struct TopThreePodium: View {
     let entries: [LeaderboardEntry]
+    let sortOption: LeaderboardSortOption
     
     var body: some View {
         HStack(alignment: .bottom, spacing: 12) {
-            // 2nd place
             if entries.count > 1 {
-                PodiumCard(
-                    entry: entries[1],
-                    rank: 2,
-                    height: 120
-                )
+                PodiumCard(entry: entries[1], rank: 2, height: 120, sortOption: sortOption)
             }
-            
-            // 1st place
             if entries.count > 0 {
-                PodiumCard(
-                    entry: entries[0],
-                    rank: 1,
-                    height: 150
-                )
+                PodiumCard(entry: entries[0], rank: 1, height: 150, sortOption: sortOption)
             }
-            
-            // 3rd place
             if entries.count > 2 {
-                PodiumCard(
-                    entry: entries[2],
-                    rank: 3,
-                    height: 100
-                )
+                PodiumCard(entry: entries[2], rank: 3, height: 100, sortOption: sortOption)
             }
         }
     }
@@ -167,6 +150,7 @@ struct PodiumCard: View {
     let entry: LeaderboardEntry
     let rank: Int
     let height: CGFloat
+    let sortOption: LeaderboardSortOption
     
     var medalColor: Color {
         switch rank {
@@ -226,8 +210,14 @@ struct PodiumCard: View {
     }
     
     private func formatValue(for entry: LeaderboardEntry) -> String {
-        // This will be dynamic based on sort option, simplified for now
-        return "\(entry.totalXP) XP"
+        switch sortOption {
+        case .xp: return "\(entry.totalXP) XP"
+        case .profit: return String(format: "$%.0f", entry.totalProfit)
+        case .winRate: return String(format: "%.1f%%", entry.winRate)
+        case .trades: return "\(entry.totalTrades) İşlem"
+        case .level: return "Lv. \(entry.level)"
+        case .streak: return "\(entry.streak) Gün"
+        }
     }
 }
 

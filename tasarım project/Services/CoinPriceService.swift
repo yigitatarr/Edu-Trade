@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import UIKit
 
 class CoinPriceService: ObservableObject {
     static let shared = CoinPriceService()
@@ -132,17 +133,35 @@ class CoinPriceService: ObservableObject {
         "GUSD": "gemini-dollar"
     ]
     
-    // Reverse mapping (CoinGecko ID -> symbol)
-    private var symbolMapping: [String: String] {
+    // Reverse mapping (CoinGecko ID -> symbol) - cached
+    private lazy var symbolMapping: [String: String] = {
         var mapping: [String: String] = [:]
         for (symbol, id) in coinIdMapping {
             mapping[id] = symbol
         }
         return mapping
-    }
+    }()
+    
+    // App arka planda mi kontrolu
+    private var isAppActive = true
     
     private init() {
         startAutoUpdate()
+        
+        // Arka plan kontrolu
+        NotificationCenter.default.addObserver(
+            forName: UIApplication.didEnterBackgroundNotification,
+            object: nil, queue: .main
+        ) { [weak self] _ in
+            self?.isAppActive = false
+        }
+        NotificationCenter.default.addObserver(
+            forName: UIApplication.willEnterForegroundNotification,
+            object: nil, queue: .main
+        ) { [weak self] _ in
+            self?.isAppActive = true
+            self?.updatePrices() // Ön plana gelince hemen güncelle
+        }
     }
     
     deinit {
@@ -172,6 +191,12 @@ class CoinPriceService: ObservableObject {
     
     func updatePrices(completion: ((Bool) -> Void)? = nil) {
         guard !isLoading else {
+            completion?(false)
+            return
+        }
+        
+        // Arka plandayken guncelleme yapma
+        guard isAppActive else {
             completion?(false)
             return
         }

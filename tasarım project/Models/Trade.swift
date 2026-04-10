@@ -12,7 +12,7 @@ enum TradeType: String, Codable {
     case sell
 }
 
-struct Trade: Identifiable, Codable {
+struct Trade: Identifiable, Codable, Hashable {
     let id: UUID
     let coinSymbol: String
     let coinName: String

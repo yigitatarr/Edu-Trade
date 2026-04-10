@@ -19,7 +19,8 @@ struct Quiz: Identifiable, Codable {
         let correctAnswer: Int
         
         var correctAnswerIndex: Int {
-            correctAnswer - 1
+            let index = correctAnswer - 1
+            return max(0, min(index, options.count - 1))
         }
     }
 }

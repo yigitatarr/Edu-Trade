@@ -9,10 +9,11 @@ import SwiftUI
 
 struct PathView: View {
     @ObservedObject var viewModel: LearningViewModel
+    @EnvironmentObject var tradingVM: TradingViewModel
     @State private var selectedLevel: Level?
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 // Clean background
                 Color(.systemGroupedBackground)
@@ -345,7 +346,7 @@ struct LevelDetailView: View {
     @State private var lessonForQuiz: Lesson?
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color(.systemGroupedBackground)
                     .ignoresSafeArea()
@@ -457,7 +458,7 @@ struct LevelDetailView: View {
                 }
             }
             .sheet(isPresented: $navigateToTrade) {
-                TradeView(viewModel: TradingViewModel())
+                TradeView(viewModel: tradingVM)
             }
             .sheet(item: $selectedLesson) { lesson in
                 LessonDetailView(
@@ -474,10 +475,21 @@ struct LevelDetailView: View {
             .sheet(item: $lessonForQuiz) { lesson in
                 if let quiz = viewModel.quizzes.first(where: { $0.lessonId == lesson.id }) {
                     QuizView(quiz: quiz, viewModel: viewModel, lessonId: lesson.id)
+                } else {
+                    VStack(spacing: 16) {
+                        Image(systemName: "questionmark.circle")
+                            .font(.system(size: 48))
+                            .foregroundColor(.secondary)
+                        Text("Bu ders için quiz henüz hazır değil.")
+                            .font(.headline)
+                            .foregroundColor(.secondary)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
             .sheet(item: $selectedChallenge) { challenge in
                 ChallengeDetailView(challenge: challenge, viewModel: viewModel)
+                    .environmentObject(tradingVM)
             }
         }
     }
@@ -645,4 +657,5 @@ struct ModernChallengeRow: View {
 
 #Preview {
     PathView(viewModel: LearningViewModel())
+        .environmentObject(TradingViewModel())
 }

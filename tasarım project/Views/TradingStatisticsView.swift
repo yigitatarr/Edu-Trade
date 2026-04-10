@@ -45,7 +45,7 @@ struct TradingStatisticsView: View {
                 
                 // Profit Factor Card
                 StatCard(
-                    title: "Profit Factor",
+                    title: "Kâr Faktörü",
                     value: String(format: "%.2f", statistics.profitFactor),
                     subtitle: statistics.profitFactor > 1 ? "İyi" : "Geliştirilmeli",
                     icon: "chart.line.uptrend.xyaxis",
@@ -95,7 +95,7 @@ struct TradingStatisticsView: View {
             .padding(.bottom)
         }
         .background(Color(.systemGroupedBackground))
-        .navigationTitle("İstatistikler")
+        .navigationTitle(LocalizationHelper.shared.string(for: "stats.title"))
         .navigationBarTitleDisplayMode(.inline)
     }
     

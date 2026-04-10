@@ -27,14 +27,19 @@ struct PendingOrdersView: View {
             .map { $0 }
     }
     
+    private var failedOrders: [Order] {
+        tradingVM.orders.filter { $0.status == .failed }
+            .sorted { $0.createdAt > $1.createdAt }
+    }
+    
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 0) {
-                if pendingOrders.isEmpty && executedOrders.isEmpty {
+                if pendingOrders.isEmpty && executedOrders.isEmpty && failedOrders.isEmpty {
                     EmptyStateView(
                         icon: "list.bullet.rectangle",
                         title: "Emir Yok",
-                        message: "Henüz limit emri oluşturmadınız. TradeSheet'te 'Limit' emir tipini seçerek limit emri oluşturabilirsiniz."
+                        message: "Henüz limit emri oluşturmadınız. İşlem ekranında 'Limit' emir tipini seçerek limit emri oluşturabilirsiniz."
                     )
                 } else {
                     List {
@@ -58,7 +63,6 @@ struct PendingOrdersView: View {
                             }
                         }
                         
-                        // Executed Orders Section
                         if !executedOrders.isEmpty {
                             Section {
                                 ForEach(executedOrders) { order in
@@ -66,6 +70,17 @@ struct PendingOrdersView: View {
                                 }
                             } header: {
                                 Text("Tamamlanan Emirler (Son 10)")
+                                    .font(.system(size: 14, weight: .semibold))
+                            }
+                        }
+                        
+                        if !failedOrders.isEmpty {
+                            Section {
+                                ForEach(failedOrders) { order in
+                                    OrderRow(order: order, tradingVM: tradingVM)
+                                }
+                            } header: {
+                                Text("Başarısız Emirler")
                                     .font(.system(size: 14, weight: .semibold))
                             }
                         }
@@ -88,25 +103,18 @@ struct PendingOrdersView: View {
                     }
                 }
             }
-            .sheet(isPresented: $showingAddLimitOrder) {
-                Group {
-                    if let coin = selectedCoin {
-                        QuickLimitOrderSheet(coin: coin, viewModel: tradingVM)
-                            .onDisappear {
-                                selectedCoin = nil
-                            }
-                    } else {
-                        CoinSelectionForOrderView(
-                            coins: dataManager.coins,
-                            onCoinSelected: { coin in
-                                selectedCoin = coin
-                                // Sheet'i kapatıp yeniden aç
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                    showingAddLimitOrder = true
-                                }
-                            }
-                        )
-                    }
+            .sheet(isPresented: $showingAddLimitOrder, onDismiss: {
+                selectedCoin = nil
+            }) {
+                if let coin = selectedCoin {
+                    QuickLimitOrderSheet(coin: coin, viewModel: tradingVM)
+                } else {
+                    CoinSelectionForOrderView(
+                        coins: dataManager.coins,
+                        onCoinSelected: { coin in
+                            selectedCoin = coin
+                        }
+                    )
                 }
             }
             .alert("Emri İptal Et", isPresented: $showingCancelAlert) {
@@ -283,34 +291,28 @@ struct StatusBadge: View {
     
     private var statusIcon: String {
         switch status {
-        case .pending:
-            return "clock.fill"
-        case .executed:
-            return "checkmark.circle.fill"
-        case .cancelled:
-            return "xmark.circle.fill"
+        case .pending: return "clock.fill"
+        case .executed: return "checkmark.circle.fill"
+        case .cancelled: return "xmark.circle.fill"
+        case .failed: return "exclamationmark.triangle.fill"
         }
     }
     
     private var statusText: String {
         switch status {
-        case .pending:
-            return "Bekliyor"
-        case .executed:
-            return "Tamamlandı"
-        case .cancelled:
-            return "İptal Edildi"
+        case .pending: return "Bekliyor"
+        case .executed: return "Tamamlandı"
+        case .cancelled: return "İptal Edildi"
+        case .failed: return "Başarısız"
         }
     }
     
     private var statusColor: Color {
         switch status {
-        case .pending:
-            return .orange
-        case .executed:
-            return .green
-        case .cancelled:
-            return .red
+        case .pending: return .orange
+        case .executed: return .green
+        case .cancelled: return .red
+        case .failed: return .purple
         }
     }
 }
@@ -334,7 +336,7 @@ struct CoinSelectionForOrderView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(filteredCoins) { coin in
                     Button(action: {

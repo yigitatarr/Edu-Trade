@@ -8,25 +8,23 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject var tradingVM: TradingViewModel
-    @ObservedObject var learningVM: LearningViewModel
+    @StateObject var tradingVM: TradingViewModel
+    @StateObject var learningVM: LearningViewModel
     @ObservedObject var offlineService = OfflineService.shared
     @EnvironmentObject var localizationHelper: LocalizationHelper
     @State private var selectedTab = 0
     
-    // Helper to get localization helper (fallback to shared if needed)
     private var locHelper: LocalizationHelper {
         return localizationHelper
     }
     
     init() {
-        // ViewModel'leri oluştur ve birbirlerine bağla
         let learningVM = LearningViewModel()
         let tradingVM = TradingViewModel()
         tradingVM.learningViewModel = learningVM
         
-        self._tradingVM = ObservedObject(wrappedValue: tradingVM)
-        self._learningVM = ObservedObject(wrappedValue: learningVM)
+        self._tradingVM = StateObject(wrappedValue: tradingVM)
+        self._learningVM = StateObject(wrappedValue: learningVM)
     }
     
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -61,13 +59,14 @@ struct HomeView: View {
             
             TradeView(viewModel: tradingVM)
                 .tabItem {
-                    Label("İşlem", systemImage: "dollarsign.circle.fill")
+                    Label(locHelper.string(for: "nav.trade"), systemImage: "dollarsign.circle.fill")
                 }
                 .tag(1)
             
             LearnView(viewModel: learningVM)
+                .environmentObject(tradingVM)
                 .tabItem {
-                    Label("Öğren", systemImage: "book.fill")
+                    Label(locHelper.string(for: "nav.learn"), systemImage: "book.fill")
                 }
                 .tag(2)
                 .onAppear {
@@ -76,13 +75,13 @@ struct HomeView: View {
             
             AIAssistantView()
                 .tabItem {
-                    Label("AI Asistan", systemImage: "sparkles")
+                    Label(locHelper.string(for: "ai.title"), systemImage: "sparkles")
                 }
                 .tag(3)
             
             ProfileView(tradingVM: tradingVM, learningVM: learningVM)
                 .tabItem {
-                    Label("Profil", systemImage: "person.fill")
+                    Label(locHelper.string(for: "nav.profile"), systemImage: "person.fill")
                 }
                 .tag(4)
                 .onAppear {
@@ -118,6 +117,10 @@ struct HomeView: View {
                 }
                 
                 Button(action: { selectedTab = 3 }) {
+                    Label(localizationHelper.string(for: "ai.title"), systemImage: "sparkles")
+                }
+                
+                Button(action: { selectedTab = 4 }) {
                     Label(localizationHelper.string(for: "nav.profile"), systemImage: "person.fill")
                 }
             }
@@ -132,7 +135,10 @@ struct HomeView: View {
                     TradeView(viewModel: tradingVM)
                 case 2:
                     LearnView(viewModel: learningVM)
+                        .environmentObject(tradingVM)
                 case 3:
+                    AIAssistantView()
+                case 4:
                     ProfileView(tradingVM: tradingVM, learningVM: learningVM)
                 default:
                     DashboardView(tradingVM: tradingVM, learningVM: learningVM, selectedTab: $selectedTab)
@@ -165,7 +171,7 @@ struct DashboardView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color(.systemGroupedBackground)
                     .ignoresSafeArea()
@@ -642,7 +648,7 @@ struct DetailedPortfolioSection: View {
                 // View All Button
                 if !portfolioCoins.isEmpty {
                     Button(action: {
-                        selectedTab = 3
+                        selectedTab = 4
                         NotificationCenter.default.post(
                             name: NSNotification.Name("OpenPortfolioTab"),
                             object: nil
@@ -781,7 +787,7 @@ struct DetailedPortfolioSection: View {
                     // Show More Button
                     if portfolioCoins.count > 5 {
                         Button(action: {
-                            selectedTab = 3
+                            selectedTab = 4
                             NotificationCenter.default.post(
                                 name: NSNotification.Name("OpenPortfolioTab"),
                                 object: nil
@@ -1610,8 +1616,7 @@ struct QuickActionsSection: View {
                     color: .indigo,
                     badge: tradingVM.user.portfolio.count,
                     action: {
-                        selectedTab = 3
-                        // ProfileView'a geçip portföy sekmesini aç
+                        selectedTab = 4
                         NotificationCenter.default.post(
                             name: NSNotification.Name("OpenPortfolioTab"),
                             object: nil

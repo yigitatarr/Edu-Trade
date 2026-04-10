@@ -54,7 +54,7 @@ struct PriceAlertsView: View {
                 }
             }
         }
-        .navigationTitle("Fiyat Alarmları")
+        .navigationTitle(LocalizationHelper.shared.string(for: "alert.title"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -74,6 +74,7 @@ struct PriceAlertsView: View {
 struct AlertRow: View {
     let alert: PriceAlert
     @ObservedObject var viewModel: TradingViewModel
+    @State private var showingEditSheet = false
     
     var body: some View {
         HStack {
@@ -107,6 +108,15 @@ struct AlertRow: View {
                     .foregroundColor(.green)
             }
             
+            if alert.isActive {
+                Button(action: {
+                    showingEditSheet = true
+                }) {
+                    Image(systemName: "pencil")
+                        .foregroundColor(.blue)
+                }
+            }
+            
             Button(role: .destructive, action: {
                 viewModel.deletePriceAlert(alert)
             }) {
@@ -114,6 +124,9 @@ struct AlertRow: View {
             }
         }
         .padding(.vertical, 4)
+        .sheet(isPresented: $showingEditSheet) {
+            EditPriceAlertView(viewModel: viewModel, alert: alert)
+        }
     }
     
     private func formatCurrency(_ value: Double) -> String {
@@ -122,6 +135,80 @@ struct AlertRow: View {
         formatter.currencyCode = "USD"
         formatter.maximumFractionDigits = 0
         return formatter.string(from: NSNumber(value: value)) ?? "$0"
+    }
+}
+
+// MARK: - Edit Price Alert View
+struct EditPriceAlertView: View {
+    @ObservedObject var viewModel: TradingViewModel
+    let alert: PriceAlert
+    @Environment(\.dismiss) var dismiss
+    @State private var targetPrice: String = ""
+    @State private var condition: AlertCondition = .above
+    
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section("Alarm Bilgileri") {
+                    HStack {
+                        Text("Coin")
+                        Spacer()
+                        Text(alert.coinSymbol)
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    TextField("Hedef Fiyat", text: $targetPrice)
+                        .keyboardType(.decimalPad)
+                    
+                    Picker("Koşul", selection: $condition) {
+                        Text("Üzerinde").tag(AlertCondition.above)
+                        Text("Altında").tag(AlertCondition.below)
+                    }
+                }
+                
+                if let coin = DataManager.shared.coins.first(where: { $0.symbol == alert.coinSymbol }) {
+                    Section("Güncel Fiyat") {
+                        HStack {
+                            Text(coin.formattedPrice)
+                                .font(.headline)
+                            Spacer()
+                            HStack(spacing: 4) {
+                                Image(systemName: coin.change24h >= 0 ? "arrow.up" : "arrow.down")
+                                    .font(.caption)
+                                Text(String(format: "%.2f%%", coin.change24h))
+                                    .font(.subheadline)
+                            }
+                            .foregroundColor(coin.change24h >= 0 ? .green : .red)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Alarm Düzenle")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("İptal") { dismiss() }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Güncelle") {
+                        guard let price = Double(targetPrice), price > 0 else { return }
+                        // Eski alarmi sil, yenisini olustur
+                        viewModel.deletePriceAlert(alert)
+                        if let coin = DataManager.shared.coins.first(where: { $0.symbol == alert.coinSymbol }) {
+                            viewModel.createPriceAlert(coin: coin, targetPrice: price, condition: condition)
+                        }
+                        HapticFeedback.success()
+                        dismiss()
+                    }
+                    .disabled(Double(targetPrice) == nil || Double(targetPrice) == 0)
+                    .fontWeight(.semibold)
+                }
+            }
+            .onAppear {
+                targetPrice = String(format: "%.0f", alert.targetPrice)
+                condition = alert.condition
+            }
+        }
     }
 }
 
@@ -137,7 +224,7 @@ struct AddPriceAlertView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section {
                     Picker("Coin", selection: $selectedCoin) {
